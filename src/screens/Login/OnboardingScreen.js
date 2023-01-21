@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F6FC",
   },
   modalContainer: {
-    flex: 1.5,
-    backgroundColor: "white",
+    flex: 1,
   },
 });
