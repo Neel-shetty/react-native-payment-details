@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import SignInScreen from "../screens/Login/SignInScreen";
 import SignUpScreen from "../screens/Login/SignUpScreen";
 import OnboardingScreen from "../screens/Login/OnboardingScreen";
+import useCachedResources from "../hooks/useCachedResources";
 
 const Stack = createNativeStackNavigator();
 
