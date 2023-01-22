@@ -17,7 +17,7 @@ const InputFields = () => {
   console.log("🚀 ~ file: InputFields.js:26 ~ InputFields ~ loading", loading);
   const formScheme = yup.object({
     // phoneNumber: yup.string().phoneNumber("error").required("error"),
-    password: yup.string().min(8, "error").required("error"),
+    password: yup.string().min(6, "error").required("error"),
     phoneNumber: yup.string().length(10, "error").required("error"),
   });
 
@@ -35,13 +35,13 @@ const InputFields = () => {
   function Login(values) {
     setLoading(true);
     axios
-      .post("http://codelumina.com/project/scanme/api/user/login", {
+      .post("http://codelumina.com/project/wallet_managment/api/user/login", {
         phone: values.phoneNumber,
         password: values.password,
       })
       .then(async (res) => {
         res.data;
-        console.log(res.data.message);
+        console.log(res.data);
         console.log(res, "if error-----------");
         dispatch(setLoggedIn(true));
         save("isLoggedIn", "true");
