@@ -8,11 +8,7 @@ import OnboardingScreen from "../screens/Login/OnboardingScreen";
 import HomeScreen from "../screens/Main/HomeScreen";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
-import {
-  setFormSubmitted,
-  setKycStatus,
-  setLoggedIn,
-} from "../store/slice/userSlice";
+import { setLoggedIn } from "../store/slice/userSlice";
 
 const Stack = createNativeStackNavigator();
 
