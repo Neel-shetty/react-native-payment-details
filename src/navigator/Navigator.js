@@ -9,6 +9,7 @@ import HomeScreen from "../screens/Main/HomeScreen";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
 import { setLoggedIn } from "../store/slice/userSlice";
+import DetailScreen from "../screens/Main/DetailScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,7 +47,10 @@ const Navigator = () => {
             <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
           </>
         ) : (
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <>
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen name="DetailScreen" component={DetailScreen} />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>
