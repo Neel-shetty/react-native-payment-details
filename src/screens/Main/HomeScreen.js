@@ -3,15 +3,17 @@ import React from "react";
 import * as SecureStore from "expo-secure-store";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../../store/slice/userSlice";
+import Header from "../../components/HomeScreenComponents/Header";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   function logOut() {
     SecureStore.setItemAsync("isLoggedIn", "false");
-    dispatch(setLoggedIn(false))
+    dispatch(setLoggedIn(false));
   }
   return (
     <View style={styles.root}>
+      <Header />
       <Button title="Log Out" onPress={logOut} />
     </View>
   );
