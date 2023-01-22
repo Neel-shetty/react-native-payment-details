@@ -5,8 +5,16 @@ import { colors } from "../../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import CustomButton from "../CustomButton";
 import SecondaryButton from "../SecondaryButton";
+import { useNavigation } from "@react-navigation/native";
 
 const Modal = () => {
+  const navigation = useNavigation();
+  function SignIn() {
+    navigation.navigate("SignInScreen");
+  }
+  function SignUp() {
+    navigation.navigate("SignUpScreen");
+  }
   return (
     <View style={styles.root}>
       <View style={styles.iconContainer}>
@@ -21,10 +29,10 @@ const Modal = () => {
       <View style={styles.line} />
       <View style={styles.buttonContainer}>
         <View style={{ paddingVertical: 8 }}>
-          <CustomButton title={"Sign In"} />
+          <CustomButton title={"Sign In"} onPress={SignIn} />
         </View>
         <View style={{ paddingVertical: 8 }}>
-          <SecondaryButton title={"Sign Up"} />
+          <SecondaryButton title={"Sign Up"} onPress={SignUp} />
         </View>
       </View>
     </View>

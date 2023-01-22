@@ -15,7 +15,7 @@ const Header = ({ back, loc }) => {
       {/* {loc !== "signIn" ?  */}
       <BackButton onPress={back} />
       <Text style={styles.title}>
-        Scan<Text style={{ color: colors.green }}>Me</Text>
+        App<Text style={{ color: colors.green }}>Name</Text>
       </Text>
       {/* {loc !== "signIn" ?  */}
       <View style={{ height: 35, width: 35 }} />
