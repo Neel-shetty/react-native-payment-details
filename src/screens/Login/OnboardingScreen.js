@@ -1,12 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Modal from "../../components/OnboarindScreenComponets/Modal";
+import { layout } from "../../constants/layout";
 
 const OnboardingScreen = () => {
   return (
     <View style={styles.root}>
       <View style={{ flex: 1 }}>
-        <Text>OnboardingScreen</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>AppName</Text>
+        </View>
       </View>
       <View style={styles.modalContainer}>
         <Modal />
@@ -26,5 +29,14 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
+  },
+  titleContainer: {
+    width: layout.widthp,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  title: {
+    fontFamily: "poppins-semibold",
+    fontSize: 28.33,
   },
 });

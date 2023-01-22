@@ -3,6 +3,8 @@ import React from "react";
 import { layout } from "../../constants/layout";
 import { colors } from "../../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
+import CustomButton from "../CustomButton";
+import SecondaryButton from "../SecondaryButton";
 
 const Modal = () => {
   return (
@@ -11,8 +13,19 @@ const Modal = () => {
         <Ionicons name="home" size={55} color={colors.green} />
       </View>
       <View style={styles.textContainer}>
-        <Text>Welcome to AppName</Text>
-        <Text>The best app for lorem ipsum lorem ipsum</Text>
+        <Text style={styles.title}>Welcome to AppName</Text>
+        <Text style={styles.subtitle}>
+          The best app for lorem ipsum lorem ipsum
+        </Text>
+      </View>
+      <View style={styles.line} />
+      <View style={styles.buttonContainer}>
+        <View style={{ paddingVertical: 8 }}>
+          <CustomButton title={"Sign In"} />
+        </View>
+        <View style={{ paddingVertical: 8 }}>
+          <SecondaryButton title={"Sign Up"} />
+        </View>
       </View>
     </View>
   );
@@ -31,11 +44,36 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     width: layout.widthp,
+    flex: 1,
+    alignItems: "flex-start",
+    justifyContent: "flex-end",
+    marginTop: 10,
   },
   textContainer: {
     width: layout.widthp,
+    flex: 2,
+    alignItems: "flex-start",
+    // justifyContent: "center",
+    paddingTop: 10,
   },
   title: {
-    
+    fontFamily: "poppins-semibold",
+    fontSize: 24,
+  },
+  subtitle: {
+    fontFamily: "poppins-semibold",
+    fontSize: 18,
+    color: "#rgba(24, 26, 32, 0.55)",
+  },
+  line: {
+    height: 1,
+    width: layout.widthp,
+    backgroundColor: "#rgba(24, 26, 32, 0.55)",
+    marginVertical: 10,
+  },
+  buttonContainer: {
+    flex: 3,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
