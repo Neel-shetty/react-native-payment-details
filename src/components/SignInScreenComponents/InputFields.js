@@ -42,7 +42,6 @@ const InputFields = () => {
       .then(async (res) => {
         res.data;
         console.log(res.data);
-        console.log(res, "if error-----------");
         dispatch(setLoggedIn(true));
         save("isLoggedIn", "true");
         save("token", JSON.stringify(res.data.data.token));
