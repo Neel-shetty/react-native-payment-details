@@ -55,11 +55,12 @@ export const {
   setLoggedIn,
   setUser,
   setUserToken,
-  setAdhaarFront,
-  setAdhaarBack,
-  setPanCard,
   setKycStatus,
   setFormSubmitted,
+  setReceiverIdImage,
+  setReceiverImage,
+  setSenderIdImage,
+  setSenderImage,
 } = userSlice.actions;
 
 export default userSlice.reducer;

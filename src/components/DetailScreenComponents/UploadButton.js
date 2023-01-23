@@ -6,22 +6,24 @@ import { Feather } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import * as ImagePicker from "expo-image-picker";
 import {
-  setAdhaarBack,
-  setAdhaarFront,
-  setPanCard,
+  setReceiverIdImage,
+  setReceiverImage,
+  setSenderIdImage,
+  setSenderImage,
 } from "../../store/slice/userSlice";
 
 const UploadButton = ({ onPress, title, type }) => {
-  const af = useSelector((state) => state.user.adhaarFront);
+  const si = useSelector((state) => state.user.senderImage);
   // console.log("🚀 ~ file: UploadButton.js:16 ~ UploadButton ~ af", af)
-  const ab = useSelector((state) => state.user.adhaarBack);
+  const sii = useSelector((state) => state.user.senderIdImage);
   // console.log("🚀 ~ file: UploadButton.js:18 ~ UploadButton ~ ab", ab)
-  const pc = useSelector((state) => state.user.panCard);
+  const ri = useSelector((state) => state.user.receiverImage);
   // console.log("🚀 ~ file: UploadButton.js:20 ~ UploadButton ~ pc", pc)
+  const rii = useSelector((state) => state.user.receiverIdImage);
+  console.log("🚀 ~ file: UploadButton.js:22 ~ UploadButton ~ rii", rii);
   const dispatch = useDispatch();
 
   async function pickImage() {
-    // No permissions request is necessary for launching the af library
     console.log("test");
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -33,19 +35,22 @@ const UploadButton = ({ onPress, title, type }) => {
     console.log(result.assets[0].uri);
 
     if (!result.canceled) {
-      if (type === "adhaarFront") {
-        dispatch(setAdhaarFront(result.assets[0]));
+      if (type === "senderImage") {
+        dispatch(setSenderImage(result.assets[0]));
       }
-      if (type === "adhaarBack") {
-        dispatch(setAdhaarBack(result.assets[0]));
+      if (type === "senderIdImage") {
+        dispatch(setSenderIdImage(result.assets[0]));
       }
-      if (type === "panCard") {
-        dispatch(setPanCard(result.assets[0]));
+      if (type === "receiverImage") {
+        dispatch(setReceiverImage(result.assets[0]));
+      }
+      if (type === "receiverIdImage") {
+        dispatch(setReceiverIdImage(result.assets[0]));
       }
     }
   }
 
-  if (type === "adhaarFront") {
+  if (type === "senderImage") {
     return (
       <View style={styles.root}>
         <TouchableOpacity onPress={pickImage}>
@@ -67,7 +72,7 @@ const UploadButton = ({ onPress, title, type }) => {
     );
   }
 
-  if (type === "adhaarBack") {
+  if (type === "senderIdImage") {
     return (
       <View style={styles.root}>
         <TouchableOpacity onPress={pickImage}>
@@ -88,7 +93,28 @@ const UploadButton = ({ onPress, title, type }) => {
       </View>
     );
   }
-  if (type === "panCard") {
+  if (type === "receiverImage") {
+    return (
+      <View style={styles.root}>
+        <TouchableOpacity onPress={pickImage}>
+          <View style={styles.bg}>
+            <View>
+              <Text
+                numberOfLines={1}
+                style={pc ? [styles.title, { color: "black" }] : styles.title}
+              >
+                {pc ? `${title} uploaded` : title}
+              </Text>
+            </View>
+            <View>
+              <Feather name="upload" size={24} color={colors.gray} />
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+  if (type === "receiverIdImage") {
     return (
       <View style={styles.root}>
         <TouchableOpacity onPress={pickImage}>
