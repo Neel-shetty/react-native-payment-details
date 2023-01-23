@@ -20,16 +20,7 @@ const Input = ({
   onBlur,
   value,
   fieldType,
-  secureTextEntry = false,
 }) => {
-  const [showPasswordtoggle, setShowPasswordToggle] = useState(false);
-  const formError = useSelector((state) => state.error.error);
-  const user = useSelector((state) => state.user.loggedIn);
-  // console.log(user,"user...")
-  console.log("🚀 ~ file: Input.js:34 ~ formError", formError);
-  if (secureTextEntry === true && showPasswordtoggle === true) {
-    secureTextEntry = false;
-  }
   return (
     <View style={styles.root}>
       <View style={styles.headerContainer}>
@@ -44,7 +35,8 @@ const Input = ({
           value={value}
           // secureTextEntry={secureTextEntry}
         />
-        <Ionicons name="ios-checkmark-circle" size={22} color={colors.green} />
+        {/* <Ionicons name="ios-checkmark-circle" size={22} color={colors.green} /> */}
+        <View style={{ width: 22 }} />
       </View>
     </View>
   );

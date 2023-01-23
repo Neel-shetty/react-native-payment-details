@@ -4,9 +4,10 @@ const initialState = {
   loggedIn: false,
   user: null,
   userToken: null,
-  adhaarFront: null,
-  adhaarBack: null,
-  panCard: null,
+  senderImage: null,
+  senderIdImage: null,
+  receiverImage: null,
+  receiverIdImage: null,
   email: null,
   phone: null,
   kycStatus: false,
@@ -26,16 +27,16 @@ export const userSlice = createSlice({
     setUserToken: (state, action) => {
       state.userToken = action.payload;
     },
-    setAdhaarFront: (state, action) => {
+    setSenderImage: (state, action) => {
       state.adhaarFront = action.payload;
     },
-    setAdhaarBack: (state, action) => {
+    setSenderIdImage: (state, action) => {
       state.adhaarBack = action.payload;
     },
-    setPanCard: (state, action) => {
+    setReceiverImage: (state, action) => {
       state.panCard = action.payload;
     },
-    setEmail: (state, action) => {
+    setReceiverIdImage: (state, action) => {
       state.email = action.payload;
     },
     setPhone: (state, action) => {
@@ -58,7 +59,7 @@ export const {
   setAdhaarBack,
   setPanCard,
   setKycStatus,
-  setFormSubmitted
+  setFormSubmitted,
 } = userSlice.actions;
 
 export default userSlice.reducer;
