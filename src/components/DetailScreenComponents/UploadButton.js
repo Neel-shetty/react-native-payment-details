@@ -14,13 +14,13 @@ import {
 
 const UploadButton = ({ onPress, title, type }) => {
   const si = useSelector((state) => state.user.senderImage);
-  // console.log("🚀 ~ file: UploadButton.js:16 ~ UploadButton ~ af", af)
+  console.log("🚀 ~ file: UploadButton.js:16 ~ UploadButton ~ si", si);
   const sii = useSelector((state) => state.user.senderIdImage);
   // console.log("🚀 ~ file: UploadButton.js:18 ~ UploadButton ~ ab", ab)
   const ri = useSelector((state) => state.user.receiverImage);
   // console.log("🚀 ~ file: UploadButton.js:20 ~ UploadButton ~ pc", pc)
   const rii = useSelector((state) => state.user.receiverIdImage);
-  console.log("🚀 ~ file: UploadButton.js:22 ~ UploadButton ~ rii", rii);
+  // console.log("🚀 ~ file: UploadButton.js:22 ~ UploadButton ~ rii", rii);
   const dispatch = useDispatch();
 
   async function pickImage() {
@@ -36,6 +36,7 @@ const UploadButton = ({ onPress, title, type }) => {
 
     if (!result.canceled) {
       if (type === "senderImage") {
+        console.log("setting sender image");
         dispatch(setSenderImage(result.assets[0]));
       }
       if (type === "senderIdImage") {
@@ -58,9 +59,9 @@ const UploadButton = ({ onPress, title, type }) => {
             <View>
               <Text
                 numberOfLines={1}
-                style={af ? [styles.title, { color: "black" }] : styles.title}
+                style={si ? [styles.title, { color: "black" }] : styles.title}
               >
-                {af ? `${title} uploaded` : title}
+                {si ? `${title} uploaded` : title}
               </Text>
             </View>
             <View>
@@ -80,9 +81,9 @@ const UploadButton = ({ onPress, title, type }) => {
             <View>
               <Text
                 numberOfLines={1}
-                style={ab ? [styles.title, { color: "black" }] : styles.title}
+                style={sii ? [styles.title, { color: "black" }] : styles.title}
               >
-                {ab ? `${title} uploaded` : title}
+                {sii ? `${title} uploaded` : title}
               </Text>
             </View>
             <View>
@@ -101,9 +102,9 @@ const UploadButton = ({ onPress, title, type }) => {
             <View>
               <Text
                 numberOfLines={1}
-                style={pc ? [styles.title, { color: "black" }] : styles.title}
+                style={ri ? [styles.title, { color: "black" }] : styles.title}
               >
-                {pc ? `${title} uploaded` : title}
+                {ri ? `${title} uploaded` : title}
               </Text>
             </View>
             <View>
@@ -122,9 +123,9 @@ const UploadButton = ({ onPress, title, type }) => {
             <View>
               <Text
                 numberOfLines={1}
-                style={pc ? [styles.title, { color: "black" }] : styles.title}
+                style={rii ? [styles.title, { color: "black" }] : styles.title}
               >
-                {pc ? `${title} uploaded` : title}
+                {rii ? `${title} uploaded` : title}
               </Text>
             </View>
             <View>
@@ -142,10 +143,11 @@ export default UploadButton;
 const styles = StyleSheet.create({
   root: {
     width: layout.widthp,
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
     height: 68,
-    width: layout.widthp,
+    width: layout.width,
+    // backgroundColor:'pink'
   },
   bg: {
     backgroundColor: "white",
@@ -156,6 +158,7 @@ const styles = StyleSheet.create({
     width: layout.widthp,
     flexDirection: "row",
     paddingHorizontal: 10,
+    elevation: 6,
   },
   title: {
     fontFamily: "inter-semibold",

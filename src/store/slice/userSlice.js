@@ -28,16 +28,16 @@ export const userSlice = createSlice({
       state.userToken = action.payload;
     },
     setSenderImage: (state, action) => {
-      state.adhaarFront = action.payload;
+      state.senderImage = action.payload;
     },
     setSenderIdImage: (state, action) => {
-      state.adhaarBack = action.payload;
+      state.senderIdImage = action.payload;
     },
     setReceiverImage: (state, action) => {
-      state.panCard = action.payload;
+      state.receiverImage = action.payload;
     },
     setReceiverIdImage: (state, action) => {
-      state.email = action.payload;
+      state.receiverIdImage = action.payload;
     },
     setPhone: (state, action) => {
       state.phone = action.payload;

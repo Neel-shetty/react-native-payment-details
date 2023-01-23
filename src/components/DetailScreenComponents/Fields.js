@@ -2,10 +2,14 @@ import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Input from "./Input";
 import { Formik } from "formik";
+import UploadButton from "./UploadButton";
+import { launchCameraAsync } from "expo-image-picker";
+import { layout } from "../../constants/layout";
+import CustomButton from "../CustomButton";
 
 const Fields = () => {
   return (
-    <View>
+    <View style={styles.root}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Formik
           initialValues={{
@@ -16,11 +20,11 @@ const Fields = () => {
             sender_phone: "",
             sender_address: "",
             sender_id_card_image: "",
-            sender_ip: "",
-            sender_current_lat: "",
-            sender_current_lng: "",
-            sender_current_state: "",
-            sender_current_city: "",
+            // sender_ip: "",
+            // sender_current_lat: "",
+            // sender_current_lng: "",
+            // sender_current_state: "",
+            // sender_current_city: "",
             sender_current_location: "",
             receiver_name: "",
             receiver_phone: "",
@@ -85,7 +89,12 @@ const Fields = () => {
                 value={values.sender_address}
                 fieldType={"sender_address"}
               />
-              <Input
+              {/* <UploadButton title={"Sender Image"} type={"senderImage"} />
+              <UploadButton
+                title={"Sender ID Card Image"}
+                type={"senderIdImage"}
+              /> */}
+              {/* <Input
                 placeholder={"Sender State"}
                 title={"Sender State"}
                 onChangeText={handleChange("sender_current_state")}
@@ -100,15 +109,15 @@ const Fields = () => {
                 handleBlur={handleBlur("sender_current_city")}
                 value={values.sender_current_city}
                 fieldType={"sender_current_city"}
-              />
-              <Input
+              /> */}
+              {/* <Input
                 placeholder={"Sender Location"}
                 title={"Sender Location"}
                 onChangeText={handleChange("sender_current_location")}
                 handleBlur={handleBlur("sender_current_location")}
                 value={values.sender_current_location}
                 fieldType={"sender_current_location"}
-              />
+              /> */}
               <Input
                 placeholder={"Receiver Name"}
                 title={"Receiver Name"}
@@ -141,6 +150,19 @@ const Fields = () => {
                 value={values.receiver_money_location}
                 fieldType={"receiver_money_location"}
               />
+              <UploadButton title={"Sender Image"} type={"senderImage"} />
+              <UploadButton
+                title={"Sender ID Card Image"}
+                type={"senderIdImage"}
+              />
+              <UploadButton title={"Receiver Image"} type={"receiverImage"} />
+              <UploadButton
+                title={"Receiver ID Card Image"}
+                type={"receiverIdImage"}
+              />
+              <View style={{ paddingVertical: 10 }}>
+                <CustomButton title={"Next"} />
+              </View>
             </View>
           )}
         </Formik>
@@ -154,5 +176,12 @@ export default Fields;
 const styles = StyleSheet.create({
   inputContainer: {
     marginBottom: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  root: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: layout.width,
   },
 });
