@@ -8,7 +8,7 @@ const OnboardingScreen = () => {
     <View style={styles.root}>
       <View style={styles.topContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>AppName</Text>
+          <Text style={styles.title}>Wallet Management</Text>
         </View>
         <View style={styles.imageContainer}>
           <Image

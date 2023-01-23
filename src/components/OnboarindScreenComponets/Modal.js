@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import CustomButton from "../CustomButton";
 import SecondaryButton from "../SecondaryButton";
 import { useNavigation } from "@react-navigation/native";
+import { Entypo } from "@expo/vector-icons";
 
 const Modal = () => {
   const navigation = useNavigation();
@@ -18,12 +19,13 @@ const Modal = () => {
   return (
     <View style={styles.root}>
       <View style={styles.iconContainer}>
-        <Ionicons name="home" size={55} color={colors.green} />
+        {/* <Ionicons name="home" size={55} color={colors.green} /> */}
+        <Entypo name="wallet" size={55} color={colors.green} />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Welcome to AppName</Text>
+        <Text style={styles.title}>Welcome!</Text>
         <Text style={styles.subtitle}>
-          The best app for lorem ipsum lorem ipsum
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
         </Text>
       </View>
       <View style={styles.line} />
@@ -32,7 +34,7 @@ const Modal = () => {
           <CustomButton title={"Sign In"} onPress={SignIn} />
         </View>
         <View style={{ paddingVertical: 8 }}>
-          <SecondaryButton title={"Sign Up"} onPress={SignUp} />
+          {/* <SecondaryButton title={"Sign Up"} onPress={SignUp} /> */}
         </View>
       </View>
     </View>

@@ -15,7 +15,7 @@ const Header = ({ back, loc }) => {
       {/* {loc !== "signIn" ?  */}
       <BackButton onPress={back} />
       <Text style={styles.title}>
-        App<Text style={{ color: colors.green }}>Name</Text>
+        Wallet <Text style={{ color: colors.green }}>Management</Text>
       </Text>
       {/* {loc !== "signIn" ?  */}
       <View style={{ height: 35, width: 35 }} />
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   title: {
-    fontSize: 28.33,
+    fontSize: 24.33,
     fontFamily: "poppins-semibold",
     textAlign: "center",
     // backgroundColor: "pink",
