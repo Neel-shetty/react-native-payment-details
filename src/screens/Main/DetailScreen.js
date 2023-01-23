@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
-import NetInfo from "@react-native-community/netinfo";
 import publicIP from "react-native-public-ip";
+import Header from "../../components/DetailScreenComponents/Header";
+import Input from "../../components/DetailScreenComponents/Input";
+import Fields from "../../components/DetailScreenComponents/Fields";
 
 const DetailScreen = () => {
   const [location, setLocation] = useState(null);
@@ -38,7 +40,13 @@ const DetailScreen = () => {
 
   return (
     <View style={styles.root}>
-      <Text>{text}</Text>
+      <View style={styles.headerContainer}>
+        <Header />
+      </View>
+      {/* <Text>{text}</Text> */}
+      <View style={styles.fieldContainer}>
+        <Fields />
+      </View>
     </View>
   );
 };
@@ -50,5 +58,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  headerContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  fieldContainer: {
+    flex: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    // backgroundColor: "pink",
   },
 });
