@@ -11,9 +11,11 @@ import { setLoggedIn } from "../store/slice/userSlice";
 import DetailScreen from "../screens/Main/DetailScreen";
 import TransactionScreen from "../screens/Main/TransactionScreen";
 import HomeScreen from "../screens/Main/HomeScreen";
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { colors } from "../constants/colors";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const Navigator = () => {
   const dispatch = useDispatch();
@@ -36,6 +38,38 @@ const Navigator = () => {
     getValueFor("isLoggedIn");
   }, [loggedIn]);
 
+  function DrawerNavigator() {
+    return (
+      <Drawer.Navigator
+        screenOptions={{
+          headerShown: false,
+          drawerActiveTintColor: colors.green,
+        }}
+      >
+        <Drawer.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{
+            drawerLabel: ({ focused, color }) => {
+              return (
+                <View>
+                  <Text
+                    style={{
+                      fontFamily: "poppins-semibold",
+                      color: focused ? color : colors.gray,
+                    }}
+                  >
+                    Home Screen
+                  </Text>
+                </View>
+              );
+            },
+          }}
+        />
+      </Drawer.Navigator>
+    );
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -50,7 +84,7 @@ const Navigator = () => {
           </>
         ) : (
           <>
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
             <Stack.Screen
               name="TransactionScreen"
               component={TransactionScreen}

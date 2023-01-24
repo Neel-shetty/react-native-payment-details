@@ -4,12 +4,19 @@ import BackButton from "../BackButton";
 import { layout } from "../../constants/layout";
 import { colors } from "../../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const Header = ({ back, loc }) => {
+  const navigation = useNavigation();
+
+  function drawer() {
+    navigation.openDrawer();
+  }
+
   return (
     <View style={[styles.root]}>
       <View style={styles.iconContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={drawer}>
           <Ionicons name="menu" size={24} color="#230B34" />
         </TouchableOpacity>
       </View>
