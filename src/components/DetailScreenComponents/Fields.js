@@ -20,6 +20,7 @@ const Fields = () => {
             sender_phone: "",
             sender_address: "",
             sender_id_card_image: "",
+            amount:"",
             // sender_ip: "",
             // sender_current_lat: "",
             // sender_current_lng: "",
@@ -64,6 +65,14 @@ const Fields = () => {
                 handleBlur={handleBlur("transaction_id")}
                 value={values.transaction_id}
                 fieldType={"transaction_id"}
+              />
+              <Input
+                placeholder={"Amount"}
+                title={"Amount"}
+                onChangeText={handleChange("amount")}
+                handleBlur={handleBlur("amount")}
+                value={values.amount}
+                fieldType={"amount"}
               />
               <Input
                 placeholder={"Sender Name"}

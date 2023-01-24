@@ -16,7 +16,7 @@ export default ImageBg;
 
 const styles = StyleSheet.create({
   root: {
-    width: layout.width * 0.8,
+    width: layout.width * 0.9,
     backgroundColor: "white",
     // flex: 1,
     justifyContent: "center",
