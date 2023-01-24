@@ -8,7 +8,7 @@ import TransactionItem from "../../components/HomeScreenComponents/TransactionIt
 import TransactionList from "../../components/HomeScreenComponents/TransactionList";
 import { layout } from "../../constants/layout";
 
-const HomeScreen = () => {
+const TransactionScreen = () => {
   const dispatch = useDispatch();
   function logOut() {
     SecureStore.setItemAsync("isLoggedIn", "false");
@@ -27,7 +27,7 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default TransactionScreen;
 
 const styles = StyleSheet.create({
   root: {
