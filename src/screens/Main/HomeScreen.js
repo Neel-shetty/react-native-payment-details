@@ -1,19 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Header from "../../components/HomeScreenComponents/Header";
 import Image from "../../components/HomeScreenComponents/ImageBg";
 import { layout } from "../../constants/layout";
+import Menu from "../../components/HomeScreenComponents/Menu";
 
 const HomeScreen = () => {
   return (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.root}>
       <View style={styles.headerContainer}>
         <Header />
       </View>
       <View style={styles.imageContainer}>
         <Image />
       </View>
-    </View>
+      <View style={styles.menuContainer}>
+        <Menu/>
+        </View>
+    </SafeAreaView>
   );
 };
 
@@ -30,11 +34,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    // backgroundColor: "coral",
   },
   imageContainer: {
-    flex: 1,
+    flex: 2,
     alignItems: "center",
     justifyContent: "center",
     width: layout.width,
+  },
+  menuContainer: {
+    flex: 6,
+    alignItems: "center",
+    justifyContent: "center",
+    width: layout.width,
+    // backgroundColor: "pink",
   },
 });
