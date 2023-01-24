@@ -55,7 +55,7 @@ const TransactionList = () => {
     fetchTransactionData();
   }, []);
 
-  if (loading) {
+  if (loading || !transactions) {
     return (
       <View style={{ flex: 1 }}>
         <ActivityIndicator />
@@ -69,7 +69,11 @@ const TransactionList = () => {
         renderItem={({ item }) => {
           return (
             // <View>
-            <TransactionItem id={item.id} amount={item.amount} date={item.updated_at}/>
+            <TransactionItem
+              id={item.id}
+              amount={item.amount}
+              date={item.updated_at}
+            />
             // </View>
           );
         }}

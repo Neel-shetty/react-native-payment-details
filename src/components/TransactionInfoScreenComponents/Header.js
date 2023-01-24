@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   title: {
-    fontSize: 28.33,
+    fontSize: 23.33,
     fontFamily: "poppins-semibold",
     textAlign: "center",
     // backgroundColor: "pink",
