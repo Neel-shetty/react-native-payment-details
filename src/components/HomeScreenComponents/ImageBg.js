@@ -21,10 +21,10 @@ const styles = StyleSheet.create({
     // flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    height: 100,
+    height: 200,
     borderRadius: 10,
     elevation: 6,
-    borderWidth: 2,
+    // borderWidth: 2,
     borderColor: colors.green,
   },
 });

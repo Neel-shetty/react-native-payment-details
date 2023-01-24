@@ -22,7 +22,7 @@ const Header = ({ back, loc }) => {
       </View>
       {/* <BackButton onPress={back} /> */}
       <Text style={styles.title}>
-        Home <Text style={{ color: colors.green }}>Screen</Text>
+        Welcome<Text style={{ color: colors.green }}> Agent 07</Text>
       </Text>
       <View style={{ height: 35, width: 35 }} />
     </View>

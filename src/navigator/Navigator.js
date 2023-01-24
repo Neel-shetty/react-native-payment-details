@@ -36,6 +36,7 @@ const Navigator = () => {
 
   useEffect(() => {
     getValueFor("isLoggedIn");
+    // getValueFor("id");
   }, [loggedIn]);
 
   function DrawerNavigator() {

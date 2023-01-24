@@ -1,9 +1,16 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+  ImageBackground,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import Header from "../../components/HomeScreenComponents/Header";
 import Image from "../../components/HomeScreenComponents/ImageBg";
 import { layout } from "../../constants/layout";
 import Menu from "../../components/HomeScreenComponents/Menu";
+import { colors } from "../../constants/colors";
 
 const HomeScreen = () => {
   return (
@@ -15,8 +22,8 @@ const HomeScreen = () => {
         <Image />
       </View>
       <View style={styles.menuContainer}>
-        <Menu/>
-        </View>
+        <Menu />
+      </View>
     </SafeAreaView>
   );
 };
@@ -28,25 +35,24 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "#F6F7FD",
   },
   headerContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor: "coral",
   },
   imageContainer: {
     flex: 2,
     alignItems: "center",
     justifyContent: "center",
     width: layout.width,
+    // backgroundColor: "pink",
   },
   menuContainer: {
-    flex: 6,
+    flex: 4,
     alignItems: "center",
     justifyContent: "center",
     width: layout.width,
-    // backgroundColor: "pink",
   },
 });
