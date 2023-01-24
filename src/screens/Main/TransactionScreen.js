@@ -3,9 +3,10 @@ import React from "react";
 import * as SecureStore from "expo-secure-store";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../../store/slice/userSlice";
-import Header from "../../components/HomeScreenComponents/Header";
-import TransactionItem from "../../components/HomeScreenComponents/TransactionItem";
-import TransactionList from "../../components/HomeScreenComponents/TransactionList";
+import Header from "../../components/TransactionScreenComponents/Header";
+// import s from '../../components/TransactionScreenComponents/Header'
+import TransactionItem from "../../components/TransactionScreenComponents/TransactionItem";
+import TransactionList from "../../components/TransactionScreenComponents/TransactionList";
 import { layout } from "../../constants/layout";
 
 const TransactionScreen = () => {
