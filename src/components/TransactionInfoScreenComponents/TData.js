@@ -55,9 +55,12 @@ const TData = () => {
       </View>
     );
   }
+
+  const date = new Date(transactions.created_at);
+
   return (
     <View style={styles.root}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <DataItem title={" Id"} data={transactions.id} />
         <DataItem title={"Agent ID"} data={transactions.agent_id} />
         <DataItem title={"Unique ID"} data={transactions.unique_id} />
@@ -84,7 +87,7 @@ const TData = () => {
           data={transactions.receive_money_location}
         />
         <DataItem title={"Status"} data={transactions.status} />
-        <DataItem title={"Date"} data={transactions.updated_at} />
+        <DataItem title={"Date"} data={date.toLocaleDateString("en-GB")} />
       </ScrollView>
     </View>
   );
