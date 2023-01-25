@@ -50,5 +50,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
+    backgroundColor: "#F6F7FD",
+
   },
 });

@@ -10,14 +10,18 @@ import { layout } from "../../constants/layout";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors } from "../../constants/colors";
 import { Formik } from "formik";
+import { useDispatch } from "react-redux";
+import { setSearched } from "../../store/slice/userSlice";
 
 const SearchBar = () => {
+  const dispatch = useDispatch();
   return (
     <View style={styles.root}>
       <Formik
         initialValues={{ search: "" }}
         onSubmit={(values) => {
           console.log(values);
+          dispatch(setSearched(true));
         }}
       >
         {({

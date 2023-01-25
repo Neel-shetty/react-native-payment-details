@@ -12,6 +12,8 @@ const initialState = {
   phone: null,
   kycStatus: false,
   formSubmitted: false,
+  searched: false,
+  receipt: null,
 };
 
 export const userSlice = createSlice({
@@ -48,6 +50,12 @@ export const userSlice = createSlice({
     setFormSubmitted: (state, action) => {
       state.formSubmitted = action.payload;
     },
+    setSearched: (state, action) => {
+      state.searched = action.payload;
+    },
+    setReceipt: (state, action) => {
+      state.receipt = action.payload;
+    },
   },
 });
 
@@ -61,6 +69,8 @@ export const {
   setReceiverImage,
   setSenderIdImage,
   setSenderImage,
+  setSearched,
+  setReceipt,
 } = userSlice.actions;
 
 export default userSlice.reducer;

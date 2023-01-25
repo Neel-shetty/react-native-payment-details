@@ -3,9 +3,17 @@ import React, { useState } from "react";
 import { layout } from "../../constants/layout";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
+import { useDispatch, useSelector } from "react-redux";
+import { colors } from "../../constants/colors";
 
 const TopContainer = () => {
   const [loading, setLoading] = useState(false);
+  // const [notSearched, setNotSearched] = useState(true);
+  const searched = useSelector((state) => state.user.searched);
+  console.log(
+    "🚀 ~ file: TopContainer.js:13 ~ TopContainer ~ searched",
+    searched
+  );
   async function getData() {
     setLoading(true);
     let result = await SecureStore.getItemAsync("id");
@@ -40,22 +48,37 @@ const TopContainer = () => {
         setLoading(false);
       });
   }
-  return (
-    <View style={styles.root}>
-      <View
-        style={{
-          alignItems: "flex-start",
-          justifyContent: "center",
-          width: layout.widthp,
-          paddingHorizontal: 10,
-        }}
-      >
-        <Text style={styles.title}>Transaction ID - </Text>
-        <Text style={styles.title}>Unique ID - </Text>
-        <Text style={styles.title}>Date - </Text>
+
+  if (!searched) {
+    <View style={{ flex: 1 }}>
+      <Text style={styles.title}>
+        Search the transaction id to view it's details
+      </Text>
+    </View>;
+  }
+  if (searched)
+    return (
+      <View style={styles.root}>
+        <View
+          style={{
+            alignItems: "flex-start",
+            justifyContent: "space-evenly",
+            width: layout.widthp,
+            paddingHorizontal: 10,
+          }}
+        >
+          <Text style={styles.title}>
+            Transaction ID - <Text style={{ color: colors.green }}>2</Text>
+          </Text>
+          <Text style={styles.title}>
+            Unique ID - <Text style={{ color: colors.green }}>ttstbn</Text>
+          </Text>
+          <Text style={styles.title}>
+            Date - <Text style={{ color: colors.green }}>2023-01-25</Text>
+          </Text>
+        </View>
       </View>
-    </View>
-  );
+    );
 };
 
 export default TopContainer;
@@ -65,14 +88,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 150,
-    // width: layout.widthp,
+    width: layout.widthp,
     elevation: 6,
     backgroundColor: "white",
     borderRadius: 10,
     // marginHorizontal:10
   },
   title: {
-    fontFamily: "poppins-semibold",
+    fontFamily: "poppins-medium",
     fontSize: 20,
   },
 });
