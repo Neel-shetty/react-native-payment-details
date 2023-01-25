@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { layout } from "../../constants/layout";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors } from "../../constants/colors";
@@ -15,6 +15,43 @@ import { setSearched } from "../../store/slice/userSlice";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
+  const [transactions, setTransactions] = useState(null);
+  const [loading, setLoading] = useState(false);
+  async function fetchTransactionData() {
+    setLoading(true);
+    let result = await SecureStore.getItemAsync("id");
+    axios
+      .post(
+        "http://codelumina.com/project/wallet_managment/api/agent/receipt/lists",
+        {
+          agent_id: result,
+        }
+      )
+      .then(async (res) => {
+        // console.log(res.data.data);
+        setTransactions(res.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data);
+          Alert.alert(
+            "Failed to get transaction data, try again later",
+            JSON.stringify(error.response.data.message)
+          );
+          setLoading(false);
+        } else if (error.request) {
+          console.log(error.request);
+          setLoading(false);
+        } else {
+          console.log("Error", error.message);
+          setLoading(false);
+        }
+        console.log(error.config);
+        setLoading(false);
+      });
+  }
+
   return (
     <View style={styles.root}>
       <Formik
