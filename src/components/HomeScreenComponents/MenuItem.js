@@ -65,6 +65,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 10,
     elevation: 6,
+    shadowRadius: 5,
+    shadowOpacity: 0.25,
     // borderWidth: 1,
     // borderColor: colors.green,
     // padding: 5,

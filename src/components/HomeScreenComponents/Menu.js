@@ -13,6 +13,10 @@ const Menu = () => {
   function reports() {
     navigation.navigate("TransactionScreen");
   }
+  function pay() {
+    navigation.navigate("PayCustomerScreen");
+  }
+
   return (
     <View style={styles.root}>
       <View style={styles.titleContainer}>
@@ -28,10 +32,15 @@ const Menu = () => {
           <MenuItem
             title={"Pay \nCustomer"}
             source={require("../../../assets/images/payment-method.png")}
+            onPress={pay}
           />
         </View>
         <View style={styles.menu2}>
-          <MenuItem title={"Reports"} onPress={reports} source={require("../../../assets/images/report.png")} />
+          <MenuItem
+            title={"Reports"}
+            onPress={reports}
+            source={require("../../../assets/images/report.png")}
+          />
           <MenuItem title={"placeholder"} />
         </View>
       </View>
