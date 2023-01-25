@@ -69,12 +69,24 @@ const TData = () => {
         <DataItem title={"Sender Address"} data={transactions.sender_address} />
         <DataItem
           title={"Agent State"}
-          data={transactions.agent_current_state}
+          data={
+            // transactions.agent_current_state
+            "Karnataka"
+          }
         />
-        <DataItem title={"Agent City"} data={transactions.agent_current_city} />
+        <DataItem
+          title={"Agent City"}
+          data={
+            // transactions.agent_current_city
+            "Bangalore"
+          }
+        />
         <DataItem
           title={"Agent Location"}
-          data={transactions.agent_current_location}
+          data={
+            // transactions.agent_current_location
+            "Placeholder"
+          }
         />
         <DataItem title={"Receiver Name"} data={transactions.receiver_name} />
         <DataItem title={"Receiver Phone"} data={transactions.receiver_phone} />
