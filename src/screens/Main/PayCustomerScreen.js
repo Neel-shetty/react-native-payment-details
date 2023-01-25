@@ -21,7 +21,12 @@ const PayCustomerScreen = () => {
     >
       <SafeAreaView style={styles.root}>
         <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            paddingTop: 20,
+          }}
         >
           <SearchBar />
         </View>
@@ -33,7 +38,6 @@ const PayCustomerScreen = () => {
         <View style={{ flex: 5 }}>
           <BottomContainer />
         </View>
-        {/* </View> */}
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
