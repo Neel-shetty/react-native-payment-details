@@ -2,8 +2,13 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { layout } from "../../constants/layout";
 import { colors } from "../../constants/colors";
+import { useSelector } from "react-redux";
 
 const BottomContainer = () => {
+  const data = useSelector((state) => state.user.receiptData?.data);
+  console.log("🚀 ~ file: BottomContainer.js:9 ~ BottomContainer ~ data", data);
+
+  if (!data) return;
   return (
     <View style={styles.root}>
       <View
@@ -50,10 +55,11 @@ const BottomContainer = () => {
         }}
       >
         <Text style={styles.title}>
-          Amount - <Text style={{ color: colors.green }}>1200</Text>
+          Amount - <Text style={{ color: colors.green }}>{data?.amount}</Text>
         </Text>
         <Text style={styles.title}>
-          Receiver Name - <Text style={{ color: colors.green }}>agent1</Text>
+          Receiver Name -{" "}
+          <Text style={{ color: colors.green }}>{data.reciver_name}</Text>
         </Text>
       </View>
       <View

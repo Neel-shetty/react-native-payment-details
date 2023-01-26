@@ -14,6 +14,7 @@ const initialState = {
   formSubmitted: false,
   searched: false,
   receipt: null,
+  receiptData: null,
 };
 
 export const userSlice = createSlice({
@@ -56,6 +57,9 @@ export const userSlice = createSlice({
     setReceipt: (state, action) => {
       state.receipt = action.payload;
     },
+    setReceiptData: (state, action) => {
+      state.receiptData = action.payload;
+    },
   },
 });
 
@@ -71,6 +75,7 @@ export const {
   setSenderImage,
   setSearched,
   setReceipt,
+  setReceiptData,
 } = userSlice.actions;
 
 export default userSlice.reducer;

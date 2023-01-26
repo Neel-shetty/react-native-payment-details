@@ -1,37 +1,48 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import { Alert, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import { layout } from "../../constants/layout";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import { useDispatch, useSelector } from "react-redux";
 import { colors } from "../../constants/colors";
+import { setReceiptData } from "../../store/slice/userSlice";
 
 const TopContainer = () => {
   const [loading, setLoading] = useState(false);
+  const [details, setDeatils] = useState();
+  console.log(
+    "🚀 ~ file: TopContainer.js:13 ~ TopContainer ~ details",
+    details
+  );
   // const [notSearched, setNotSearched] = useState(true);
   const searched = useSelector((state) => state.user.searched);
+  const receiptId = useSelector((state) => state.user.receipt);
   console.log(
-    "🚀 ~ file: TopContainer.js:13 ~ TopContainer ~ searched",
-    searched
+    "🚀 ~ file: TopContainer.js:16 ~ TopContainer ~ receiptId",
+    receiptId
   );
+
+  const dispatch = useDispatch();
+
   async function getData() {
     setLoading(true);
-    let result = await SecureStore.getItemAsync("id");
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/receipt/lists",
+        "http://codelumina.com/project/wallet_managment/api/agent/receipt/detail",
         {
-          agent_id: result,
+          receipt_id: receiptId,
         }
       )
       .then(async (res) => {
-        console.log(res.data.data);
+        console.log(res.data);
         // setTransactions(res.data.data);
+        setDeatils(res.data);
+        dispatch(setReceiptData(res.data));
         setLoading(false);
       })
       .catch((error) => {
         if (error.response) {
-          console.log(error.response.data);
+          console.log("error response - ", error.response.data);
           Alert.alert(
             "Failed to get transaction data, try again later",
             JSON.stringify(error.response.data.message)
@@ -49,36 +60,54 @@ const TopContainer = () => {
       });
   }
 
-  if (!searched) {
-    <View style={{ flex: 1 }}>
-      <Text style={styles.title}>
-        Search the transaction id to view it's details
-      </Text>
-    </View>;
-  }
-  if (searched)
-    return (
-      <View style={styles.root}>
-        <View
-          style={{
-            alignItems: "flex-start",
-            justifyContent: "space-evenly",
-            width: layout.widthp,
-            paddingHorizontal: 10,
-          }}
-        >
+  useEffect(() => {
+    if (receiptId) {
+      getData();
+    }
+  }, [receiptId, searched]);
+
+  if (loading) return;
+
+  const date = new Date(details?.data.created_at);
+  console.log("🚀 ~ file: TopContainer.js:59 ~ TopContainer ~ date", date);
+
+  return (
+    <View style={styles.root}>
+      <View
+        style={{
+          alignItems: "flex-start",
+          justifyContent: "space-evenly",
+          width: layout.widthp,
+          paddingHorizontal: 10,
+        }}
+      >
+        {searched ? (
+          <>
+            <Text style={styles.title}>
+              Transaction ID -{" "}
+              <Text style={{ color: colors.green }}>{details?.data.id}</Text>
+            </Text>
+            <Text style={styles.title}>
+              Unique ID -{" "}
+              <Text style={{ color: colors.green }}>
+                {details?.data.transaction_id}
+              </Text>
+            </Text>
+            <Text style={styles.title}>
+              Date -{" "}
+              <Text style={{ color: colors.green }}>
+                {date ? date.toLocaleDateString("en-GB") : ""}
+              </Text>
+            </Text>
+          </>
+        ) : (
           <Text style={styles.title}>
-            Transaction ID - <Text style={{ color: colors.green }}>2</Text>
+            Search using transaction ID to get it's details
           </Text>
-          <Text style={styles.title}>
-            Unique ID - <Text style={{ color: colors.green }}>ttstbn</Text>
-          </Text>
-          <Text style={styles.title}>
-            Date - <Text style={{ color: colors.green }}>2023-01-25</Text>
-          </Text>
-        </View>
+        )}
       </View>
-    );
+    </View>
+  );
 };
 
 export default TopContainer;
