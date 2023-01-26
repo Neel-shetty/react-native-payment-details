@@ -1,14 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Alert, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
 import Input from "./Input";
 import { layout } from "../../constants/layout";
 import { Formik } from "formik";
 import UploadButton from "./UploadButton";
 import CustomButton from "../CustomButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
+import { setReceiptSearch } from "../../store/slice/userSlice";
 
 const CreateReceipt = () => {
+  const [loading, setLoading] = useState(false);
+
+  const navigation = useNavigation();
+  const dispatch = useDispatch()
+
   const rri = useSelector((state) => state.user.receiptReceiverImage);
   // console.log("🚀 ~ file: CreateReceipt.js:12 ~ CreateReceipt ~ rri", rri);
   const rrii = useSelector((state) => state.user.receiptReceiverId);
@@ -32,21 +39,32 @@ const CreateReceipt = () => {
       type: type1,
     });
     formData.append("reciver_id_image", {
-      uri: af.uri,
+      uri: rrii.uri,
       name: filename2,
       type: type2,
     });
 
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/receipt/detail",
+        "http://codelumina.com/project/wallet_managment/api/agent/receipt/insert",
+        formData,
         {
-          receipt_id: receiptId,
+          headers: {
+            // accept: "application/json",
+            accept: "application/json",
+            "Content-Type": "multipart/form-data",
+          },
         }
       )
       .then(async (res) => {
         console.log(res.data);
         setLoading(false);
+        Alert.alert("Receipt Created", res.data.message, [
+          {
+            text: "OK",
+            onPress: () => dispatch(setReceiptSearch(true)) ,
+          },
+        ]);
       })
       .catch((error) => {
         if (error.response) {

@@ -12,7 +12,11 @@ import { FontAwesome } from "@expo/vector-icons";
 import { colors } from "../../constants/colors";
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { setReceipt, setSearched } from "../../store/slice/userSlice";
+import {
+  setReceipt,
+  setReceiptSearch,
+  setSearched,
+} from "../../store/slice/userSlice";
 import * as SecureStore from "expo-secure-store";
 import axios from "axios";
 
@@ -82,11 +86,13 @@ const SearchBar = () => {
       // if (!receipt) {
       if (transactions[i].transaction_id == searchQuery) {
         dispatch(setReceipt(transactions[i].id));
+        dispatch(setReceiptSearch(true));
         console.log("exists");
-        break;
+        return;
       }
       // }
     }
+    dispatch(setReceiptSearch(false));
     const postid = receipt;
     console.log("prev id - ", previd, "post id - ", postid);
   }

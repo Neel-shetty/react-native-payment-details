@@ -47,7 +47,7 @@ const BottomContainer = () => {
         >
           <Image
             source={{
-              uri: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
+              uri: data?.reciver_image,
             }}
             style={{ width: 100, height: 100, borderRadius: 50 }}
           />
@@ -82,7 +82,7 @@ const BottomContainer = () => {
           <Image
             style={{ height: 200, width: 300, alignSelf: "center" }}
             source={{
-              uri: "https://cdn-icons-png.flaticon.com/512/179/179573.png",
+              uri: data?.reciver_id_image,
             }}
             resizeMode="contain"
           />
