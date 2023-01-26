@@ -15,6 +15,9 @@ const initialState = {
   searched: false,
   receipt: null,
   receiptData: null,
+  receiptSearch: false,
+  receiptReceiverImage: null,
+  receiptReceiverId: null,
 };
 
 export const userSlice = createSlice({
@@ -60,6 +63,15 @@ export const userSlice = createSlice({
     setReceiptData: (state, action) => {
       state.receiptData = action.payload;
     },
+    setReceiptSearch: (state, action) => {
+      state.receiptSearch = action.payload;
+    },
+    setReceiptReceiverImage: (state, action) => {
+      state.receiptSearch = action.payload;
+    },
+    setReceiptReceiverId: (state, action) => {
+      state.receiptSearch = action.payload;
+    },
   },
 });
 
@@ -76,6 +88,10 @@ export const {
   setSearched,
   setReceipt,
   setReceiptData,
+  setReceiptSearch,
+  setReceiptReceiverId,
+  setReceiptReceiverImage,
+  setPhone,
 } = userSlice.actions;
 
 export default userSlice.reducer;

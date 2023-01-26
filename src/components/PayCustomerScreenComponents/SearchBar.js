@@ -72,19 +72,23 @@ const SearchBar = () => {
     if (!loading) {
       checkSearch();
     }
-  }, [searchQuery,transactions]);
+  }, [searchQuery, transactions]);
 
   function checkSearch() {
+    const previd = receipt;
     for (let i = 0; i < transactions.length; i++) {
-      console.log('looping');
+      console.log("looping");
       // if (JSON.stringify(transactions.data[i]).includes(searchQuery)) {
       // if (!receipt) {
-        if (transactions[i].transaction_id == searchQuery) {
-          dispatch(setReceipt(transactions[i].id));
-          console.log("exists");
-        }
+      if (transactions[i].transaction_id == searchQuery) {
+        dispatch(setReceipt(transactions[i].id));
+        console.log("exists");
+        break;
+      }
       // }
     }
+    const postid = receipt;
+    console.log("prev id - ", previd, "post id - ", postid);
   }
 
   // if (loading || !transactions) return;
