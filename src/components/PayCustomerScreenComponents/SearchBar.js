@@ -26,6 +26,7 @@ const SearchBar = () => {
   console.log("🚀 ~ file: SearchBar.js:22 ~ transactions", transactions);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState(null);
+  console.log("🚀 ~ file: SearchBar.js:29 ~ searchQuery", searchQuery);
 
   const receipt = useSelector((state) => state.user.receipt);
   console.log("🚀 ~ file: SearchBar.js:26 ~ receipt", receipt);
@@ -73,7 +74,7 @@ const SearchBar = () => {
   }, [searchQuery]);
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && transactions) {
       checkSearch();
     }
   }, [searchQuery, transactions]);
@@ -92,9 +93,12 @@ const SearchBar = () => {
       }
       // }
     }
-    dispatch(setReceiptSearch(false));
-    const postid = receipt;
-    console.log("prev id - ", previd, "post id - ", postid);
+    if (searchQuery) {
+      console.log("setting receipt result as false");
+      dispatch(setReceiptSearch(false));
+      const postid = receipt;
+      console.log("prev id - ", previd, "post id - ", postid);
+    }
   }
 
   // if (loading || !transactions) return;

@@ -15,7 +15,7 @@ const initialState = {
   searched: false,
   receipt: null,
   receiptData: null,
-  receiptSearch: false,
+  receiptSearch: true,
   receiptReceiverImage: null,
   receiptReceiverId: null,
 };

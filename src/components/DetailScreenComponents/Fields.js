@@ -6,8 +6,14 @@ import UploadButton from "./UploadButton";
 import { launchCameraAsync } from "expo-image-picker";
 import { layout } from "../../constants/layout";
 import CustomButton from "../CustomButton";
+import { useSelector } from "react-redux";
 
 const Fields = () => {
+  const si = useSelector((state) => state.user.senderImage);
+  const sii = useSelector((state) => state.user.senderIdImage);
+  const ri = useSelector((state) => state.user.receiverImage);
+  const rii = useSelector((state) => state.user.receiverIdImage);
+  async function sendTransaction(values) {}
   return (
     <View style={styles.root}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -20,7 +26,7 @@ const Fields = () => {
             sender_phone: "",
             sender_address: "",
             sender_id_card_image: "",
-            amount:"",
+            amount: "",
             // sender_ip: "",
             // sender_current_lat: "",
             // sender_current_lng: "",
@@ -30,13 +36,12 @@ const Fields = () => {
             receiver_name: "",
             receiver_phone: "",
             receiver_address: "",
-            receiver_image: "",
-            receiver_id_card_image: "",
+            // receiver_image: "",
+            // receiver_id_card_image: "",
             receiver_money_location: "",
           }}
           onSubmit={(values) => {
             console.log(values);
-            Login(values);
           }}
           validationSchema={""}
         >
@@ -170,7 +175,7 @@ const Fields = () => {
                 type={"receiverIdImage"}
               />
               <View style={{ paddingVertical: 10 }}>
-                <CustomButton title={"Next"} />
+                <CustomButton title={"Next"} onPress={handleSubmit} />
               </View>
             </View>
           )}
