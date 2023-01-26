@@ -5,13 +5,73 @@ import { layout } from "../../constants/layout";
 import { Formik } from "formik";
 import UploadButton from "./UploadButton";
 import CustomButton from "../CustomButton";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const CreateReceipt = () => {
+  const rri = useSelector((state) => state.user.receiptReceiverImage);
+  // console.log("🚀 ~ file: CreateReceipt.js:12 ~ CreateReceipt ~ rri", rri);
+  const rrii = useSelector((state) => state.user.receiptReceiverId);
+  async function sendReceipt(values) {
+    let filename1 = rri.uri.split("/").pop();
+    let filename2 = rrii.uri.split("/").pop();
+
+    let match1 = /\.(\w+)$/.exec(filename1);
+    let type1 = match1 ? `image/${match1[1]}` : `image`;
+    let match2 = /\.(\w+)$/.exec(filename2);
+    let type2 = match2 ? `image/${match2[1]}` : `image`;
+
+    let formData = new FormData();
+    formData.append("agent_id", values.agent_id);
+    formData.append("transaction_id", values.transaction_id);
+    formData.append("amount", values.amount);
+    formData.append("reciver_name", values.receiver_name);
+    formData.append("reciver_image", {
+      uri: rri.uri,
+      name: filename1,
+      type: type1,
+    });
+    formData.append("reciver_id_image", {
+      uri: af.uri,
+      name: filename2,
+      type: type2,
+    });
+
+    axios
+      .post(
+        "http://codelumina.com/project/wallet_managment/api/agent/receipt/detail",
+        {
+          receipt_id: receiptId,
+        }
+      )
+      .then(async (res) => {
+        console.log(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log("error response - ", error.response.data);
+          Alert.alert(
+            "Failed creating receipt",
+            JSON.stringify(error.response.data.message)
+          );
+          setLoading(false);
+        } else if (error.request) {
+          console.log(error.request);
+          setLoading(false);
+        } else {
+          console.log("Error", error.message);
+          setLoading(false);
+        }
+        console.log(error.config);
+        setLoading(false);
+      });
+  }
   return (
     <View style={styles.root}>
       <View
         style={{
-          flex: 1,
+          // flex: 1,
           width: layout.widthp,
           // alignItems: "center",
           justifyContent: "center",
@@ -27,7 +87,7 @@ const CreateReceipt = () => {
           Create Receipt
         </Text>
       </View>
-      <View style={{ alignItems: "center", justifyContent: "center", flex: 5 }}>
+      <View style={{ alignItems: "center", flex: 1 }}>
         <Formik
           initialValues={{
             agent_id: "",
@@ -37,6 +97,7 @@ const CreateReceipt = () => {
           }}
           onSubmit={(values) => {
             console.log(values);
+            sendReceipt(values);
           }}
         >
           {({
@@ -76,7 +137,8 @@ const CreateReceipt = () => {
                 onBlur={handleBlur("receiver_name")}
                 value={values.receiver_name}
               />
-              <UploadButton type={"senderImage"} />
+              <UploadButton type={"receiverImage"} title={"Receiver Image"} />
+              <UploadButton type={"receiverId"} title={"Receive ID Image"} />
               <View style={{ paddingVertical: 10 }}>
                 <CustomButton title={"create Receipt"} onPress={handleSubmit} />
               </View>

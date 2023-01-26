@@ -6,17 +6,16 @@ import { Feather } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import * as ImagePicker from "expo-image-picker";
 import {
-  setReceiverIdImage,
-  setReceiverImage,
-  setSenderIdImage,
-  setSenderImage,
+  setReceiptReceiverId,
+  setReceiptReceiverImage,
 } from "../../store/slice/userSlice";
 
 const UploadButton = ({ onPress, title, type }) => {
-  const si = useSelector((state) => state.user.senderImage);
-  console.log("🚀 ~ file: UploadButton.js:16 ~ UploadButton ~ si", si);
-  const sii = useSelector((state) => state.user.senderIdImage);
+  const rri = useSelector((state) => state.user.receiptReceiverImage);
+  // console.log("🚀 ~ file: UploadButton.js:16 ~ UploadButton ~ rri", rri);
+  const rrii = useSelector((state) => state.user.receiptReceiverId);
   // console.log("🚀 ~ file: UploadButton.js:18 ~ UploadButton ~ ab", ab)
+  const dispatch = useDispatch();
 
   async function pickImage() {
     console.log("test");
@@ -30,23 +29,17 @@ const UploadButton = ({ onPress, title, type }) => {
     console.log(result.assets[0].uri);
 
     if (!result.canceled) {
-      if (type === "senderImage") {
-        console.log("setting sender image");
-        dispatch(setSenderImage(result.assets[0]));
-      }
-      if (type === "senderIdImage") {
-        dispatch(setSenderIdImage(result.assets[0]));
-      }
       if (type === "receiverImage") {
-        dispatch(setReceiverImage(result.assets[0]));
+        console.log("setting sender image");
+        dispatch(setReceiptReceiverImage(result.assets[0]));
       }
-      if (type === "receiverIdImage") {
-        dispatch(setReceiverIdImage(result.assets[0]));
+      if (type === "receiverId") {
+        dispatch(setReceiptReceiverId(result.assets[0]));
       }
     }
   }
 
-  if (type === "senderImage") {
+  if (type === "receiverImage") {
     return (
       <View style={styles.root}>
         <TouchableOpacity onPress={pickImage}>
@@ -54,9 +47,9 @@ const UploadButton = ({ onPress, title, type }) => {
             <View>
               <Text
                 numberOfLines={1}
-                style={si ? [styles.title, { color: "black" }] : styles.title}
+                style={rri ? [styles.title, { color: "black" }] : styles.title}
               >
-                {si ? `${title} uploaded` : title}
+                {rri ? `${title} uploaded` : title}
               </Text>
             </View>
             <View>
@@ -68,7 +61,7 @@ const UploadButton = ({ onPress, title, type }) => {
     );
   }
 
-  if (type === "senderIdImage") {
+  if (type === "receiverId") {
     return (
       <View style={styles.root}>
         <TouchableOpacity onPress={pickImage}>
@@ -76,9 +69,9 @@ const UploadButton = ({ onPress, title, type }) => {
             <View>
               <Text
                 numberOfLines={1}
-                style={sii ? [styles.title, { color: "black" }] : styles.title}
+                style={rrii ? [styles.title, { color: "black" }] : styles.title}
               >
-                {sii ? `${title} uploaded` : title}
+                {rrii ? `${title} uploaded` : title}
               </Text>
             </View>
             <View>

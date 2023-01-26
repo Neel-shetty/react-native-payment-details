@@ -67,10 +67,10 @@ export const userSlice = createSlice({
       state.receiptSearch = action.payload;
     },
     setReceiptReceiverImage: (state, action) => {
-      state.receiptSearch = action.payload;
+      state.receiptReceiverImage = action.payload;
     },
     setReceiptReceiverId: (state, action) => {
-      state.receiptSearch = action.payload;
+      state.receiptReceiverId = action.payload;
     },
   },
 });
