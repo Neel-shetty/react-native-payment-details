@@ -5,6 +5,7 @@ import publicIP from "react-native-public-ip";
 import Header from "../../components/DetailScreenComponents/Header";
 import Input from "../../components/DetailScreenComponents/Input";
 import Fields from "../../components/DetailScreenComponents/Fields";
+import { StatusBar } from "expo-status-bar";
 
 const DetailScreen = () => {
   const [location, setLocation] = useState(null);
@@ -40,6 +41,7 @@ const DetailScreen = () => {
 
   return (
     <View style={styles.root}>
+      <StatusBar style="dark" />
       <View style={styles.headerContainer}>
         <Header />
       </View>

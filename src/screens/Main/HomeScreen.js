@@ -11,10 +11,12 @@ import Image from "../../components/HomeScreenComponents/ImageBg";
 import { layout } from "../../constants/layout";
 import Menu from "../../components/HomeScreenComponents/Menu";
 import { colors } from "../../constants/colors";
+import { StatusBar } from "expo-status-bar";
 
 const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.root}>
+      <StatusBar style="dark" />
       <View style={styles.headerContainer}>
         <Header />
       </View>

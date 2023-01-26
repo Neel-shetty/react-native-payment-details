@@ -12,6 +12,8 @@ import SearchBar from "../../components/PayCustomerScreenComponents/SearchBar";
 import BottomContainer from "../../components/PayCustomerScreenComponents/BottomContainer";
 import { useSelector } from "react-redux";
 import CreateReceipt from "../../components/PayCustomerScreenComponents/CreateReceipt";
+import { StatusBar } from "expo-status-bar";
+
 const PayCustomerScreen = () => {
   const receiptSearch = useSelector((state) => state.user.receiptSearch);
   return (
@@ -22,6 +24,7 @@ const PayCustomerScreen = () => {
       enabled={false}
       style={styles.root}
     >
+      <StatusBar style="dark" />
       <SafeAreaView style={styles.root}>
         <View
           style={{

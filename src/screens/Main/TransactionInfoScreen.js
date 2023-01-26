@@ -3,12 +3,14 @@ import React from "react";
 import Header from "../../components/TransactionInfoScreenComponents/Header";
 import TData from "../../components/TransactionInfoScreenComponents/TData";
 import { layout } from "../../constants/layout";
+import { StatusBar } from "expo-status-bar";
 
 const TransactionInfoScreen = ({ route }) => {
   console.log(route?.params?.transaction_id);
 
   return (
     <View style={styles.root}>
+       <StatusBar style="dark" />
       <View style={styles.headerContainer}>
         <Header />
       </View>
