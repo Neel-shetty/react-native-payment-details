@@ -18,6 +18,7 @@ const initialState = {
   receiptSearch: true,
   receiptReceiverImage: null,
   receiptReceiverId: null,
+  selectedDropdown: null,
 };
 
 export const userSlice = createSlice({
@@ -72,6 +73,9 @@ export const userSlice = createSlice({
     setReceiptReceiverId: (state, action) => {
       state.receiptReceiverId = action.payload;
     },
+    setSelectedDropdown: (state, action) => {
+      state.selectedDropdown = action.payload;
+    },
   },
 });
 
@@ -92,6 +96,7 @@ export const {
   setReceiptReceiverId,
   setReceiptReceiverImage,
   setPhone,
+  setSelectedDropdown,
 } = userSlice.actions;
 
 export default userSlice.reducer;
