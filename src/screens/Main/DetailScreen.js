@@ -1,43 +1,41 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import * as Location from "expo-location";
-import publicIP from "react-native-public-ip";
 import Header from "../../components/DetailScreenComponents/Header";
 import Input from "../../components/DetailScreenComponents/Input";
 import Fields from "../../components/DetailScreenComponents/Fields";
 import { StatusBar } from "expo-status-bar";
 
 const DetailScreen = () => {
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+  // const [location, setLocation] = useState(null);
+  // const [errorMsg, setErrorMsg] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
+  // useEffect(() => {
+  //   (async () => {
+  //     let { status } = await Location.requestForegroundPermissionsAsync();
+  //     if (status !== "granted") {
+  //       setErrorMsg("Permission to access location was denied");
+  //       return;
+  //     }
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLocation(location);
+  //   })();
 
-    publicIP()
-      .then((ip) => {
-        console.log(ip);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  //   publicIP()
+  //     .then((ip) => {
+  //       console.log(ip);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
-  let text = "Waiting..";
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
-  }
+  // let text = "Waiting..";
+  // if (errorMsg) {
+  //   text = errorMsg;
+  // } else if (location) {
+  //   text = JSON.stringify(location);
+  // }
 
   return (
     <View style={styles.root}>

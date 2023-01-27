@@ -14,7 +14,7 @@ const CreateReceipt = () => {
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const rri = useSelector((state) => state.user.receiptReceiverImage);
   // console.log("🚀 ~ file: CreateReceipt.js:12 ~ CreateReceipt ~ rri", rri);
@@ -47,14 +47,7 @@ const CreateReceipt = () => {
     axios
       .post(
         "http://codelumina.com/project/wallet_managment/api/agent/receipt/insert",
-        formData,
-        {
-          headers: {
-            // accept: "application/json",
-            accept: "application/json",
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        
       )
       .then(async (res) => {
         console.log(res.data);
@@ -62,7 +55,7 @@ const CreateReceipt = () => {
         Alert.alert("Receipt Created", res.data.message, [
           {
             text: "OK",
-            onPress: () => dispatch(setReceiptSearch(true)) ,
+            onPress: () => navigation.navigate("SearchTransactionScreen"),
           },
         ]);
       })

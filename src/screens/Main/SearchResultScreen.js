@@ -36,7 +36,7 @@ const data = {
 
 const SearchResultScreen = ({ route }) => {
   return (
-    <View style={styles.root}>
+    // <View style={styles.root}>
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 70}
@@ -65,7 +65,7 @@ const SearchResultScreen = ({ route }) => {
         </>
       )} */}
     </KeyboardAvoidingView>
-    </View>
+    // </View>
   );
 };
 

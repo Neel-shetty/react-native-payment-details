@@ -18,16 +18,25 @@ import { useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
 import axios from "axios";
 import { colors } from "../../constants/colors";
+import * as Location from "expo-location";
+import publicIP from "react-native-public-ip";
+import * as SecureStore from "expo-secure-store";
 
 const Fields = () => {
   const [loading, setLoading] = useState();
   console.log("🚀 ~ file: Fields.js:22 ~ Fields ~ loading", loading);
   const [dropdownData, setDropdownData] = useState();
+  const [location, setLocation] = useState(null);
+  console.log("🚀 ~ file: Fields.js:29 ~ Fields ~ location", location?.coords);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [ip, setIp] = useState(null);
 
   const si = useSelector((state) => state.user.senderImage);
   const sii = useSelector((state) => state.user.senderIdImage);
   const ri = useSelector((state) => state.user.receiverImage);
   const rii = useSelector((state) => state.user.receiverIdImage);
+  const dropdown = useSelector((state) => state.user.selectedDropdown);
+  console.log("🚀 ~ file: Fields.js:38 ~ Fields ~ dropdown", dropdown);
 
   async function fetchDropdownData() {
     setLoading(true);
@@ -73,6 +82,8 @@ const Fields = () => {
     let match4 = /\.(\w+)$/.exec(filename4);
     let type4 = match4 ? `image/${match4[1]}` : `image`;
 
+    let result = await SecureStore.getItemAsync("id");
+
     let formData = new FormData();
     formData.append("receiver_image", {
       uri: ri.uri,
@@ -98,18 +109,90 @@ const Fields = () => {
     formData.append("commission", values.commision);
     formData.append("sender_name", values.sender_name);
     formData.append("sender_phone", values.sender_phone);
+    formData.append("sender_address", values.sender_address);
+    formData.append("receiver_name", values.receiver_name);
+    formData.append("receiver_phone", values.receiver_phone);
+    formData.append("receiver_address", values.receiver_address);
+    formData.append("agent_ip", ip);
+    formData.append("agent_current_lat", location?.coords.latitude);
+    formData.append("agent_current_lng", location?.coords.longitude);
+    formData.append("agent_id", result);
+    formData.append("receive_money_location", dropdown);
+
+    axios
+      .post(
+        "http://codelumina.com/project/wallet_managment/api/agent/transaction/create",
+        formData,
+        {
+          headers: {
+            // accept: "application/json",
+            accept: "application/json",
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then(async (res) => {
+        console.log(res.data);
+        setLoading(false);
+        Alert.alert("Transaction Created", res.data.message, [
+          {
+            text: "OK",
+            onPress: () => console.log("ok"),
+          },
+        ]);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log("error response - ", error.response.data);
+          Alert.alert(
+            "Failed creating receipt",
+            JSON.stringify(error.response.data.message)
+          );
+          setLoading(false);
+        } else if (error.request) {
+          console.log(error.request);
+          setLoading(false);
+        } else {
+          console.log("Error", error.message);
+          setLoading(false);
+        }
+        console.log(error.config);
+        setLoading(false);
+      });
   }
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+
+    publicIP()
+      .then((ip) => {
+        console.log(ip);
+        setIp(ip);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     fetchDropdownData();
   }, []);
 
-  if (loading)
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ActivityIndicator size={"large"} color={colors.green} />
-      </View>
-    );
+  // if (loading)
+  //   return (
+  //     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+  //       <ActivityIndicator size={"large"} color={colors.green} />
+  //     </View>
+  //   );
 
   return (
     <View style={styles.root}>
@@ -137,6 +220,7 @@ const Fields = () => {
           }}
           onSubmit={(values) => {
             console.log(values);
+            sendTransaction(values)
           }}
           validationSchema={""}
         >
@@ -206,11 +290,14 @@ const Fields = () => {
                 value={values.receiver_address}
                 fieldType={"receiver_address"}
               />
-              <Dropdown
-                title={"Payment Receiving Location"}
-                data={dropdownData}
-              />
-
+              {!loading ? (
+                <Dropdown
+                  title={"Payment Receiving Location"}
+                  data={dropdownData}
+                />
+              ) : (
+                <ActivityIndicator size={"large"} color={colors.green} />
+              )}
               <UploadButton title={"Sender Image"} type={"senderImage"} />
               <UploadButton
                 title={"Sender ID Card Image"}
