@@ -21,9 +21,11 @@ import * as SecureStore from "expo-secure-store";
 import axios from "axios";
 import Input from "./Input";
 import CustomButton from "../CustomButton";
+import { useNavigation } from "@react-navigation/native";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [transactions, setTransactions] = useState([]);
   console.log("🚀 ~ file: SearchBar.js:22 ~ transactions", transactions);
   const [loading, setLoading] = useState(false);
@@ -49,6 +51,9 @@ const SearchBar = () => {
       .then(async (res) => {
         console.log(res.data.data);
         setTransactions(res.data.data);
+        navigation.navigate("SearchResultScreen", {
+          transactionData: res.data.data,
+        });
         setLoading(false);
       })
       .catch((error) => {

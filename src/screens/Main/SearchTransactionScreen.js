@@ -31,9 +31,10 @@ const SearchTransactionScreen = () => {
           style={{
             flex: 3,
             alignItems: "center",
-            justifyContent: "center",
+            // justifyContent: "center",
             paddingTop: 20,
             width: layout.width,
+            marginTop: 30,
           }}
         >
           <SearchBar />

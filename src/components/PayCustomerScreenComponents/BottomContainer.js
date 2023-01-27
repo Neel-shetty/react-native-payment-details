@@ -5,94 +5,78 @@ import { colors } from "../../constants/colors";
 import { useSelector } from "react-redux";
 import CreateReceipt from "./CreateReceipt";
 
-const BottomContainer = () => {
-  const data = useSelector((state) => state.user.receiptData?.data);
-  const receiptSearch = useSelector((state) => state.user.receiptSearch);
-  console.log(
-    "🚀 ~ file: BottomContainer.js:9 ~ BottomContainer ~ data",
-    receiptSearch
-  );
-
-  if (!data) return;
-
-  if (true) {
-    return (
-      <View style={styles.root}>
-        <View
+const BottomContainer = ({ data }) => {
+  return (
+    <View style={styles.root}>
+      <View
+        style={{
+          flex: 1,
+          width: layout.widthp,
+          // alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Text
           style={{
-            flex: 1,
-            width: layout.widthp,
-            // alignItems: "center",
-            justifyContent: "center",
+            fontFamily: "poppins-semibold",
+            fontSize: 24,
+            // color: colors.green,
           }}
         >
-          <Text
-            style={{
-              fontFamily: "poppins-semibold",
-              fontSize: 24,
-              // color: colors.green,
-            }}
-          >
-            Details
-          </Text>
-        </View>
-        <View
-          style={{
-            flex: 3,
-            alignItems: "center",
-            justifyContent: "center",
-            maxHeight: 120,
-            width: layout.widthp,
-          }}
-        >
-          <Image
-            source={{
-              uri: data?.reciver_image,
-            }}
-            style={{ width: 100, height: 100, borderRadius: 50 }}
-          />
-        </View>
-        <View
-          style={{
-            flex: 4,
-            width: layout.widthp,
-            marginTop: 20,
-            // alignItems: "center",
-            // justifyContent: "center",
-          }}
-        >
-          <Text style={styles.title}>
-            Amount - <Text style={{ color: colors.green }}>{data?.amount}</Text>
-          </Text>
-          <Text style={styles.title}>
-            Receiver Name -{" "}
-            <Text style={{ color: colors.green }}>{data.reciver_name}</Text>
-          </Text>
-        </View>
-        <View
-          style={{
-            flex: 2,
-            alignItems: "center",
-            justifyContent: "center",
-            // backgroundColor: "pink",
-            minHeight: 100,
-          }}
-        >
-          <Text style={styles.title}>ID Card</Text>
-          <Image
-            style={{ height: 200, width: 300, alignSelf: "center" }}
-            source={{
-              uri: data?.reciver_id_image,
-            }}
-            resizeMode="contain"
-          />
-        </View>
+          Details
+        </Text>
       </View>
-    );
-  }
-  // if (!receiptSearch) {
-  //   return <CreateReceipt />;
-  // }
+      <View
+        style={{
+          flex: 3,
+          alignItems: "center",
+          justifyContent: "center",
+          maxHeight: 120,
+          width: layout.widthp,
+        }}
+      >
+        <Image
+          source={{
+            uri: data?.reciver_image,
+          }}
+          style={{ width: 100, height: 100, borderRadius: 50 }}
+        />
+      </View>
+      <View
+        style={{
+          flex: 4,
+          width: layout.widthp,
+          marginTop: 20,
+        }}
+      >
+        <Text style={styles.title}>
+          Amount - <Text style={{ color: colors.green }}>{data?.amount}</Text>
+        </Text>
+        <Text style={styles.title}>
+          Receiver Name -{" "}
+          <Text style={{ color: colors.green }}>{data.reciver_name}</Text>
+        </Text>
+      </View>
+      <View
+        style={{
+          flex: 2,
+          alignItems: "center",
+          justifyContent: "center",
+          // backgroundColor: "pink",
+          minHeight: 100,
+        }}
+      >
+        <Text style={styles.title}>ID Card</Text>
+        <Image
+          style={{ height: 200, width: 300, alignSelf: "center" }}
+          source={{
+            uri: data?.reciver_id_image,
+          }}
+          resizeMode="contain"
+        />
+      </View>
+    </View>
+  );
 };
 
 export default BottomContainer;

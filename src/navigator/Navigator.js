@@ -16,6 +16,7 @@ import { colors } from "../constants/colors";
 import TransactionInfoScreen from "../screens/Main/TransactionInfoScreen";
 // import PayCustomerScreen from "../screens/Main/PayCustomerScreen";``
 import SearchTransactionScreen from "../screens/Main/SearchTransactionScreen";
+import SearchResultScreen from "../screens/Main/SearchResultScreen";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -101,6 +102,10 @@ const Navigator = () => {
             <Stack.Screen
               name="SearchTransactionScreen"
               component={SearchTransactionScreen}
+            />
+            <Stack.Screen
+              name="SearchResultScreen"
+              component={SearchResultScreen}
             />
           </>
         )}
