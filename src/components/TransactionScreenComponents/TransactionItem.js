@@ -5,12 +5,13 @@ import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../constants/colors";
 
 const TransactionItem = ({ id, date, amount }) => {
+  console.log("🚀 ~ file: TransactionItem.js:8 ~ TransactionItem ~ id", id)
   const navigation = useNavigation();
   function transactionDetails() {
     navigation.navigate("TransactionInfoScreen", { transaction_id: id });
   }
   const formattedDate = new Date(date);
-  console.log(formattedDate.toLocaleDateString("en-GB"));
+  // console.log(formattedDate.toLocaleDateString("en-GB"));
   return (
     <TouchableOpacity onPress={transactionDetails}>
       <View style={styles.root}>

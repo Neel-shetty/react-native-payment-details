@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import Input from "./Input";
 import { layout } from "../../constants/layout";
@@ -86,7 +86,7 @@ const CreateReceipt = () => {
       });
   }
   return (
-    <View style={styles.root}>
+    <ScrollView contentContainerStyle={styles.root}>
       <View
         style={{
           // flex: 1,
@@ -164,7 +164,7 @@ const CreateReceipt = () => {
           )}
         </Formik>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

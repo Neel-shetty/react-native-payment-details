@@ -17,18 +17,18 @@ import { StatusBar } from "expo-status-bar";
 const PayCustomerScreen = () => {
   const receiptSearch = useSelector((state) => state.user.receiptSearch);
   return (
-    // <View style={styles.root}>
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 70}
       enabled={false}
       style={styles.root}
     >
+    {/* <View style={styles.root}> */}
       <StatusBar style="dark" />
       <SafeAreaView style={styles.root}>
         <View
           style={{
-            flex: 1,
+            flex: 3,
             alignItems: "center",
             justifyContent: "center",
             paddingTop: 20,
@@ -38,7 +38,7 @@ const PayCustomerScreen = () => {
         </View>
         {receiptSearch ? (
           <>
-            <View
+            {/* <View
               style={{
                 flex: 2,
                 alignItems: "center",
@@ -46,18 +46,18 @@ const PayCustomerScreen = () => {
               }}
             >
               <TopContainer />
-            </View>
-            <View style={{ flex: 5 }}>
+            </View> */}
+            {/* <View style={{ flex: 5 }}>
               <BottomContainer />
-            </View>
+            </View> */}
           </>
-        ) : (
-          <View style={{ flex: 7 }}>
-            <CreateReceipt />
-          </View>
-        )}
+        ) : // <View style={{ flex: 5 }}>
+        //   <CreateReceipt />
+        // </View>
+        null}
       </SafeAreaView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    // {/* </View> */}
   );
 };
 

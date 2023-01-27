@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Alert,
   FlatList,
   ScrollView,
@@ -16,6 +17,7 @@ import CustomButton from "../CustomButton";
 import { useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
 import axios from "axios";
+import { colors } from "../../constants/colors";
 
 const Fields = () => {
   const [loading, setLoading] = useState();
@@ -92,13 +94,22 @@ const Fields = () => {
       name: filename2,
       type: type3,
     });
+    formData.append("amount", values.amount);
+    formData.append("commission", values.commision);
+    formData.append("sender_name", values.sender_name);
+    formData.append("sender_phone", values.sender_phone);
   }
 
   useEffect(() => {
     fetchDropdownData();
   }, []);
 
-  if (loading) return;
+  if (loading)
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <ActivityIndicator size={"large"} color={colors.green} />
+      </View>
+    );
 
   return (
     <View style={styles.root}>

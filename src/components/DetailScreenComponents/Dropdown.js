@@ -42,11 +42,11 @@ const Dropdown = ({ data = [], title }) => {
             color: "#a1a1a1",
           }}
           buttonStyle={{
-            width: layout.widthp,
+            width: layout.width * 0.86,
             borderRadius: 10,
             // elevation: 6,
             backgroundColor: "white",
-            height: 25,
+            height: 30,
           }}
           renderDropdownIcon={() => (
             <View style={{ alignItems: "center", justifyContent: "center" }}>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.green,
     borderBottomWidth: 2.5,
     paddingBottom: 5,
-    width:layout.widthp
+    // width:layout.widthp
   },
   infoText: {
     fontFamily: "inter-semibold",

@@ -16,6 +16,10 @@ const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 const TransactionList = () => {
   const [transactions, setTransactions] = useState(null);
+  // console.log(
+  //   "🚀 ~ file: TransactionList.js:19 ~ TransactionList ~ transactions",
+  //   transactions[1].transaction_id
+  // );
   const [loading, setLoading] = useState(false);
   async function fetchTransactionData() {
     setLoading(true);
@@ -28,7 +32,7 @@ const TransactionList = () => {
         }
       )
       .then(async (res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         setTransactions(res.data.data);
         setLoading(false);
       })
@@ -71,7 +75,7 @@ const TransactionList = () => {
           return (
             // <View>
             <TransactionItem
-              id={item.id}
+              id={item.transaction_id}
               amount={item.amount}
               date={item.updated_at}
             />

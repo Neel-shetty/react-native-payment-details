@@ -62,7 +62,7 @@ const TopContainer = () => {
 
   useEffect(() => {
     if (receiptId) {
-      getData();
+      // getData();
     }
   }, [receiptId, searched]);
 
