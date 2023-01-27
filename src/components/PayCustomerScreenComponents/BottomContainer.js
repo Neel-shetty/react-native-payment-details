@@ -6,13 +6,13 @@ import { useSelector } from "react-redux";
 import CreateReceipt from "./CreateReceipt";
 
 const BottomContainer = ({ data }) => {
+  console.log("🚀 ~ file: BottomContainer.js:9 ~ BottomContainer ~ data", data);
   return (
     <View style={styles.root}>
       <View
         style={{
           flex: 1,
           width: layout.widthp,
-          // alignItems: "center",
           justifyContent: "center",
         }}
       >
@@ -20,7 +20,6 @@ const BottomContainer = ({ data }) => {
           style={{
             fontFamily: "poppins-semibold",
             fontSize: 24,
-            // color: colors.green,
           }}
         >
           Details
@@ -37,7 +36,7 @@ const BottomContainer = ({ data }) => {
       >
         <Image
           source={{
-            uri: data?.reciver_image,
+            uri: data?.receiver_image,
           }}
           style={{ width: 100, height: 100, borderRadius: 50 }}
         />
@@ -54,7 +53,7 @@ const BottomContainer = ({ data }) => {
         </Text>
         <Text style={styles.title}>
           Receiver Name -{" "}
-          <Text style={{ color: colors.green }}>{data.reciver_name}</Text>
+          <Text style={{ color: colors.green }}>{data?.receiver_name}</Text>
         </Text>
       </View>
       <View
@@ -62,7 +61,6 @@ const BottomContainer = ({ data }) => {
           flex: 2,
           alignItems: "center",
           justifyContent: "center",
-          // backgroundColor: "pink",
           minHeight: 100,
         }}
       >
@@ -70,7 +68,7 @@ const BottomContainer = ({ data }) => {
         <Image
           style={{ height: 200, width: 300, alignSelf: "center" }}
           source={{
-            uri: data?.reciver_id_image,
+            uri: `http://codelumina.com/project/wallet_managment/public/${data?.reciver_id_image}`,
           }}
           resizeMode="contain"
         />

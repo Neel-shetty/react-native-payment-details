@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import TopContainer from "../../components/PayCustomerScreenComponents/TopContainer";
 import BottomContainer from "../../components/PayCustomerScreenComponents/BottomContainer";
+import Header from "../../components/TransactionInfoScreenComponents/Header";
 
 const data = {
   agent_current_city: null,
@@ -35,12 +36,14 @@ const data = {
 const SearchResultScreen = ({ route }) => {
   return (
     <View style={styles.root}>
-      <Text>SearchResultScreen</Text>
-      <View>
+      <View style={{ flex: 1 }}>
+        <Header title={""} />
+      </View>
+      <View style={{ flex: 2 }}>
         <TopContainer data={route.params.transactionData} />
       </View>
-      <View>
-        <BottomContainer />
+      <View style={{ flex: 5 }}>
+        <BottomContainer data={route.params.transactionData} />
       </View>
     </View>
   );

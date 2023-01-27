@@ -24,21 +24,12 @@ import CustomButton from "../CustomButton";
 import { useNavigation } from "@react-navigation/native";
 
 const SearchBar = () => {
-  const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [transactions, setTransactions] = useState([]);
-  console.log("🚀 ~ file: SearchBar.js:22 ~ transactions", transactions);
   const [loading, setLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(null);
-  console.log("🚀 ~ file: SearchBar.js:29 ~ searchQuery", searchQuery);
-
-  const receipt = useSelector((state) => state.user.receipt);
-  console.log("🚀 ~ file: SearchBar.js:26 ~ receipt", receipt);
 
   async function fetchTransactionData(values) {
     console.log("fetch searchbar");
     setLoading(true);
-    // let result = await SecureStore.getItemAsync("id");
     axios
       .post(
         "http://codelumina.com/project/wallet_managment/api/agent/transaction/search",
@@ -49,8 +40,7 @@ const SearchBar = () => {
         }
       )
       .then(async (res) => {
-        console.log(res.data.data);
-        setTransactions(res.data.data);
+        console.log("search result ---------- ",res.data.data);
         navigation.navigate("SearchResultScreen", {
           transactionData: res.data.data,
         });
@@ -77,47 +67,12 @@ const SearchBar = () => {
       });
   }
 
-  useEffect(() => {
-    // fetchTransactionData();
-  }, [searchQuery]);
-
-  useEffect(() => {
-    if (!loading && transactions) {
-      // checkSearch();
-    }
-  }, [searchQuery, transactions]);
-
-  function checkSearch() {
-    const previd = receipt;
-    for (let i = 0; i < transactions.length; i++) {
-      console.log("looping");
-      // if (JSON.stringify(transactions.data[i]).includes(searchQuery)) {
-      // if (!receipt) {
-      if (transactions[i].transaction_id == searchQuery) {
-        dispatch(setReceipt(transactions[i].id));
-        dispatch(setReceiptSearch(true));
-        console.log("exists");
-        return;
-      }
-      // }
-    }
-    if (searchQuery) {
-      console.log("setting receipt result as false");
-      dispatch(setReceiptSearch(false));
-      const postid = receipt;
-      console.log("prev id - ", previd, "post id - ", postid);
-    }
-  }
-
-  // if (loading || !transactions) return;
-
   return (
     <View style={styles.root}>
       <Formik
         initialValues={{ transaction_id: "", unique_id: "", amount: "" }}
         onSubmit={(values) => {
           console.log(values);
-          setSearchQuery(values);
           // dispatch(setSearched(true));
           fetchTransactionData(values);
         }}
