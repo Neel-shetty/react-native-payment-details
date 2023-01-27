@@ -40,7 +40,7 @@ const SearchBar = () => {
         }
       )
       .then(async (res) => {
-        console.log("search result ---------- ",res.data.data);
+        console.log("search result ---------- ", res.data.data);
         navigation.navigate("SearchResultScreen", {
           transactionData: res.data.data,
         });
@@ -49,11 +49,8 @@ const SearchBar = () => {
       .catch((error) => {
         if (error.response) {
           console.log("error response", error.response.data);
-          // setTransactions(error.response.data);
-          Alert.alert(
-            "Failed to get transaction data, try again later",
-            JSON.stringify(error.response.data.message)
-          );
+
+          Alert.alert("Search Failed", error.response.data.message);
           setLoading(false);
         } else if (error.request) {
           console.log(error.request);

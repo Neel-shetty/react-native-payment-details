@@ -15,7 +15,7 @@ const Header = ({ loc }) => {
       <BackButton onPress={back} />
       <View style={styles.titleContainer}>
         <Text style={styles.title} numberOfLines={2}>
-          Transaction Details
+          Search Transactions
         </Text>
       </View>
       <View style={{ height: 35, width: 35 }} />

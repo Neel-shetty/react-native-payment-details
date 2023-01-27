@@ -6,7 +6,10 @@ import { useSelector } from "react-redux";
 import CreateReceipt from "./CreateReceipt";
 
 const BottomContainer = ({ data }) => {
-  console.log("🚀 ~ file: BottomContainer.js:9 ~ BottomContainer ~ data", data);
+  console.log(
+    "🚀 ~ file: BottomContainer.js:9 ~ BottomContainer ~ data",
+    data.receiver_image
+  );
   return (
     <View style={styles.root}>
       <View
@@ -36,7 +39,7 @@ const BottomContainer = ({ data }) => {
       >
         <Image
           source={{
-            uri: data?.receiver_image,
+            uri: `http://codelumina.com/project/wallet_managment/${data?.receiver_image}`,
           }}
           style={{ width: 100, height: 100, borderRadius: 50 }}
         />

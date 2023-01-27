@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import CreateReceipt from "../../components/PayCustomerScreenComponents/CreateReceipt";
 import { StatusBar } from "expo-status-bar";
 import { layout } from "../../constants/layout";
+import Header from "../../components/PayCustomerScreenComponents/Header";
 
 const SearchTransactionScreen = () => {
   const receiptSearch = useSelector((state) => state.user.receiptSearch);
@@ -29,12 +30,22 @@ const SearchTransactionScreen = () => {
       <SafeAreaView style={styles.root}>
         <View
           style={{
-            flex: 3,
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            // backgroundColor: "pink",
+          }}
+        >
+          <Header />
+        </View>
+        <View
+          style={{
+            flex: 7,
             alignItems: "center",
             // justifyContent: "center",
             paddingTop: 20,
             width: layout.width,
-            marginTop: 30,
+            // marginTop: 30,
           }}
         >
           <SearchBar />
