@@ -13,8 +13,9 @@ import BottomContainer from "../../components/PayCustomerScreenComponents/Bottom
 import { useSelector } from "react-redux";
 import CreateReceipt from "../../components/PayCustomerScreenComponents/CreateReceipt";
 import { StatusBar } from "expo-status-bar";
+import { layout } from "../../constants/layout";
 
-const PayCustomerScreen = () => {
+const SearchTransactionScreen = () => {
   const receiptSearch = useSelector((state) => state.user.receiptSearch);
   return (
     <KeyboardAvoidingView
@@ -23,7 +24,7 @@ const PayCustomerScreen = () => {
       enabled={false}
       style={styles.root}
     >
-    {/* <View style={styles.root}> */}
+      {/* <View style={styles.root}> */}
       <StatusBar style="dark" />
       <SafeAreaView style={styles.root}>
         <View
@@ -32,6 +33,7 @@ const PayCustomerScreen = () => {
             alignItems: "center",
             justifyContent: "center",
             paddingTop: 20,
+            width: layout.width,
           }}
         >
           <SearchBar />
@@ -56,12 +58,12 @@ const PayCustomerScreen = () => {
         // </View>
         null}
       </SafeAreaView>
-      </KeyboardAvoidingView>
+    </KeyboardAvoidingView>
     // {/* </View> */}
   );
 };
 
-export default PayCustomerScreen;
+export default SearchTransactionScreen;
 
 const styles = StyleSheet.create({
   root: {

@@ -14,7 +14,7 @@ const Menu = () => {
     navigation.navigate("TransactionScreen");
   }
   function pay() {
-    navigation.navigate("PayCustomerScreen");
+    navigation.navigate("SearchTransactionScreen");
   }
 
   return (

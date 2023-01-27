@@ -33,21 +33,22 @@ const SearchBar = () => {
   const receipt = useSelector((state) => state.user.receipt);
   console.log("🚀 ~ file: SearchBar.js:26 ~ receipt", receipt);
 
-  async function fetchTransactionData() {
+  async function fetchTransactionData(values) {
     console.log("fetch searchbar");
     setLoading(true);
-    let result = await SecureStore.getItemAsync("id");
+    // let result = await SecureStore.getItemAsync("id");
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/receipt/lists",
+        "http://codelumina.com/project/wallet_managment/api/agent/transaction/search",
         {
-          agent_id: result,
+          transaction_id: values.transaction_id,
+          unique_id: values.unique_id,
+          amount: values.amount,
         }
       )
       .then(async (res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         setTransactions(res.data.data);
-        checkSearch();
         setLoading(false);
       })
       .catch((error) => {
@@ -113,7 +114,7 @@ const SearchBar = () => {
           console.log(values);
           setSearchQuery(values);
           // dispatch(setSearched(true));
-          // fetchTransactionData();
+          fetchTransactionData(values);
         }}
       >
         {({

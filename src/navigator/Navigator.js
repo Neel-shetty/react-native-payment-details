@@ -14,7 +14,8 @@ import HomeScreen from "../screens/Main/HomeScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { colors } from "../constants/colors";
 import TransactionInfoScreen from "../screens/Main/TransactionInfoScreen";
-import PayCustomerScreen from "../screens/Main/PayCustomerScreen";
+// import PayCustomerScreen from "../screens/Main/PayCustomerScreen";``
+import SearchTransactionScreen from "../screens/Main/SearchTransactionScreen";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -97,7 +98,10 @@ const Navigator = () => {
               name="TransactionInfoScreen"
               component={TransactionInfoScreen}
             />
-            <Stack.Screen name="PayCustomerScreen" component={PayCustomerScreen} />
+            <Stack.Screen
+              name="SearchTransactionScreen"
+              component={SearchTransactionScreen}
+            />
           </>
         )}
       </Stack.Navigator>
