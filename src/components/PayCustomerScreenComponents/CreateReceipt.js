@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { setReceiptSearch } from "../../store/slice/userSlice";
+import * as SecureStore from "expo-secure-store";
 
 const CreateReceipt = () => {
   const [loading, setLoading] = useState(false);
@@ -20,6 +21,10 @@ const CreateReceipt = () => {
   // console.log("🚀 ~ file: CreateReceipt.js:12 ~ CreateReceipt ~ rri", rri);
   const rrii = useSelector((state) => state.user.receiptReceiverId);
   async function sendReceipt(values) {
+    console.log(
+      "🚀 ~ file: CreateReceipt.js:23 ~ sendReceipt ~ values",
+      values
+    );
     let filename1 = rri.uri.split("/").pop();
     let filename2 = rrii.uri.split("/").pop();
 
@@ -28,8 +33,10 @@ const CreateReceipt = () => {
     let match2 = /\.(\w+)$/.exec(filename2);
     let type2 = match2 ? `image/${match2[1]}` : `image`;
 
+    let result = await SecureStore.getItemAsync("id");
+
     let formData = new FormData();
-    formData.append("agent_id", values.agent_id);
+    formData.append("agent_id", result);
     formData.append("transaction_id", values.transaction_id);
     formData.append("amount", values.amount);
     formData.append("reciver_name", values.receiver_name);
@@ -47,7 +54,14 @@ const CreateReceipt = () => {
     axios
       .post(
         "http://codelumina.com/project/wallet_managment/api/agent/receipt/insert",
-        
+        formData,
+        {
+          headers: {
+            // accept: "application/json",
+            accept: "application/json",
+            "Content-Type": "multipart/form-data",
+          },
+        }
       )
       .then(async (res) => {
         console.log(res.data);

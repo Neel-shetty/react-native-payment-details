@@ -63,8 +63,9 @@ const TData = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <DataItem title={" Id"} data={transactions.id} />
         <DataItem title={"Agent ID"} data={transactions.agent_id} />
+        <DataItem title={"Amount"} data={transactions.amount} />
         <DataItem title={"Unique ID"} data={transactions.unique_id} />
-        <DataItem title={"Transaction ID"} data={transactions.unique_id} />
+        <DataItem title={"Transaction ID"} data={transactions.transaction_id} />
         <DataItem title={"Sender Name"} data={transactions.sender_name} />
         <DataItem title={"Sender Address"} data={transactions.sender_address} />
         <DataItem
