@@ -21,6 +21,7 @@ import { colors } from "../../constants/colors";
 import * as Location from "expo-location";
 import publicIP from "react-native-public-ip";
 import * as SecureStore from "expo-secure-store";
+import { useNavigation } from "@react-navigation/native";
 
 const Fields = () => {
   const [loading, setLoading] = useState();
@@ -37,6 +38,8 @@ const Fields = () => {
   const rii = useSelector((state) => state.user.receiverIdImage);
   const dropdown = useSelector((state) => state.user.selectedDropdown);
   console.log("🚀 ~ file: Fields.js:38 ~ Fields ~ dropdown", dropdown);
+
+  const navigation = useNavigation();
 
   async function fetchDropdownData() {
     setLoading(true);
@@ -134,12 +137,15 @@ const Fields = () => {
       .then(async (res) => {
         console.log(res.data);
         setLoading(false);
-        Alert.alert("Transaction Created", res.data.message, [
+        Alert.alert("Transaction Created", res.data.data.transaction_id, [
           {
             text: "OK",
             onPress: () => console.log("ok"),
           },
         ]);
+        navigation.navigate("TransactionInfoScreen", {
+          transaction_id: res.data.data.transaction_id,
+        });
       })
       .catch((error) => {
         if (error.response) {
@@ -220,7 +226,7 @@ const Fields = () => {
           }}
           onSubmit={(values) => {
             console.log(values);
-            sendTransaction(values)
+            sendTransaction(values);
           }}
           validationSchema={""}
         >
@@ -233,6 +239,7 @@ const Fields = () => {
                 handleBlur={handleBlur("amount")}
                 value={values.amount}
                 fieldType={"amount"}
+                keyboardType={"numeric"}
               />
               <Input
                 placeholder={"Commision"}
@@ -241,6 +248,7 @@ const Fields = () => {
                 handleBlur={handleBlur("commision")}
                 value={values.commision}
                 fieldType={"commision"}
+                keyboardType={"numeric"}
               />
               <Input
                 placeholder={"Sender Name"}
@@ -257,6 +265,8 @@ const Fields = () => {
                 handleBlur={handleBlur("sender_phone")}
                 value={values.sender_phone}
                 fieldType={"sender_phone"}
+                keyboardType={"numeric"}
+                maxLength={10}
               />
               <Input
                 placeholder={"Sender Address"}
@@ -281,6 +291,8 @@ const Fields = () => {
                 handleBlur={handleBlur("receiver_phone")}
                 value={values.receiver_phone}
                 fieldType={"receiver_phone"}
+                keyboardType={"numeric"}
+                maxLength={10}
               />
               <Input
                 placeholder={"Receiver Address"}
@@ -309,7 +321,10 @@ const Fields = () => {
                 type={"receiverIdImage"}
               />
               <View style={{ paddingVertical: 10 }}>
-                <CustomButton title={"Next"} onPress={handleSubmit} />
+                <CustomButton
+                  title={loading ? "loading..." : "Next"}
+                  onPress={handleSubmit}
+                />
               </View>
             </View>
           )}

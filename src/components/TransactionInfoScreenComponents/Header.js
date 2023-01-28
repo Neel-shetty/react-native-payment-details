@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 const Header = ({ loc }) => {
   const navigation = useNavigation();
   function back() {
-    navigation.goBack();
+    navigation.navigate("TransactionScreen");
   }
   return (
     <View style={[styles.root]}>

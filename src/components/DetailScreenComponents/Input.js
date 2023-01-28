@@ -20,6 +20,8 @@ const Input = ({
   onBlur,
   value,
   fieldType,
+  keyboardType = "text",
+  maxLength = 1000,
 }) => {
   return (
     <View style={styles.root}>
@@ -33,6 +35,8 @@ const Input = ({
           onChangeText={onChangeText}
           onBlur={onBlur}
           value={value}
+          keyboardType={keyboardType}
+          maxLength={maxLength}
           // secureTextEntry={secureTextEntry}
         />
         {/* <Ionicons name="ios-checkmark-circle" size={22} color={colors.green} /> */}
