@@ -115,7 +115,6 @@ const CreateReceipt = () => {
       <View style={{ alignItems: "center", flex: 1 }}>
         <Formik
           initialValues={{
-            agent_id: "",
             transaction_id: "",
             amount: "",
             receiver_name: "",
@@ -134,13 +133,6 @@ const CreateReceipt = () => {
             errors = false,
           }) => (
             <View style={{ alignItems: "center", justifyContent: "center" }}>
-              <Input
-                title={"Agent ID"}
-                placeholder={"Agent ID"}
-                onChangeText={handleChange("agent_id")}
-                onBlur={handleBlur("agent_id")}
-                value={values.agent_id}
-              />
               <Input
                 title={"Transaction ID"}
                 placeholder={"Transaction ID"}
