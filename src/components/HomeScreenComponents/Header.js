@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     width: layout.widthp,
     alignItems: "center",
     justifyContent: "space-between",
+    // backgroundColor:'pink'
   },
   title: {
     fontSize: 24.33,

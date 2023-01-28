@@ -16,8 +16,8 @@ const Menu = () => {
   function pay() {
     navigation.navigate("SearchTransactionScreen");
   }
-  function transinfo() {
-    navigation.navigate("CreatedTransactionInfoScreen");
+  function receipt() {
+    navigation.navigate("ReceiptScreen");
   }
 
   return (
@@ -44,7 +44,11 @@ const Menu = () => {
             onPress={reports}
             source={require("../../../assets/images/report.png")}
           />
-          <MenuItem title={"placeholder"} onPress={transinfo} />
+          <MenuItem
+            title={"Receipts"}
+            onPress={receipt}
+            source={require("../../../assets/images/g8.png")}
+          />
         </View>
       </View>
 

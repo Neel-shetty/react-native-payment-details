@@ -18,7 +18,6 @@ const CreateReceipt = () => {
   const dispatch = useDispatch();
 
   const rri = useSelector((state) => state.user.receiptReceiverImage);
-  // console.log("🚀 ~ file: CreateReceipt.js:12 ~ CreateReceipt ~ rri", rri);
   const rrii = useSelector((state) => state.user.receiptReceiverId);
   async function sendReceipt(values) {
     console.log(

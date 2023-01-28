@@ -27,8 +27,9 @@ const MenuItem = ({ title, onPress, source }) => {
             // backgroundColor: "pink",
             width: "100%",
             flex: 1,
-            paddingTop: 5,
-            paddingLeft: 5,
+            paddingTop: 10,
+            paddingLeft: 10,
+            // padding:10
           }}
         >
           <Text style={styles.title}>{title}</Text>
@@ -39,8 +40,8 @@ const MenuItem = ({ title, onPress, source }) => {
             width: "100%",
             justifyContent: "flex-end",
             flex: 1,
-            paddingBottom: 5,
-            paddingRight: 5,
+            paddingBottom: 10,
+            paddingRight: 10,
           }}
         >
           <Image source={source} style={{ height: 50, width: 50 }} />

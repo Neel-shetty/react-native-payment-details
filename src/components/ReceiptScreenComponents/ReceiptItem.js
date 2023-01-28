@@ -4,7 +4,7 @@ import { layout } from "../../constants/layout";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../constants/colors";
 
-const TransactionItem = ({ id, date, amount }) => {
+const ReceiptItem = ({ id, date, amount }) => {
   console.log("🚀 ~ file: TransactionItem.js:8 ~ TransactionItem ~ id", id);
   const navigation = useNavigation();
   function transactionDetails() {
@@ -19,7 +19,7 @@ const TransactionItem = ({ id, date, amount }) => {
           <Text style={styles.date}>
             Date - {formattedDate.toLocaleDateString("en-GB")}
             {"\n"}
-            Time - {date.slice(11, 19)}
+            {/* Time - {date.slice(11, 19)} */}
           </Text>
         </View>
         <View style={{ flex: 1 }}>
@@ -30,7 +30,7 @@ const TransactionItem = ({ id, date, amount }) => {
   );
 };
 
-export default TransactionItem;
+export default ReceiptItem;
 
 const styles = StyleSheet.create({
   root: {
