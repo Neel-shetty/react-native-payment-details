@@ -1,9 +1,15 @@
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import TopContainer from "../../components/PayCustomerScreenComponents/TopContainer";
 import BottomContainer from "../../components/PayCustomerScreenComponents/BottomContainer";
-import Header from "../../components/TransactionInfoScreenComponents/Header";
 import CreateReceipt from "../../components/PayCustomerScreenComponents/CreateReceipt";
+import SearchResultHeader from "../../components/PayCustomerScreenComponents/SearchResultHeader";
 
 const data = {
   agent_current_city: null,
@@ -37,17 +43,40 @@ const data = {
 const SearchResultScreen = ({ route }) => {
   return (
     // <View style={styles.root}>
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 70}
-      enabled={false}
-      style={styles.root}
-    >
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Header title={""} />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 0}
+        enabled={false}
+        style={styles.root}
+      >
+      <View
+        style={{
+          flex: 0.5,
+          alignItems: "center",
+          justifyContent: "center",
+          paddingTop: 20,
+        }}
+      >
+        <SearchResultHeader />
       </View>
-      {/* {route.params?.create === true ? ( */}
-      <View style={{ flex: 7, alignItems: "center", justifyContent: "center" }}>
+      {/* <View
+          style={{
+            flex: 2,
+            alignItems: "center",
+            justifyContent: "center",
+            // backgroundColor: "pink",
+          }}
+        >
+          <TopContainer />
+        </View> */}
+      <View
+        style={{
+          flex: 7,
+          alignItems: "center",
+          justifyContent: "center",
+          // backgroundColor: "v"
+        }}
+      >
         <CreateReceipt />
       </View>
       {/* ) : (
@@ -64,7 +93,7 @@ const SearchResultScreen = ({ route }) => {
           </View>
         </>
       )} */}
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
     // </View>
   );
 };
@@ -76,5 +105,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
+    backgroundColor:'lightblue'
   },
 });

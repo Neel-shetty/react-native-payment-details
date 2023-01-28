@@ -16,10 +16,6 @@ const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 const TransactionList = () => {
   const [transactions, setTransactions] = useState(null);
-  // console.log(
-  //   "🚀 ~ file: TransactionList.js:19 ~ TransactionList ~ transactions",
-  //   transactions[1].transaction_id
-  // );
   const [loading, setLoading] = useState(false);
   async function fetchTransactionData() {
     setLoading(true);

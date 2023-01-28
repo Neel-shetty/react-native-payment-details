@@ -8,8 +8,8 @@ import CustomButton from "../CustomButton";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-import { setReceiptSearch } from "../../store/slice/userSlice";
 import * as SecureStore from "expo-secure-store";
+import TopContainer from "./TopContainer";
 
 const CreateReceipt = () => {
   const [loading, setLoading] = useState(false);
@@ -161,6 +161,9 @@ const CreateReceipt = () => {
             </View>
           )}
         </Formik>
+        <View>
+          <TopContainer />
+        </View>
       </View>
     </ScrollView>
   );
@@ -177,6 +180,8 @@ const styles = StyleSheet.create({
     elevation: 6,
     backgroundColor: "white",
     borderRadius: 20,
+    borderBottomLeftRadius:0,
+    borderBottomRightRadius:0,
     flex: 1,
     padding: 20,
   },
