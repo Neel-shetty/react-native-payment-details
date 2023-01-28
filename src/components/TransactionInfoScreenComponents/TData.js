@@ -1,4 +1,4 @@
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import DataItem from "./DataItem";
 import { ScrollView } from "react-native-gesture-handler";

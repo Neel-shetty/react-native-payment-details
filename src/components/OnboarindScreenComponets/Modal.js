@@ -7,6 +7,7 @@ import CustomButton from "../CustomButton";
 import SecondaryButton from "../SecondaryButton";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
 
 const Modal = () => {
   const navigation = useNavigation();
@@ -18,14 +19,14 @@ const Modal = () => {
   }
   return (
     <View style={styles.root}>
+      <StatusBar style="dark" />
       <View style={styles.iconContainer}>
-        {/* <Ionicons name="home" size={55} color={colors.green} /> */}
         <Entypo name="wallet" size={55} color={colors.green} />
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>Welcome!</Text>
         <Text style={styles.subtitle}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          We are happy that you are using our service
         </Text>
       </View>
       <View style={styles.line} />

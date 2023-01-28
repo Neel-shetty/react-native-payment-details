@@ -11,10 +11,6 @@ import { StatusBar } from "expo-status-bar";
 
 const TransactionScreen = () => {
   const dispatch = useDispatch();
-  function logOut() {
-    SecureStore.setItemAsync("isLoggedIn", "false");
-    dispatch(setLoggedIn(false));
-  }
   return (
     <View style={styles.root}>
       <StatusBar style="dark" />

@@ -11,7 +11,12 @@ import { setLoggedIn } from "../store/slice/userSlice";
 import DetailScreen from "../screens/Main/DetailScreen";
 import TransactionScreen from "../screens/Main/TransactionScreen";
 import HomeScreen from "../screens/Main/HomeScreen";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  DrawerContentScrollView,
+  DrawerItem,
+  DrawerItemList,
+  createDrawerNavigator,
+} from "@react-navigation/drawer";
 import { colors } from "../constants/colors";
 import TransactionInfoScreen from "../screens/Main/TransactionInfoScreen";
 // import PayCustomerScreen from "../screens/Main/PayCustomerScreen";``
@@ -19,6 +24,7 @@ import SearchTransactionScreen from "../screens/Main/SearchTransactionScreen";
 import SearchResultScreen from "../screens/Main/SearchResultScreen";
 import CreatedTransactionInfoScreen from "../screens/Main/CreatedTransactionInfoScreen";
 import ReceiptScreen from "../screens/Main/ReceiptScreen";
+import ProfileScreen from "../screens/Main/ProfileScreen";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -45,12 +51,36 @@ const Navigator = () => {
     // getValueFor("id");
   }, [loggedIn]);
 
+  function logOut() {
+    SecureStore.setItemAsync("isLoggedIn", "false");
+    dispatch(setLoggedIn(false));
+  }
+
   function DrawerNavigator() {
     return (
       <Drawer.Navigator
         screenOptions={{
           headerShown: false,
           drawerActiveTintColor: colors.green,
+        }}
+        drawerContent={(props) => {
+          return (
+            <DrawerContentScrollView {...props}>
+              <DrawerItemList {...props} />
+              <DrawerItem
+                label="Logout"
+                onPress={() => {
+                  console.log("logged out");
+                  logOut();
+                }}
+                // inactiveBackgroundColor="#e6f4ea"
+                labelStyle={{
+                  fontFamily: "poppins-semibold",
+                  color: colors.red,
+                }}
+              />
+            </DrawerContentScrollView>
+          );
         }}
       >
         <Drawer.Screen
@@ -67,6 +97,26 @@ const Navigator = () => {
                     }}
                   >
                     Home Screen
+                  </Text>
+                </View>
+              );
+            },
+          }}
+        />
+        <Drawer.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
+          options={{
+            drawerLabel: ({ focused, color }) => {
+              return (
+                <View>
+                  <Text
+                    style={{
+                      fontFamily: "poppins-semibold",
+                      color: focused ? color : colors.gray,
+                    }}
+                  >
+                    Update Profile
                   </Text>
                 </View>
               );

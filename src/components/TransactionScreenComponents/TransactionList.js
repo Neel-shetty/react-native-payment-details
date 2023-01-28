@@ -68,10 +68,14 @@ const TransactionList = () => {
       <FlatList
         data={transactions}
         renderItem={({ item }) => {
+          console.log(
+            "🚀 ~ file: TransactionList.js:86 ~ TransactionList ~ item",
+            item
+          );
           return (
             // <View>
             <TransactionItem
-              id={item.transaction_id}
+              id={item.id}
               amount={item.amount}
               date={item.updated_at}
             />
