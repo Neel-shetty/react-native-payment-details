@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#49D7E5",
+    // backgroundColor: "#49D7E5",
     width: layout.width,
   },
   imageContainer: {

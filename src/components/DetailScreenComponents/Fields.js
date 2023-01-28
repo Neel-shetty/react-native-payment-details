@@ -121,6 +121,7 @@ const Fields = () => {
     formData.append("agent_current_lng", location?.coords.longitude);
     formData.append("agent_id", result);
     formData.append("receive_money_location", dropdown);
+    console.log("🚀 ~ file: Fields.js:124 ~ sendTransaction ~ formData", formData)
 
     axios
       .post(
@@ -143,17 +144,14 @@ const Fields = () => {
             onPress: () => console.log("ok"),
           },
         ]);
-        navigation.navigate("TransactionInfoScreen", {
-          transaction_id: res.data.data.transaction_id,
-        });
+        // navigation.navigate("TransactionInfoScreen", {
+        //   transaction_id: res.data.data.transaction_id,
+        // });
       })
       .catch((error) => {
         if (error.response) {
           console.log("error response - ", error.response.data);
-          Alert.alert(
-            "Failed creating receipt",
-            JSON.stringify(error.response.data.message)
-          );
+          Alert.alert("Failed creating receipt", error.response.data);
           setLoading(false);
         } else if (error.request) {
           console.log(error.request);

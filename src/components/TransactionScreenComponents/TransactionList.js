@@ -75,7 +75,7 @@ const TransactionList = () => {
           return (
             // <View>
             <TransactionItem
-              id={item.id}
+              id={item.transaction_id}
               amount={item.amount}
               date={item.updated_at}
             />

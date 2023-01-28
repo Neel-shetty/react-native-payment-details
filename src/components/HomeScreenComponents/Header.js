@@ -14,17 +14,26 @@ const Header = ({ back, loc }) => {
   }
 
   return (
-    <View style={[styles.root]}>
-      <View style={styles.iconContainer}>
-        <TouchableOpacity onPress={drawer}>
-          <Ionicons name="menu" size={24} color="#230B34" />
-        </TouchableOpacity>
+    <View
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+        width: layout.width,
+        height: 40,
+      }}
+    >
+      <View style={[styles.root]}>
+        <View style={styles.iconContainer}>
+          <TouchableOpacity onPress={drawer}>
+            <Ionicons name="menu" size={24} color="#230B34" />
+          </TouchableOpacity>
+        </View>
+        {/* <BackButton onPress={back} /> */}
+        <Text style={styles.title}>
+          Agent 07<Text style={{ color: colors.green }}> </Text>
+        </Text>
+        <View style={{ height: 35, width: 35 }} />
       </View>
-      {/* <BackButton onPress={back} /> */}
-      <Text style={styles.title}>
-        Welcome<Text style={{ color: colors.green }}> Agent 07</Text>
-      </Text>
-      <View style={{ height: 35, width: 35 }} />
     </View>
   );
 };
@@ -36,10 +45,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    width: layout.widthp,
+    width: layout.widthp +10,
     alignItems: "center",
     justifyContent: "space-between",
-    // backgroundColor:'pink'
+    // backgroundColor: "pink",
+    backgroundColor: "#49D7E5",
+    paddingHorizontal: 15,
+    borderRadius: 10,
   },
   title: {
     fontSize: 24.33,
