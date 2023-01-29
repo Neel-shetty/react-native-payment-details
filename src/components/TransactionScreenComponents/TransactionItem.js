@@ -94,7 +94,7 @@ const TransactionItem = ({ id, date, amount }) => {
             {/* <TouchableOpacity>
               <Feather name="edit" size={20} color="black" />
             </TouchableOpacity> */}
-            <Menu style={{height:25,width:25}}>
+            <Menu style={{ height: 25, width: 25 }}>
               <MenuTrigger
                 children={<Feather name="edit" size={20} color="black" />}
               />
@@ -105,11 +105,17 @@ const TransactionItem = ({ id, date, amount }) => {
                     borderRadius: 10,
                     elevation: 6,
                     padding: 5,
-                    width:100
+                    width: 100,
                   },
                 }}
               >
-                <MenuOption onSelect={() => alert(`Save`)}>
+                <MenuOption
+                  onSelect={() =>
+                    navigation.navigate("EditDetailScreen", {
+                      transaction_id: id,
+                    })
+                  }
+                >
                   <Text style={{ fontFamily: "poppins-medium" }}>Edit</Text>
                 </MenuOption>
                 <MenuOption onSelect={deleteTransaction}>

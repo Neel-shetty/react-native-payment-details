@@ -17,7 +17,10 @@ const CreateReceipt = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const route = useRoute();
-  console.log("🚀 ~ file: CreateReceipt.js:20 ~ CreateReceipt ~ route", route.params)
+  console.log(
+    "🚀 ~ file: CreateReceipt.js:20 ~ CreateReceipt ~ route",
+    route.params
+  );
 
   const rri = useSelector((state) => state.user.receiptReceiverImage);
   const rrii = useSelector((state) => state.user.receiptReceiverId);
@@ -38,7 +41,10 @@ const CreateReceipt = () => {
 
     let formData = new FormData();
     formData.append("agent_id", result);
-    formData.append("transaction_id", values.transaction_id);
+    formData.append(
+      "transaction_id",
+      route?.params?.transactionData.transaction_id
+    );
     formData.append("amount", values.amount);
     formData.append("reciver_name", values.receiver_name);
     formData.append("reciver_image", {
@@ -134,13 +140,13 @@ const CreateReceipt = () => {
             errors = false,
           }) => (
             <View style={{ alignItems: "center", justifyContent: "center" }}>
-              <Input
+              {/* <Input
                 title={"Transaction ID"}
                 placeholder={"Transaction ID"}
                 onChangeText={handleChange("transaction_id")}
                 onBlur={handleBlur("transaction_id")}
                 value={values.transaction_id}
-              />
+              /> */}
               <Input
                 title={"Amount"}
                 placeholder={"Amount"}

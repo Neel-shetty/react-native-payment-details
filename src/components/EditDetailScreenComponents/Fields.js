@@ -21,26 +21,36 @@ import { colors } from "../../constants/colors";
 import * as Location from "expo-location";
 import publicIP from "react-native-public-ip";
 import * as SecureStore from "expo-secure-store";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import * as yup from "yup";
 
 const Fields = () => {
   const [loading, setLoading] = useState();
-  console.log("🚀 ~ file: Fields.js:22 ~ Fields ~ loading", loading);
+  // console.log("🚀 ~ file: Fields.js:22 ~ Fields ~ loading", loading);
   const [dropdownData, setDropdownData] = useState();
   const [location, setLocation] = useState(null);
-  console.log("🚀 ~ file: Fields.js:29 ~ Fields ~ location", location?.coords);
+  // console.log("🚀 ~ file: Fields.js:29 ~ Fields ~ location", location?.coords);
   const [errorMsg, setErrorMsg] = useState(null);
   const [ip, setIp] = useState(null);
+  const [transactionData, setTransactionData] = useState(null);
+  console.log(
+    "🚀 ~ file: Fields.js:36 ~ Fields ~ transactionData",
+    transactionData
+  );
+  const [dataLoading, setDataLoading] = useState(false);
 
   const si = useSelector((state) => state.user.senderImage);
   const sii = useSelector((state) => state.user.senderIdImage);
   const ri = useSelector((state) => state.user.receiverImage);
   const rii = useSelector((state) => state.user.receiverIdImage);
   const dropdown = useSelector((state) => state.user.selectedDropdown);
-  console.log("🚀 ~ file: Fields.js:38 ~ Fields ~ dropdown", dropdown);
 
   const navigation = useNavigation();
+  const route = useRoute();
+  console.log(
+    "🚀 ~ file: Fields.js:45 ~ Fields ~ route",
+    route.params.transaction_id
+  );
 
   const formScheme = yup.object({
     amount: yup.string().required(),
@@ -59,7 +69,7 @@ const Fields = () => {
     axios
       .post("http://codelumina.com/project/wallet_managment/api/locations")
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setDropdownData(res.data.data);
         setLoading(false);
       })
@@ -82,50 +92,92 @@ const Fields = () => {
         setLoading(false);
       });
   }
+  async function fetchInfo() {
+    setLoading(true);
+    setDataLoading(true);
+    axios
+      .post(
+        "http://codelumina.com/project/wallet_managment/api/agent/transaction/detail",
+        {
+          transaction_id: route?.params?.transaction_id,
+        }
+      )
+      .then(async (res) => {
+        console.log(res.data.data);
+        setTransactionData(res.data.data);
+        setLoading(false);
+        setDataLoading(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data);
+          Alert.alert(
+            "Failed to get transaction data, try again later",
+            JSON.stringify(error.response.data.message)
+          );
+          setLoading(false);
+          setDataLoading(false);
+        } else if (error.request) {
+          console.log(error.request);
+          setLoading(false);
+          setDataLoading(false);
+        } else {
+          console.log("Error", error.message);
+          setLoading(false);
+          setDataLoading(false);
+        }
+        console.log(error.config);
+        setLoading(false);
+        setDataLoading(false);
+      });
+  }
 
   async function sendTransaction(values) {
-    if (!si || !sii || !ri || !rii || !dropdown) {
-      console.log("sending rejected coz empty values");
-      Alert.alert("Failed", "Fill all the fields");
-      return;
-    }
-    let filename1 = si.uri.split("/").pop();
-    let filename2 = sii.uri.split("/").pop();
-    let filename3 = ri.uri.split("/").pop();
-    let filename4 = rii.uri.split("/").pop();
-
-    let match1 = /\.(\w+)$/.exec(filename1);
-    let type1 = match1 ? `image/${match1[1]}` : `image`;
-    let match2 = /\.(\w+)$/.exec(filename2);
-    let type2 = match2 ? `image/${match2[1]}` : `image`;
-    let match3 = /\.(\w+)$/.exec(filename3);
-    let type3 = match3 ? `image/${match3[1]}` : `image`;
-    let match4 = /\.(\w+)$/.exec(filename4);
-    let type4 = match4 ? `image/${match4[1]}` : `image`;
-
     let result = await SecureStore.getItemAsync("id");
 
     let formData = new FormData();
-    formData.append("receiver_image", {
-      uri: ri.uri,
-      name: filename3,
-      type: type3,
-    });
-    formData.append("receiver_id_card_image", {
-      uri: rii.uri,
-      name: filename4,
-      type: type4,
-    });
-    formData.append("sender_image", {
-      uri: si.uri,
-      name: filename1,
-      type: type1,
-    });
-    formData.append("sender_id_card_image", {
-      uri: sii.uri,
-      name: filename2,
-      type: type3,
-    });
+    if (ri) {
+      let filename3 = ri.uri.split("/").pop();
+      let match3 = /\.(\w+)$/.exec(filename3);
+      let type3 = match3 ? `image/${match3[1]}` : `image`;
+      formData.append("receiver_image", {
+        uri: ri.uri,
+        name: filename3,
+        type: type3,
+      });
+    }
+    if (rii) {
+      let filename4 = rii.uri.split("/").pop();
+
+      let match4 = /\.(\w+)$/.exec(filename4);
+      let type4 = match4 ? `image/${match4[1]}` : `image`;
+      formData.append("receiver_id_card_image", {
+        uri: rii.uri,
+        name: filename4,
+        type: type4,
+      });
+    }
+    if (si) {
+      let filename1 = si.uri.split("/").pop();
+      let match1 = /\.(\w+)$/.exec(filename1);
+      let type1 = match1 ? `image/${match1[1]}` : `image`;
+      formData.append("sender_image", {
+        uri: si.uri,
+        name: filename1,
+        type: type1,
+      });
+    }
+    if (sii) {
+      let filename2 = sii.uri.split("/").pop();
+      let match2 = /\.(\w+)$/.exec(filename2);
+      let type2 = match2 ? `image/${match2[1]}` : `image`;
+      formData.append("sender_id_card_image", {
+        uri: sii.uri,
+        name: filename2,
+        type: type2,
+      });
+    }
+    formData.append("transaction_id", route?.params?.transaction_id);
     formData.append("amount", values.amount);
     formData.append("commission", values.commision);
     formData.append("sender_name", values.sender_name);
@@ -138,15 +190,17 @@ const Fields = () => {
     formData.append("agent_current_lat", location?.coords.latitude);
     formData.append("agent_current_lng", location?.coords.longitude);
     formData.append("agent_id", result);
-    formData.append("receive_money_location", dropdown);
-    console.log(
-      "🚀 ~ file: Fields.js:124 ~ sendTransaction ~ formData",
-      formData
-    );
+    if (dropdown) {
+      formData.append("receive_money_location", dropdown);
+    }
+    // console.log(
+    //   "🚀 ~ file: Fields.js:124 ~ sendTransaction ~ formData",
+    //   formData
+    // );
 
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/transaction/create",
+        "http://codelumina.com/project/wallet_managment/api/agent/transaction/update",
         formData,
         {
           headers: {
@@ -157,10 +211,10 @@ const Fields = () => {
         }
       )
       .then(async (res) => {
-        console.log(res.data);
+        console.log(res.data.data);
         setLoading(false);
         Alert.alert(
-          "Transaction Created",
+          "Transaction Updated",
           JSON.stringify(res.data.data.message),
           [
             {
@@ -214,28 +268,37 @@ const Fields = () => {
 
   useEffect(() => {
     fetchDropdownData();
+    fetchInfo();
   }, []);
+
+  if (dataLoading || transactionData === null) {
+    return (
+      <View style={{ flex: 1 }}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.root}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Formik
           initialValues={{
-            commision: "",
-            sender_name: "",
-            sender_phone: "",
-            sender_address: "",
+            commision: transactionData.commission,
+            sender_name: transactionData.sender_name,
+            sender_phone: transactionData.sender_phone,
+            sender_address: transactionData.sender_address,
             // sender_id_card_image: "",
-            amount: "",
+            amount: transactionData.amount,
             // sender_ip: "",
             // sender_current_lat: "",
             // sender_current_lng: "",
             // sender_current_state: "",
             // sender_current_city: "",
             sender_current_location: "",
-            receiver_name: "",
-            receiver_phone: "",
-            receiver_address: "",
+            receiver_name: transactionData.receiver_name,
+            receiver_phone: transactionData.receiver_phone,
+            receiver_address: transactionData.receiver_address,
             // receiver_image: "",
             // receiver_id_card_image: "",
             payment_receiving_location: "",
@@ -322,6 +385,7 @@ const Fields = () => {
                 <Dropdown
                   title={"Payment Receiving Location"}
                   data={dropdownData}
+                  defaultOption={transactionData.receive_money_location}
                 />
               ) : (
                 <ActivityIndicator size={"large"} color={colors.green} />
