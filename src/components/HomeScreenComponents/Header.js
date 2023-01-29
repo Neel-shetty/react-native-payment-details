@@ -1,13 +1,27 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BackButton from "../BackButton";
 import { layout } from "../../constants/layout";
 import { colors } from "../../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 const Header = ({ back, loc }) => {
+  const [name, setName] = useState();
   const navigation = useNavigation();
+
+  async function getName() {
+    axios
+      .post("http://codelumina.com/project/wallet_managment/api/user/profile")
+      .then((res) => {
+        console.log(res.data);
+      });
+  }
+
+  useEffect(() => {
+    getName();
+  }, []); 
 
   function drawer() {
     navigation.openDrawer();
@@ -45,7 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    width: layout.widthp +10,
+    width: layout.widthp + 10,
     alignItems: "center",
     justifyContent: "space-between",
     // backgroundColor: "pink",

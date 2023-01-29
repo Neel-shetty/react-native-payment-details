@@ -121,7 +121,10 @@ const Fields = () => {
     formData.append("agent_current_lng", location?.coords.longitude);
     formData.append("agent_id", result);
     formData.append("receive_money_location", dropdown);
-    console.log("🚀 ~ file: Fields.js:124 ~ sendTransaction ~ formData", formData)
+    console.log(
+      "🚀 ~ file: Fields.js:124 ~ sendTransaction ~ formData",
+      formData
+    );
 
     axios
       .post(
@@ -138,15 +141,19 @@ const Fields = () => {
       .then(async (res) => {
         console.log(res.data);
         setLoading(false);
-        Alert.alert("Transaction Created", res.data.data.transaction_id, [
-          {
-            text: "OK",
-            onPress: () => console.log("ok"),
-          },
-        ]);
-        // navigation.navigate("TransactionInfoScreen", {
-        //   transaction_id: res.data.data.transaction_id,
-        // });
+        Alert.alert(
+          "Transaction Created",
+          JSON.stringify(res.data.data.message),
+          [
+            {
+              text: "OK",
+              onPress: () => console.log("ok"),
+            },
+          ]
+        );
+        navigation.navigate("TransactionInfoScreen", {
+          transaction_id: res.data.data.transaction_id,
+        });
       })
       .catch((error) => {
         if (error.response) {

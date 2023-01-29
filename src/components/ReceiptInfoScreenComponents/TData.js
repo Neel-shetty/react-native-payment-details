@@ -17,7 +17,7 @@ const TData = () => {
       .post(
         "http://codelumina.com/project/wallet_managment/api/agent/transaction/detail",
         {
-          transaction_id: route?.params?.transaction_id,
+          receipt_id: route?.params?.transaction_id,
         }
       )
       .then(async (res) => {

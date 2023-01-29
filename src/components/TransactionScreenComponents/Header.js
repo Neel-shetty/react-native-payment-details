@@ -12,7 +12,7 @@ const Header = ({ back, loc }) => {
   }
   return (
     <View style={[styles.root]}>
-      {/* <BackButton onPress={back} /> */}
+      <BackButton onPress={back} />
       <Text style={styles.title}>
         Trans
         {/* <Text style={{ color: colors.green }}> */}

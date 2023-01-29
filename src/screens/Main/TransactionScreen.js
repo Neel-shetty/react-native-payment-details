@@ -8,14 +8,19 @@ import TransactionItem from "../../components/TransactionScreenComponents/Transa
 import TransactionList from "../../components/TransactionScreenComponents/TransactionList";
 import { layout } from "../../constants/layout";
 import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 
 const TransactionScreen = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+  function back() {
+    navigation.navigate("DrawerNavigator", { screen: "HomeScreen" });
+  }
   return (
     <View style={styles.root}>
       <StatusBar style="dark" />
       <View style={styles.headerContainer}>
-        <Header />
+        <Header back={back} />
       </View>
       <View style={styles.listContainer}>
         <TransactionList />
