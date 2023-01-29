@@ -30,6 +30,7 @@ const SearchBar = () => {
   async function fetchTransactionData(values) {
     console.log("fetch searchbar");
     setLoading(true);
+    const result = await SecureStore.getItemAsync("id");
     axios
       .post(
         "http://codelumina.com/project/wallet_managment/api/agent/transaction/search",
@@ -37,6 +38,7 @@ const SearchBar = () => {
           transaction_id: values.transaction_id,
           unique_id: values.unique_id,
           amount: values.amount,
+          agent_id: result,
         }
       )
       .then(async (res) => {

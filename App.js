@@ -5,12 +5,15 @@ import Navigator from "./src/navigator/Navigator";
 import { AppLoading } from "./src/components/AppLoading";
 import { Provider } from "react-redux";
 import { store } from "./src/store";
+import { MenuProvider } from "react-native-popup-menu";
 
 export default function App() {
   return (
     <AppLoading>
       <Provider store={store}>
-        <Navigator />
+        <MenuProvider>
+          <Navigator />
+        </MenuProvider>
       </Provider>
     </AppLoading>
   );

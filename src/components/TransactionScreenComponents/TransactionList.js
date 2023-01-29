@@ -17,8 +17,10 @@ const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 const TransactionList = () => {
   const [transactions, setTransactions] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [refresh, setReferesh] = useState(false);
   async function fetchTransactionData() {
     setLoading(true);
+    setReferesh(true);
     let result = await SecureStore.getItemAsync("id");
     axios
       .post(
@@ -31,6 +33,7 @@ const TransactionList = () => {
         console.log(res.data.data);
         setTransactions(res.data.data);
         setLoading(false);
+        setReferesh(false);
       })
       .catch((error) => {
         if (error.response) {
@@ -40,15 +43,19 @@ const TransactionList = () => {
             JSON.stringify(error.response.data.message)
           );
           setLoading(false);
+          setReferesh(false);
         } else if (error.request) {
           console.log(error.request);
           setLoading(false);
+          setReferesh(false);
         } else {
           console.log("Error", error.message);
           setLoading(false);
+          setReferesh(false);
         }
         console.log(error.config);
         setLoading(false);
+        setReferesh(false);
       });
   }
 
@@ -66,18 +73,17 @@ const TransactionList = () => {
   return (
     <View style={styles.root}>
       <FlatList
+        onRefresh={fetchTransactionData}
+        refreshing={refresh}
         data={transactions}
         renderItem={({ item }) => {
-          console.log(
-            "🚀 ~ file: TransactionList.js:86 ~ TransactionList ~ item",
-            item
-          );
           return (
             // <View>
             <TransactionItem
               id={item.transaction_id}
               amount={item.amount}
               date={item.updated_at}
+              deleteTransaction={""}
             />
             // </View>
           );

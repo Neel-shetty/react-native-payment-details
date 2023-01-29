@@ -7,7 +7,7 @@ import UploadButton from "./UploadButton";
 import CustomButton from "../CustomButton";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 import TopContainer from "./TopContainer";
 
@@ -16,6 +16,8 @@ const CreateReceipt = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const route = useRoute();
+  console.log("🚀 ~ file: CreateReceipt.js:20 ~ CreateReceipt ~ route", route.params)
 
   const rri = useSelector((state) => state.user.receiptReceiverImage);
   const rrii = useSelector((state) => state.user.receiptReceiverId);
@@ -180,8 +182,8 @@ const styles = StyleSheet.create({
     elevation: 6,
     backgroundColor: "white",
     borderRadius: 20,
-    borderBottomLeftRadius:0,
-    borderBottomRightRadius:0,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
     flex: 1,
     padding: 20,
   },

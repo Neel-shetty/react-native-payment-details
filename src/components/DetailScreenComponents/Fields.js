@@ -22,6 +22,7 @@ import * as Location from "expo-location";
 import publicIP from "react-native-public-ip";
 import * as SecureStore from "expo-secure-store";
 import { useNavigation } from "@react-navigation/native";
+import * as yup from "yup";
 
 const Fields = () => {
   const [loading, setLoading] = useState();
@@ -40,6 +41,18 @@ const Fields = () => {
   console.log("🚀 ~ file: Fields.js:38 ~ Fields ~ dropdown", dropdown);
 
   const navigation = useNavigation();
+
+  const formScheme = yup.object({
+    amount: yup.string().required(),
+    commision: yup.string().required(),
+    sender_name: yup.string().required(),
+    sender_phone: yup.string().required(),
+    sender_address: yup.string().required(),
+    receiver_name: yup.string().required(),
+    receiver_phone: yup.string().required(),
+    receiver_address: yup.string().required(),
+    commission: yup.string().required(),
+  });
 
   async function fetchDropdownData() {
     setLoading(true);
@@ -71,6 +84,11 @@ const Fields = () => {
   }
 
   async function sendTransaction(values) {
+    if (!si || !sii || !ri || !rii || !dropdown) {
+      console.log("sending rejected coz empty values");
+      Alert.alert("Failed", "Fill all the fields");
+      return;
+    }
     let filename1 = si.uri.split("/").pop();
     let filename2 = sii.uri.split("/").pop();
     let filename3 = ri.uri.split("/").pop();
@@ -158,7 +176,7 @@ const Fields = () => {
       .catch((error) => {
         if (error.response) {
           console.log("error response - ", error.response.data);
-          Alert.alert("Failed creating receipt", error.response.data);
+          Alert.alert("Failed creating receipt", error.response.data.message);
           setLoading(false);
         } else if (error.request) {
           console.log(error.request);
@@ -214,7 +232,7 @@ const Fields = () => {
             sender_name: "",
             sender_phone: "",
             sender_address: "",
-            sender_id_card_image: "",
+            // sender_id_card_image: "",
             amount: "",
             // sender_ip: "",
             // sender_current_lat: "",
@@ -233,7 +251,7 @@ const Fields = () => {
             console.log(values);
             sendTransaction(values);
           }}
-          validationSchema={""}
+          // validationSchema={formScheme}
         >
           {({ handleChange, handleBlur, handleSubmit, values }) => (
             <View style={styles.inputContainer}>
