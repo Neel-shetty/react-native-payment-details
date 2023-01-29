@@ -4,11 +4,11 @@ import { layout } from "../../constants/layout";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../constants/colors";
 
-const ReceiptItem = ({ id, date, amount }) => {
+const ReceiptItem = ({ id, date, amount, receiptId }) => {
   console.log("🚀 ~ file: TransactionItem.js:8 ~ TransactionItem ~ id", id);
   const navigation = useNavigation();
   function transactionDetails() {
-    navigation.navigate("TransactionInfoScreen", { transaction_id: id });
+    navigation.navigate("ReceiptInfoScreen", { receipt_id: receiptId });
   }
   const formattedDate = new Date(date);
   return (

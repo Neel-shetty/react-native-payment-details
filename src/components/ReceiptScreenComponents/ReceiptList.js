@@ -1,4 +1,11 @@
-import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
@@ -66,6 +73,7 @@ const ReceiptList = () => {
               id={item.transaction_id}
               amount={item.amount}
               date={item.updated_at}
+              receiptId={item.id}
             />
             // </View>
           );

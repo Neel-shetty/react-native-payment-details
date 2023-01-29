@@ -1,4 +1,11 @@
-import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import DataItem from "./DataItem";
 import { ScrollView } from "react-native-gesture-handler";
@@ -15,9 +22,9 @@ const TData = () => {
   async function fetchInfo() {
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/transaction/detail",
+        "http://codelumina.com/project/wallet_managment/api/agent/receipt/detail",
         {
-          receipt_id: route?.params?.transaction_id,
+          receipt_id: route?.params?.receipt_id,
         }
       )
       .then(async (res) => {
@@ -28,7 +35,7 @@ const TData = () => {
         if (error.response) {
           console.log(error.response.data);
           Alert.alert(
-            "Failed to get transaction data, try again later",
+            "Failed to get Receipt data, try again later",
             JSON.stringify(error.response.data.message)
           );
           setLoading(false);
@@ -64,11 +71,7 @@ const TData = () => {
         <DataItem title={" Id"} data={transactions.id} />
         <DataItem title={"Agent ID"} data={transactions.agent_id} />
         <DataItem title={"Amount"} data={transactions.amount} />
-        <DataItem title={"Commission"} data={transactions.commission} />
-        <DataItem title={"Unique ID"} data={transactions.unique_id} />
         <DataItem title={"Transaction ID"} data={transactions.transaction_id} />
-        <DataItem title={"Sender Name"} data={transactions.sender_name} />
-        <DataItem title={"Sender Address"} data={transactions.sender_address} />
         {/* <DataItem
           title={"Agent State"}
           data={
@@ -90,18 +93,25 @@ const TData = () => {
             "Placeholder"
           }
         /> */}
-        <DataItem title={"Receiver Name"} data={transactions.receiver_name} />
-        <DataItem title={"Receiver Phone"} data={transactions.receiver_phone} />
-        <DataItem
-          title={"Receiver Address"}
-          data={transactions.receiver_address}
-        />
-        <DataItem
-          title={"Receiver Money Location"}
-          data={transactions.receive_money_location}
-        />
-        <DataItem title={"Status"} data={transactions.status} />
+        <DataItem title={"Receiver Name"} data={transactions.reciver_name} />
         <DataItem title={"Date"} data={date.toLocaleDateString("en-GB")} />
+        <View>
+          <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
+            Receiver Image
+          </Text>
+          <Image
+            source={{ uri: transactions.reciver_image }}
+            style={{ width: 100, height: 100, borderRadius: 50 }}
+          />
+          <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
+            Receiver ID Card Image
+          </Text>
+          <Image
+            source={{ uri: transactions.reciver_id_image }}
+            style={{ width: 300, height: 200 }}
+            resizeMode="contain"
+          />
+        </View>
       </ScrollView>
     </View>
   );

@@ -25,6 +25,7 @@ import SearchResultScreen from "../screens/Main/SearchResultScreen";
 import CreatedTransactionInfoScreen from "../screens/Main/CreatedTransactionInfoScreen";
 import ReceiptScreen from "../screens/Main/ReceiptScreen";
 import ProfileScreen from "../screens/Main/ProfileScreen";
+import ReceiptInfoScreen from "../screens/Main/ReceiptInfoScreen";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -160,6 +161,10 @@ const Navigator = () => {
               component={SearchResultScreen}
             />
             <Stack.Screen name="ReceiptScreen" component={ReceiptScreen} />
+            <Stack.Screen
+              name="ReceiptInfoScreen"
+              component={ReceiptInfoScreen}
+            />
           </>
         )}
       </Stack.Navigator>

@@ -13,15 +13,21 @@ const Header = ({ back, loc }) => {
 
   async function getName() {
     axios
-      .post("http://codelumina.com/project/wallet_managment/api/user/profile")
+      .post("http://codelumina.com/project/wallet_managment/api/user/profile", {
+        userid: 12,
+      })
       .then((res) => {
         console.log(res.data);
+        setName(res.data.data.name);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
       });
   }
 
   useEffect(() => {
     getName();
-  }, []); 
+  }, []);
 
   function drawer() {
     navigation.openDrawer();
@@ -43,9 +49,7 @@ const Header = ({ back, loc }) => {
           </TouchableOpacity>
         </View>
         {/* <BackButton onPress={back} /> */}
-        <Text style={styles.title}>
-          Agent 07<Text style={{ color: colors.green }}> </Text>
-        </Text>
+        <Text style={styles.title}>{name ? name : "Welcome!"}</Text>
         <View style={{ height: 35, width: 35 }} />
       </View>
     </View>

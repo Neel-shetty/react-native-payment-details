@@ -3,13 +3,14 @@ import React from "react";
 import { layout } from "../../constants/layout";
 import { StatusBar } from "expo-status-bar";
 import Header from "../../components/ReceiptInfoScreenComponents/Header";
+import TData from "../../components/ReceiptInfoScreenComponents/TData";
 
-const TransactionInfoScreen = ({ route }) => {
+const ReceiptInfoScreen = ({ route }) => {
   console.log(route?.params?.transaction_id);
 
   return (
     <View style={styles.root}>
-       <StatusBar style="dark" />
+      <StatusBar style="dark" />
       <View style={styles.headerContainer}>
         <Header />
       </View>
@@ -20,7 +21,7 @@ const TransactionInfoScreen = ({ route }) => {
   );
 };
 
-export default TransactionInfoScreen;
+export default ReceiptInfoScreen;
 
 const styles = StyleSheet.create({
   root: {
