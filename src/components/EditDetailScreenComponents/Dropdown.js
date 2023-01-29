@@ -10,6 +10,7 @@ import { setSelectedDropdown } from "../../store/slice/userSlice";
 const countries = ["Canada", "Australia", "Ireland"];
 
 const Dropdown = ({ data = [], title, defaultOption }) => {
+  console.log("🚀 ~ file: Dropdown.js:13 ~ Dropdown ~ defaultOption", defaultOption)
   const dispatch = useDispatch();
   // console.log("🚀 ~ file: Dropdown.js:11 ~ Dropdown ~ data", data);
   let options = [];
