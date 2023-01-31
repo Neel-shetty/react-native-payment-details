@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
-const TransactionItem = ({ id, date, amount }) => {
+const TransactionItem = ({ id, date, amount, currency }) => {
   console.log("🚀 ~ file: TransactionItem.js:8 ~ TransactionItem ~ id", id);
   const navigation = useNavigation();
   function transactionDetails() {
@@ -79,7 +79,8 @@ const TransactionItem = ({ id, date, amount }) => {
             }}
           >
             <Text ellipsizeMode="tail" style={styles.amount}>
-              ₹{amount}
+              {currency?.slice(0,1)}
+              {amount}
             </Text>
           </View>
           <View

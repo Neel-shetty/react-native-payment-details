@@ -1,5 +1,5 @@
 import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import { layout } from "../../constants/layout";
 import { Formik } from "formik";
@@ -10,9 +10,11 @@ import axios from "axios";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 import TopContainer from "./TopContainer";
+import Dropdown from "../DetailScreenComponents/Dropdown";
 
 const CreateReceipt = () => {
   const [loading, setLoading] = useState(false);
+  const [currencydata, setCurrencyData] = useState();
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -24,6 +26,37 @@ const CreateReceipt = () => {
 
   const rri = useSelector((state) => state.user.receiptReceiverImage);
   const rrii = useSelector((state) => state.user.receiptReceiverId);
+  const currency = useSelector((state) => state.user.currency);
+  console.log("🚀 ~ file: CreateReceipt.js:30 ~ CreateReceipt ~ currency", currency)
+
+  async function fetchCurrency() {
+    setLoading(true);
+    axios
+      .post("http://codelumina.com/project/wallet_managment/api/currency")
+      .then((res) => {
+        console.log(res.data.data);
+        setCurrencyData(res.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log("error response - ", error.response.data);
+          Alert.alert(
+            "Failed getting currency data",
+            JSON.stringify(error.response.data.message)
+          );
+          setLoading(false);
+        } else if (error.request) {
+          console.log(error.request);
+          setLoading(false);
+        } else {
+          console.log("Error", error.message);
+          setLoading(false);
+        }
+        console.log(error.config);
+        setLoading(false);
+      });
+  }
   async function sendReceipt(values) {
     console.log(
       "🚀 ~ file: CreateReceipt.js:23 ~ sendReceipt ~ values",
@@ -41,6 +74,7 @@ const CreateReceipt = () => {
 
     let formData = new FormData();
     formData.append("agent_id", result);
+    formData.append("currency", currency);
     formData.append(
       "transaction_id",
       route?.params?.transactionData.transaction_id
@@ -99,6 +133,9 @@ const CreateReceipt = () => {
         setLoading(false);
       });
   }
+  useEffect(() => {
+    fetchCurrency();
+  }, []);
   return (
     <ScrollView contentContainerStyle={styles.root}>
       <View
@@ -154,6 +191,7 @@ const CreateReceipt = () => {
                 onBlur={handleBlur("amount")}
                 value={values.amount}
               />
+              <Dropdown title={"Currency"} data={currencydata} />
               <Input
                 title={"Receiver Name"}
                 placeholder={"Receiver Name"}

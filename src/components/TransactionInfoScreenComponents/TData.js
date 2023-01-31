@@ -65,6 +65,7 @@ const TData = () => {
         <DataItem title={"Agent ID"} data={transactions.agent_id} />
         <DataItem title={"Amount"} data={transactions.amount} />
         <DataItem title={"Commission"} data={transactions.commission} />
+        <DataItem title={"Currency"} data={transactions.currency} />
         <DataItem title={"Unique ID"} data={transactions.unique_id} />
         <DataItem title={"Transaction ID"} data={transactions.transaction_id} />
         <DataItem title={"Sender Name"} data={transactions.sender_name} />

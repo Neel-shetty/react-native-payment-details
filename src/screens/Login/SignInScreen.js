@@ -37,7 +37,7 @@ const SignInScreen = ({ navigation }) => {
           <InputFields />
         </View>
         <View style={styles.bottomContainer}>
-          <BottomText />
+          {/* <BottomText /> */}
         </View>
         <View style={styles.empty} />
       </View>

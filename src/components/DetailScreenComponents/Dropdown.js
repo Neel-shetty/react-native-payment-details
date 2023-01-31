@@ -5,18 +5,20 @@ import { layout } from "../../constants/layout";
 import { AntDesign } from "@expo/vector-icons";
 import { colors } from "../../constants/colors";
 import { useDispatch } from "react-redux";
-import { setSelectedDropdown } from "../../store/slice/userSlice";
+import { setCurrency, setSelectedDropdown } from "../../store/slice/userSlice";
 
-const countries = ["Canada", "Australia", "Ireland"];
 
 const Dropdown = ({ data = [], title }) => {
   const dispatch = useDispatch();
-  console.log("🚀 ~ file: Dropdown.js:11 ~ Dropdown ~ data", data);
   let options = [];
   for (let i = 0; i < data.length; i++) {
-    options.push(data[i].name);
+    if (title === "Currency") {
+      options.push(`${data[i]?.sign} ${data[i].name}`);
+    } else {
+      options.push(data[i].name);
+    }
   }
-  console.log(options);
+  console.log("🚀 ~ file: Dropdown.js:16 ~ Dropdown ~ options", options);
   return (
     <View style={styles.root}>
       <View style={styles.headerContainer}>
@@ -28,7 +30,11 @@ const Dropdown = ({ data = [], title }) => {
           defaultButtonText="Select an option"
           onSelect={(selectedItem, index) => {
             console.log(selectedItem, index);
-            dispatch(setSelectedDropdown(selectedItem));
+            if (title === "Currency") {
+              dispatch(setCurrency(selectedItem));
+            } else {
+              dispatch(setSelectedDropdown(selectedItem));
+            }
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
             return <Text style={{ color: "black" }}>{selectedItem}</Text>;

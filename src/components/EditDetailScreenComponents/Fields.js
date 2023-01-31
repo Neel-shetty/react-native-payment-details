@@ -28,6 +28,8 @@ const Fields = () => {
   const [loading, setLoading] = useState();
   // console.log("🚀 ~ file: Fields.js:22 ~ Fields ~ loading", loading);
   const [dropdownData, setDropdownData] = useState();
+  const [currencydata, setCurrencyData] = useState();
+  console.log("🚀 ~ file: Fields.js:32 ~ Fields ~ currencydata", currencydata);
   const [location, setLocation] = useState(null);
   // console.log("🚀 ~ file: Fields.js:29 ~ Fields ~ location", location?.coords);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -44,6 +46,7 @@ const Fields = () => {
   const ri = useSelector((state) => state.user.receiverImage);
   const rii = useSelector((state) => state.user.receiverIdImage);
   const dropdown = useSelector((state) => state.user.selectedDropdown);
+  const currency = useSelector((state) => state.user.currency);
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -64,36 +67,38 @@ const Fields = () => {
     commission: yup.string().required(),
   });
 
-  async function fetchDropdownData() {
+  async function fetchDropdownData(callback) {
     setLoading(true);
     axios
       .post("http://codelumina.com/project/wallet_managment/api/locations")
       .then((res) => {
         // console.log(res.data.data);
         setDropdownData(res.data.data);
-        setLoading(false);
+        // setLoading(false);
+        callback();
       })
       .catch((error) => {
+        Alert.alert("failed getting data", "try again later");
         if (error.response) {
           console.log("error response - ", error.response.data);
           Alert.alert(
             "Failed getting dropdown data",
             JSON.stringify(error.response.data.message)
           );
-          setLoading(false);
+          // setLoading(false);
         } else if (error.request) {
           console.log(error.request);
-          setLoading(false);
+          // setLoading(false);
         } else {
           console.log("Error", error.message);
-          setLoading(false);
+          // setLoading(false);
         }
         console.log(error.config);
-        setLoading(false);
+        // setLoading(false);
       });
   }
   async function fetchInfo() {
-    setLoading(true);
+    // setLoading(true);
     setDataLoading(true);
     axios
       .post(
@@ -109,6 +114,7 @@ const Fields = () => {
         setDataLoading(false);
       })
       .catch((error) => {
+        Alert.alert("failed getting data", "try again later");
         if (error.response) {
           console.log(error.response.data);
           Alert.alert(
@@ -129,6 +135,36 @@ const Fields = () => {
         console.log(error.config);
         setLoading(false);
         setDataLoading(false);
+      });
+  }
+  async function fetchCurrency(callback) {
+    // setLoading(true);
+    axios
+      .post("http://codelumina.com/project/wallet_managment/api/currency")
+      .then((res) => {
+        console.log(res.data.data);
+        setCurrencyData(res.data.data);
+        callback();
+        // setLoading(false);
+      })
+      .catch((error) => {
+        Alert.alert("failed getting data", "try again later");
+        if (error.response) {
+          console.log("error response - ", error.response.data);
+          Alert.alert(
+            "Failed getting currency data",
+            JSON.stringify(error.response.data.message)
+          );
+          // setLoading(false);
+        } else if (error.request) {
+          console.log(error.request);
+          // setLoading(false);
+        } else {
+          console.log("Error", error.message);
+          // setLoading(false);
+        }
+        console.log(error.config);
+        // setLoading(false);
       });
   }
 
@@ -190,6 +226,7 @@ const Fields = () => {
     formData.append("agent_current_lat", location?.coords.latitude);
     formData.append("agent_current_lng", location?.coords.longitude);
     formData.append("agent_id", result);
+    formData.append("currency", currency);
     if (dropdown) {
       formData.append("receive_money_location", dropdown);
     }
@@ -267,8 +304,14 @@ const Fields = () => {
   }, []);
 
   useEffect(() => {
-    fetchDropdownData();
-    fetchInfo();
+    fetchDropdownData(function () {
+      fetchCurrency(function () {
+        fetchInfo();
+      });
+    });
+    // fetchCurrency();
+    // fetchInfo();
+    // setLoading(false);
   }, []);
 
   if (dataLoading || transactionData === null) {
@@ -329,6 +372,15 @@ const Fields = () => {
                 fieldType={"commision"}
                 keyboardType={"numeric"}
               />
+              {!loading ? (
+                <Dropdown
+                  title={"Currency"}
+                  data={currencydata}
+                  defaultOption={transactionData.currency}
+                />
+              ) : (
+                <ActivityIndicator size={"large"} color={colors.green} />
+              )}
               <Input
                 placeholder={"Sender Name"}
                 title={"Sender Name"}

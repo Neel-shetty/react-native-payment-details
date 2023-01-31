@@ -28,6 +28,7 @@ const Fields = () => {
   const [loading, setLoading] = useState();
   console.log("🚀 ~ file: Fields.js:22 ~ Fields ~ loading", loading);
   const [dropdownData, setDropdownData] = useState();
+  const [currencydata, setCurrencyData] = useState();
   const [location, setLocation] = useState(null);
   console.log("🚀 ~ file: Fields.js:29 ~ Fields ~ location", location?.coords);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -38,21 +39,23 @@ const Fields = () => {
   const ri = useSelector((state) => state.user.receiverImage);
   const rii = useSelector((state) => state.user.receiverIdImage);
   const dropdown = useSelector((state) => state.user.selectedDropdown);
+  const currency = useSelector((state) => state.user.currency);
+  console.log("🚀 ~ file: Fields.js:69 ~ Fields ~ currency", currency);
   console.log("🚀 ~ file: Fields.js:38 ~ Fields ~ dropdown", dropdown);
 
   const navigation = useNavigation();
 
-  const formScheme = yup.object({
-    amount: yup.string().required(),
-    commision: yup.string().required(),
-    sender_name: yup.string().required(),
-    sender_phone: yup.string().required(),
-    sender_address: yup.string().required(),
-    receiver_name: yup.string().required(),
-    receiver_phone: yup.string().required(),
-    receiver_address: yup.string().required(),
-    commission: yup.string().required(),
-  });
+  // const formScheme = yup.object({
+  //   amount: yup.string().required(),
+  //   commision: yup.string().required(),
+  //   sender_name: yup.string().required(),
+  //   sender_phone: yup.string().required(),
+  //   sender_address: yup.string().required(),
+  //   receiver_name: yup.string().required(),
+  //   receiver_phone: yup.string().required(),
+  //   receiver_address: yup.string().required(),
+  //   commission: yup.string().required(),
+  // });
 
   async function fetchDropdownData() {
     setLoading(true);
@@ -83,8 +86,37 @@ const Fields = () => {
       });
   }
 
+  async function fetchCurrency() {
+    setLoading(true);
+    axios
+      .post("http://codelumina.com/project/wallet_managment/api/currency")
+      .then((res) => {
+        console.log(res.data.data);
+        setCurrencyData(res.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log("error response - ", error.response.data);
+          Alert.alert(
+            "Failed getting currency data",
+            JSON.stringify(error.response.data.message)
+          );
+          setLoading(false);
+        } else if (error.request) {
+          console.log(error.request);
+          setLoading(false);
+        } else {
+          console.log("Error", error.message);
+          setLoading(false);
+        }
+        console.log(error.config);
+        setLoading(false);
+      });
+  }
+
   async function sendTransaction(values) {
-    if (!si || !sii || !ri || !rii || !dropdown) {
+    if (!si || !sii || !ri || !rii || !dropdown || !currency) {
       console.log("sending rejected coz empty values");
       Alert.alert("Failed", "Fill all the fields");
       return;
@@ -139,6 +171,7 @@ const Fields = () => {
     formData.append("agent_current_lng", location?.coords.longitude);
     formData.append("agent_id", result);
     formData.append("receive_money_location", dropdown);
+    formData.append("currency", currency);
     console.log(
       "🚀 ~ file: Fields.js:124 ~ sendTransaction ~ formData",
       formData
@@ -176,7 +209,7 @@ const Fields = () => {
       .catch((error) => {
         if (error.response) {
           console.log("error response - ", error.response.data);
-          Alert.alert("Failed creating receipt", error.response.data.message);
+          Alert.alert("Failed creating transaction", error.response.data.message);
           setLoading(false);
         } else if (error.request) {
           console.log(error.request);
@@ -214,6 +247,7 @@ const Fields = () => {
 
   useEffect(() => {
     fetchDropdownData();
+    fetchCurrency();
   }, []);
 
   return (
@@ -266,6 +300,11 @@ const Fields = () => {
                 fieldType={"commision"}
                 keyboardType={"numeric"}
               />
+              {!loading ? (
+                <Dropdown title={"Currency"} data={currencydata} />
+              ) : (
+                <ActivityIndicator size={"large"} color={colors.green} />
+              )}
               <Input
                 placeholder={"Sender Name"}
                 title={"Sender Name"}
