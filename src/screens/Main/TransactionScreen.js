@@ -1,5 +1,6 @@
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+// import React from "react";
+import React, { useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../../store/slice/userSlice";
@@ -9,9 +10,24 @@ import TransactionList from "../../components/TransactionScreenComponents/Transa
 import { layout } from "../../constants/layout";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
+import Storage from "../../utils/expireStorage";
+// import { useDispatch } from "react-redux";
+// import { setLoggedIn } from "../../store/slice/userSlice";
 
 const TransactionScreen = () => {
+  // const dispatch = useDispatch();
   const dispatch = useDispatch();
+  useEffect(() => {
+    async function checkLogin() {
+      let result = await Storage.getItem("isLoggedIn");
+      console.log("🚀 ~ file: checkLogin.js:21 ~ getValueFor ~ result", result);
+      if (result !== "true") {
+        dispatch(setLoggedIn(false));
+      }
+    }
+
+    checkLogin();
+  }, []);
   const navigation = useNavigation();
   function back() {
     navigation.navigate("DrawerNavigator", { screen: "HomeScreen" });

@@ -6,7 +6,8 @@ import {
   Text,
   View,
 } from "react-native";
-import React from "react";
+// import React from "react";
+import React, { useEffect } from "react";
 import TopContainer from "../../components/PayCustomerScreenComponents/TopContainer";
 import SearchBar from "../../components/PayCustomerScreenComponents/SearchBar";
 import BottomContainer from "../../components/PayCustomerScreenComponents/BottomContainer";
@@ -15,8 +16,23 @@ import CreateReceipt from "../../components/PayCustomerScreenComponents/CreateRe
 import { StatusBar } from "expo-status-bar";
 import { layout } from "../../constants/layout";
 import Header from "../../components/PayCustomerScreenComponents/Header";
+import Storage from "../../utils/expireStorage";
+import { useDispatch } from "react-redux";
+import { setLoggedIn } from "../../store/slice/userSlice";
 
 const SearchTransactionScreen = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function checkLogin() {
+      let result = await Storage.getItem("isLoggedIn");
+      console.log("🚀 ~ file: checkLogin.js:21 ~ getValueFor ~ result", result);
+      if (result !== "true") {
+        dispatch(setLoggedIn(false));
+      }
+    }
+
+    checkLogin();
+  }, []);
   const receiptSearch = useSelector((state) => state.user.receiptSearch);
   return (
     <KeyboardAvoidingView

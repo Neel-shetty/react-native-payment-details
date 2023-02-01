@@ -1,12 +1,28 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+// import React from "react";
+import React, { useEffect } from "react";
 import { layout } from "../../constants/layout";
 import { StatusBar } from "expo-status-bar";
 import Header from "../../components/ReceiptInfoScreenComponents/Header";
 import TData from "../../components/ReceiptInfoScreenComponents/TData";
+import Storage from "../../utils/expireStorage";
+import { useDispatch } from "react-redux";
+import { setLoggedIn } from "../../store/slice/userSlice";
 
 const ReceiptInfoScreen = ({ route }) => {
   console.log(route?.params?.transaction_id);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function checkLogin() {
+      let result = await Storage.getItem("isLoggedIn");
+      console.log("🚀 ~ file: checkLogin.js:21 ~ getValueFor ~ result", result);
+      if (result !== "true") {
+        dispatch(setLoggedIn(false));
+      }
+    }
+
+    checkLogin();
+  }, []);
 
   return (
     <View style={styles.root}>

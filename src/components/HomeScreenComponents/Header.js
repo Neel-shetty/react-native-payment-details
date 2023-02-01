@@ -7,13 +7,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
+import Storage from "../../utils/expireStorage";
 
 const Header = ({ back, loc }) => {
   const [name, setName] = useState();
   const navigation = useNavigation();
 
   async function getName() {
-    const result = await SecureStore.getItemAsync("id");
+    // const result = await SecureStore.getItemAsync("id");
+    let result = await Storage.getItem("id");
     axios
       .post("http://codelumina.com/project/wallet_managment/api/user/profile", {
         userid: result,

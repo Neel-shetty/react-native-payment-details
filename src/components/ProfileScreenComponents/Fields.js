@@ -5,12 +5,14 @@ import axios from "axios";
 import { Formik } from "formik";
 import Input from "../DetailScreenComponents/Input";
 import CustomButton from "../CustomButton";
+import Storage from '../../utils/expireStorage'
 
 const Fields = () => {
   const [loading, setLoading] = useState(false);
   async function updateProfile(values) {
     setLoading(true);
-    const result = await SecureStore.getItemAsync("id");
+    // const result = await SecureStore.getItemAsync("id");
+    let result = await Storage.getItem("id");
 
     let data = {
       user_id: result,

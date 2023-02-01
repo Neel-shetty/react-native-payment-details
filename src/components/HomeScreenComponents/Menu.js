@@ -4,8 +4,10 @@ import { layout } from "../../constants/layout";
 import { colors } from "../../constants/colors";
 import MenuItem from "./MenuItem";
 import { useNavigation } from "@react-navigation/native";
+import Storage from "../../utils/expireStorage";
 
 const Menu = () => {
+
   const navigation = useNavigation();
   function register() {
     navigation.navigate("DetailScreen");

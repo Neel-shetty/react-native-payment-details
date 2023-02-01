@@ -11,6 +11,7 @@ import TransactionItem from "./TransactionItem";
 import { layout } from "../../constants/layout";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
+import Storage from '../../utils/expireStorage'
 
 const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
@@ -22,7 +23,8 @@ const TransactionList = () => {
   async function fetchTransactionData() {
     setLoading(true);
     setReferesh(true);
-    let result = await SecureStore.getItemAsync("id");
+    // let result = await SecureStore.getItemAsync("id");
+    let result = await Storage.getItem("id");
     axios
       .post(
         "http://codelumina.com/project/wallet_managment/api/agent/transactions",

@@ -11,6 +11,7 @@ import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import ReceiptItem from "./ReceiptItem";
 import { layout } from "../../constants/layout";
+import Storage from '../../utils/expireStorage'
 
 const ReceiptList = () => {
   const [receipt, setReceipt] = useState(null);
@@ -18,7 +19,8 @@ const ReceiptList = () => {
   const [loading, setLoading] = useState(false);
   async function fetchReceiptData() {
     setLoading(true);
-    let result = await SecureStore.getItemAsync("id");
+    // let result = await SecureStore.getItemAsync("id");
+    let result = await Storage.getItem("id");
     axios
       .post(
         "http://codelumina.com/project/wallet_managment/api/agent/receipt/lists",

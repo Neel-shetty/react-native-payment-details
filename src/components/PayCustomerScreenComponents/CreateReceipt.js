@@ -11,6 +11,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 import TopContainer from "./TopContainer";
 import Dropdown from "../DetailScreenComponents/Dropdown";
+import Storage from "../../utils/expireStorage";
 
 const CreateReceipt = () => {
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,10 @@ const CreateReceipt = () => {
   const rri = useSelector((state) => state.user.receiptReceiverImage);
   const rrii = useSelector((state) => state.user.receiptReceiverId);
   const currency = useSelector((state) => state.user.currency);
-  console.log("🚀 ~ file: CreateReceipt.js:30 ~ CreateReceipt ~ currency", currency)
+  console.log(
+    "🚀 ~ file: CreateReceipt.js:30 ~ CreateReceipt ~ currency",
+    currency
+  );
 
   async function fetchCurrency() {
     setLoading(true);
@@ -70,7 +74,8 @@ const CreateReceipt = () => {
     let match2 = /\.(\w+)$/.exec(filename2);
     let type2 = match2 ? `image/${match2[1]}` : `image`;
 
-    let result = await SecureStore.getItemAsync("id");
+    // let result = await SecureStore.getItemAsync("id");
+    let result = await Storage.getItem("id");
 
     let formData = new FormData();
     formData.append("agent_id", result);

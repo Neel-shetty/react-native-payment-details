@@ -12,6 +12,7 @@ import {
 } from "react-native-popup-menu";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
+import Storage from '../../utils/expireStorage'
 
 const TransactionItem = ({ id, date, amount, currency }) => {
   console.log("🚀 ~ file: TransactionItem.js:8 ~ TransactionItem ~ id", id);
@@ -20,7 +21,7 @@ const TransactionItem = ({ id, date, amount, currency }) => {
     navigation.navigate("TransactionInfoScreen", { transaction_id: id });
   }
   async function deleteTransaction() {
-    const result = await SecureStore.getItemAsync("id");
+    // const result = await SecureStore.getItemAsync("id");
     axios
       .post(
         "http://codelumina.com/project/wallet_managment/api/agent/transaction/delete",

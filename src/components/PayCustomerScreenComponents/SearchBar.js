@@ -22,6 +22,7 @@ import axios from "axios";
 import Input from "./Input";
 import CustomButton from "../CustomButton";
 import { useNavigation } from "@react-navigation/native";
+import Storage from "../../utils/expireStorage";
 
 const SearchBar = () => {
   const navigation = useNavigation();
@@ -30,7 +31,8 @@ const SearchBar = () => {
   async function fetchTransactionData(values) {
     console.log("fetch searchbar");
     setLoading(true);
-    const result = await SecureStore.getItemAsync("id");
+    // const result = await SecureStore.getItemAsync("id");
+    let result = await Storage.getItem("id");
     axios
       .post(
         "http://codelumina.com/project/wallet_managment/api/agent/transaction/search",

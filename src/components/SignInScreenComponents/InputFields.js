@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { setLoggedIn } from "../../store/slice/userSlice";
 import * as SecureStore from "expo-secure-store";
+import Storage from '../../utils/expireStorage'
 
 const InputFields = () => {
   const [loading, setLoading] = useState(false);
@@ -28,8 +29,8 @@ const InputFields = () => {
     navigation.navigate("");
   }
 
-  async function save(key, value) {
-    await SecureStore.setItemAsync(key, value);
+  async function save(key, value, expire) {
+    await Storage.setItem(key,value,expire)
   }
 
   function Login(values) {
@@ -43,8 +44,8 @@ const InputFields = () => {
         res.data;
         console.log(res.data);
         dispatch(setLoggedIn(true));
-        save("isLoggedIn", "true");
-        save("id", JSON.stringify(res.data.data.id));
+        save("isLoggedIn", "true",60*60); //1hr
+        save("id", res.data.data.id);
         navigation.navigate("HomeScreen");
       })
       .catch((error) => {

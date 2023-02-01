@@ -4,8 +4,23 @@ import Header from "../../components/DetailScreenComponents/Header";
 import Input from "../../components/DetailScreenComponents/Input";
 import Fields from "../../components/DetailScreenComponents/Fields";
 import { StatusBar } from "expo-status-bar";
+import Storage from "../../utils/expireStorage";
+import { useDispatch } from "react-redux";
+import { setLoggedIn } from "../../store/slice/userSlice";
 
 const DetailScreen = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function checkLogin() {
+      let result = await Storage.getItem("isLoggedIn");
+      console.log("🚀 ~ file: checkLogin.js:21 ~ getValueFor ~ result", result);
+      if (result !== "true") {
+        dispatch(setLoggedIn(false));
+      }
+    }
+
+    checkLogin();
+  }, []);
   // const [location, setLocation] = useState(null);
   // const [errorMsg, setErrorMsg] = useState(null);
 

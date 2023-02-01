@@ -27,6 +27,7 @@ import ReceiptScreen from "../screens/Main/ReceiptScreen";
 import ProfileScreen from "../screens/Main/ProfileScreen";
 import ReceiptInfoScreen from "../screens/Main/ReceiptInfoScreen";
 import EditDetailScreen from "../screens/Main/EditDetailScreen";
+import Storage from "../utils/expireStorage";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -34,12 +35,12 @@ const Drawer = createDrawerNavigator();
 const Navigator = () => {
   const dispatch = useDispatch();
 
-  async function save(key, value) {
-    await SecureStore.setItemAsync(key, value);
-  }
+  // async function save(key, value) {
+  //   await SecureStore.setItemAsync(key, value);
+  // }
 
   async function getValueFor(key) {
-    let result = await SecureStore.getItemAsync(key);
+    let result = await Storage.getItem(key);
     console.log("🚀 ~ file: Navigator.js:21 ~ getValueFor ~ result", result);
     if (result === "true") {
       dispatch(setLoggedIn(true));
@@ -53,8 +54,8 @@ const Navigator = () => {
     // getValueFor("id");
   }, [loggedIn]);
 
-  function logOut() {
-    SecureStore.setItemAsync("isLoggedIn", "false");
+  async function logOut() {
+    await Storage.setItem("isLoggedIn", "false");
     dispatch(setLoggedIn(false));
   }
 

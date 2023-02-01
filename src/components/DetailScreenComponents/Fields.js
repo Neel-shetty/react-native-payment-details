@@ -23,6 +23,7 @@ import publicIP from "react-native-public-ip";
 import * as SecureStore from "expo-secure-store";
 import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
+import Storage from '../../utils/expireStorage'
 
 const Fields = () => {
   const [loading, setLoading] = useState();
@@ -135,7 +136,8 @@ const Fields = () => {
     let match4 = /\.(\w+)$/.exec(filename4);
     let type4 = match4 ? `image/${match4[1]}` : `image`;
 
-    let result = await SecureStore.getItemAsync("id");
+    // let result = await SecureStore.getItemAsync("id");
+        let result = await Storage.getItem('id');
 
     let formData = new FormData();
     formData.append("receiver_image", {

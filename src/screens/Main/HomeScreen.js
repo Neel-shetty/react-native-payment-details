@@ -5,15 +5,30 @@ import {
   Text,
   View,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/HomeScreenComponents/Header";
 import Image from "../../components/HomeScreenComponents/ImageBg";
 import { layout } from "../../constants/layout";
 import Menu from "../../components/HomeScreenComponents/Menu";
 import { colors } from "../../constants/colors";
 import { StatusBar } from "expo-status-bar";
+import Storage from "../../utils/expireStorage";
+import { useDispatch } from "react-redux";
+import { setLoggedIn } from "../../store/slice/userSlice";
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function checkLogin() {
+      let result = await Storage.getItem("isLoggedIn");
+      console.log("🚀 ~ file: checkLogin.js:21 ~ getValueFor ~ result", result);
+      if (result !== "true") {
+        dispatch(setLoggedIn(false));
+      }
+    }
+
+    checkLogin();
+  }, []);
   return (
     <SafeAreaView style={styles.root}>
       <StatusBar style="dark" />

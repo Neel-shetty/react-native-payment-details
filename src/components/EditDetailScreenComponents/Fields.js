@@ -23,6 +23,7 @@ import publicIP from "react-native-public-ip";
 import * as SecureStore from "expo-secure-store";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import * as yup from "yup";
+import Storage from '../../utils/expireStorage'
 
 const Fields = () => {
   const [loading, setLoading] = useState();
@@ -169,7 +170,8 @@ const Fields = () => {
   }
 
   async function sendTransaction(values) {
-    let result = await SecureStore.getItemAsync("id");
+    // let result = await SecureStore.getItemAsync("id");
+        let result = await Storage.getItem('id');
 
     let formData = new FormData();
     if (ri) {

@@ -5,11 +5,15 @@ import {
   Text,
   View,
 } from "react-native";
-import React from "react";
+// import React from "react";
+import React, { useEffect } from "react";
 import TopContainer from "../../components/PayCustomerScreenComponents/TopContainer";
 import BottomContainer from "../../components/PayCustomerScreenComponents/BottomContainer";
 import CreateReceipt from "../../components/PayCustomerScreenComponents/CreateReceipt";
 import SearchResultHeader from "../../components/PayCustomerScreenComponents/SearchResultHeader";
+import Storage from "../../utils/expireStorage";
+import { useDispatch } from "react-redux";
+import { setLoggedIn } from "../../store/slice/userSlice";
 
 const data = {
   agent_current_city: null,
@@ -41,6 +45,18 @@ const data = {
 };
 
 const SearchResultScreen = ({ route }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function checkLogin() {
+      let result = await Storage.getItem("isLoggedIn");
+      console.log("🚀 ~ file: checkLogin.js:21 ~ getValueFor ~ result", result);
+      if (result !== "true") {
+        dispatch(setLoggedIn(false));
+      }
+    }
+
+    checkLogin();
+  }, []);
   return (
     // <View style={styles.root}>
       <KeyboardAvoidingView
