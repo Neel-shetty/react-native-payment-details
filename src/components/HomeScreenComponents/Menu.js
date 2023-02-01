@@ -73,11 +73,11 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 10,
     // borderTopRightRadius: 10,
     elevation: 6,
-    // borderWidth: 2,
+    borderWidth: 1,
     // borderRightWidth: 2,
     // borderLeftWidth: 2,
     // borderTopWidth: 2,
-    borderColor: colors.green,
+    borderColor: '#edf0f3',
   },
   title: {
     fontFamily: "poppins-semibold",

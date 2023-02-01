@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     // backgroundColor: "pink",
-    backgroundColor: "#49D7E5",
+    // backgroundColor: "#49D7E5",
     paddingHorizontal: 15,
     borderRadius: 10,
   },

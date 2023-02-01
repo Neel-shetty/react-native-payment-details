@@ -35,11 +35,20 @@ const HomeScreen = () => {
       <View style={styles.headerContainer}>
         <Header />
       </View>
-      <View style={styles.imageContainer}>
-        <Image />
-      </View>
-      <View style={styles.menuContainer}>
-        <Menu />
+      <View
+        style={{
+          flex: 7,
+          backgroundColor: "white",
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+        }}
+      >
+        <View style={styles.imageContainer}>
+          <Image />
+        </View>
+        <View style={styles.menuContainer}>
+          <Menu />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -52,7 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#F6F7FD",
+    backgroundColor: "#93e3fe",
   },
   headerContainer: {
     flex: 1,
