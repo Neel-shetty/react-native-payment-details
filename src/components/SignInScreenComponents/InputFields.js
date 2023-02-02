@@ -44,7 +44,7 @@ const InputFields = () => {
         res.data;
         console.log(res.data);
         dispatch(setLoggedIn(true));
-        save("isLoggedIn", "true",60*60); //1hr
+        save("isLoggedIn", "true",60); //60sec
         save("id", res.data.data.id);
         navigation.navigate("HomeScreen");
       })
