@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    // backgroundColor: "white",
+    backgroundColor: "#F6F7FD",
     width: layout.width,
   },
   headerContainer: {

@@ -1729,6 +1729,13 @@
     prompts "^2.4.0"
     semver "^6.3.0"
 
+"@react-native-community/datetimepicker@6.5.2":
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-6.5.2.tgz#d2c0df9f2c6acce39f7e957743dd811547656098"
+  integrity sha512-9K3zhIH1zmpIGSG3GJTWLIoAx+sR4kJ1wqpGKMwWJ5IYXBsFxMdvGw023t0pz2CQStlnNbbNhnZY/HMYFBCsCg==
+  dependencies:
+    invariant "^2.2.4"
+
 "@react-native-community/netinfo@9.3.5":
   version "9.3.5"
   resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-9.3.5.tgz#0c60c798b5e0e14dd3b3fbab629a6e9609f709fd"
@@ -5688,6 +5695,11 @@ react-native-image-slider-banner@^1.0.3:
   integrity sha512-yo5klEz82eNSSj1luYEk54vpVinUnUE08LsHBnp01KQVt9LrVuuFusN9m+nnkZv4vlR2zeBRRFK3mQAse0PHPg==
   dependencies:
     react-native-vector-icons "^8.1.0"
+
+react-native-image-slider-show@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-image-slider-show/-/react-native-image-slider-show-1.0.3.tgz#4df4c0ba520074f7a5513cca9a83ea48ac8868a5"
+  integrity sha512-9Tysqt4Q1I2OIYN1hJ+291Axy9JwsKFpr1a4uxu9uDMLGgkYsOLhbsMdgj7qVBmtLWZDQ9Kr45r+LNIRmmSvGg==
 
 react-native-popup-menu@^0.16.1:
   version "0.16.1"

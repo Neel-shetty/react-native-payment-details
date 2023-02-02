@@ -28,6 +28,10 @@ import ProfileScreen from "../screens/Main/ProfileScreen";
 import ReceiptInfoScreen from "../screens/Main/ReceiptInfoScreen";
 import EditDetailScreen from "../screens/Main/EditDetailScreen";
 import Storage from "../utils/expireStorage";
+import { AntDesign } from "@expo/vector-icons";
+import { Octicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { SimpleLineIcons } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -81,6 +85,12 @@ const Navigator = () => {
                   fontFamily: "poppins-semibold",
                   color: colors.red,
                 }}
+                style={{ borderBottomWidth: 2, borderColor: "#edf0f3" }}
+                icon={({ color, size }) => {
+                  return (
+                    <SimpleLineIcons name="logout" size={size} color={colors.red} />
+                  );
+                }}
               />
             </DrawerContentScrollView>
           );
@@ -104,6 +114,11 @@ const Navigator = () => {
                 </View>
               );
             },
+            drawerContentContainerStyle: {},
+            drawerItemStyle: { borderBottomWidth: 2, borderColor: "#edf0f3" },
+            drawerIcon: ({ focused, color, size }) => {
+              return <AntDesign name="home" size={size} color={color} />;
+            },
           }}
         />
         <Drawer.Screen
@@ -122,6 +137,12 @@ const Navigator = () => {
                     Update Profile
                   </Text>
                 </View>
+              );
+            },
+            drawerItemStyle: { borderBottomWidth: 2, borderColor: "#edf0f3" },
+            drawerIcon: ({ focused, color, size }) => {
+              return (
+                <Ionicons name="person-outline" size={size} color={color} />
               );
             },
           }}
