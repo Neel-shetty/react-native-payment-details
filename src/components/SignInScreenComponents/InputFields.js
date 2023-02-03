@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { setLoggedIn } from "../../store/slice/userSlice";
 import * as SecureStore from "expo-secure-store";
-import Storage from '../../utils/expireStorage'
+import Storage from "../../utils/expireStorage";
 
 const InputFields = () => {
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ const InputFields = () => {
   const formScheme = yup.object({
     // phoneNumber: yup.string().phoneNumber("error").required("error"),
     password: yup.string().min(6, "error").required("error"),
-    phoneNumber: yup.string().length(10, "error").required("error"),
+    phoneNumber: yup.string().required("error"),
   });
 
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const InputFields = () => {
   }
 
   async function save(key, value, expire) {
-    await Storage.setItem(key,value,expire)
+    await Storage.setItem(key, value, expire);
   }
 
   function Login(values) {
@@ -44,7 +44,7 @@ const InputFields = () => {
         res.data;
         console.log(res.data);
         dispatch(setLoggedIn(true));
-        save("isLoggedIn", "true",60); //60sec
+        save("isLoggedIn", "true"); //no expire
         save("id", res.data.data.id);
         navigation.navigate("HomeScreen");
       })
@@ -97,8 +97,8 @@ const InputFields = () => {
               dispatch(setError(errors));
             }, [errors])}
             <Input
-              placeholder={"Phone Number"}
-              title={"Your Phone Number"}
+              placeholder={"Phone Number / Email"}
+              title={"Your Phone Number / Email"}
               onChangeText={handleChange("phoneNumber")}
               handleBlur={handleBlur("phoneNumber")}
               value={values.phoneNumber}
