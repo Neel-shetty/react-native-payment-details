@@ -11,6 +11,7 @@ import DataItem from "./DataItem";
 import { ScrollView } from "react-native-gesture-handler";
 import { useRoute } from "@react-navigation/native";
 import axios from "axios";
+import { layout } from "../../constants/layout";
 
 const TData = () => {
   const [transactions, setTransactions] = useState(null);
@@ -96,20 +97,20 @@ const TData = () => {
         /> */}
         <DataItem title={"Receiver Name"} data={transactions.reciver_name} />
         <DataItem title={"Date"} data={date.toLocaleDateString("en-GB")} />
-        <View>
+        <View style={{width:layout.widthp,alignItems:'center',}}>
           <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
             Receiver Image
           </Text>
           <Image
             source={{ uri: transactions.reciver_image }}
-            style={{ width: 100, height: 100, borderRadius: 50 }}
+            style={{ width: 120, height: 120, borderRadius: 60 }}
           />
           <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
             Receiver ID Card Image
           </Text>
           <Image
             source={{ uri: transactions.reciver_id_image }}
-            style={{ width: 300, height: 200 }}
+            style={{ width: '100%', height: 250 }}
             resizeMode="contain"
           />
         </View>

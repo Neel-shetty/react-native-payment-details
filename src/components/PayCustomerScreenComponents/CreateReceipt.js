@@ -142,81 +142,100 @@ const CreateReceipt = () => {
     fetchCurrency();
   }, []);
   return (
-    <ScrollView contentContainerStyle={styles.root}>
-      <View
-        style={{
-          // flex: 1,
-          width: layout.widthp,
-          // alignItems: "center",
+    <View style={styles.root}>
+      <ScrollView
+      showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          alignItems: "center",
           justifyContent: "center",
+          // flex: 1,
+          // backgroundColor: "pink",
+          width: layout.width,
+        }}
+        style={{
+          alignSelf: "center",
+          // flex: 1,
+          width: layout.width,
         }}
       >
-        <Text
+        <View
           style={{
-            fontFamily: "poppins-semibold",
-            fontSize: 24,
-            // color: colors.green,
+            // flex: 1,
+            width: layout.widthp,
+            // alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          Create Receipt
-        </Text>
-      </View>
-      <View style={{ alignItems: "center", flex: 1 }}>
-        <Formik
-          initialValues={{
-            transaction_id: "",
-            amount: "",
-            receiver_name: "",
-          }}
-          onSubmit={(values) => {
-            console.log(values);
-            sendReceipt(values);
-          }}
-        >
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            touched,
-            errors = false,
-          }) => (
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
-              {/* <Input
+          <Text
+            style={{
+              fontFamily: "poppins-semibold",
+              fontSize: 24,
+              // color: colors.green,
+            }}
+          >
+            Create Receipt
+          </Text>
+        </View>
+        <View style={{ alignItems: "center", flex: 1 }}>
+          <Formik
+            initialValues={{
+              transaction_id: "",
+              amount: "",
+              receiver_name: "",
+            }}
+            onSubmit={(values) => {
+              console.log(values);
+              sendReceipt(values);
+            }}
+          >
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              touched,
+              errors = false,
+            }) => (
+              <View style={{ alignItems: "center", justifyContent: "center" }}>
+                {/* <Input
                 title={"Transaction ID"}
                 placeholder={"Transaction ID"}
                 onChangeText={handleChange("transaction_id")}
                 onBlur={handleBlur("transaction_id")}
                 value={values.transaction_id}
               /> */}
-              <Input
-                title={"Amount"}
-                placeholder={"Amount"}
-                onChangeText={handleChange("amount")}
-                onBlur={handleBlur("amount")}
-                value={values.amount}
-              />
-              <Dropdown title={"Currency"} data={currencydata} />
-              <Input
-                title={"Receiver Name"}
-                placeholder={"Receiver Name"}
-                onChangeText={handleChange("receiver_name")}
-                onBlur={handleBlur("receiver_name")}
-                value={values.receiver_name}
-              />
-              <UploadButton type={"receiverImage"} title={"Receiver Image"} />
-              <UploadButton type={"receiverId"} title={"Receive ID Image"} />
-              <View style={{ paddingVertical: 10 }}>
-                <CustomButton title={"create Receipt"} onPress={handleSubmit} />
+                <Input
+                  title={"Amount"}
+                  placeholder={"Amount"}
+                  onChangeText={handleChange("amount")}
+                  onBlur={handleBlur("amount")}
+                  value={values.amount}
+                />
+                <Dropdown title={"Currency"} data={currencydata} />
+                <Input
+                  title={"Receiver Name"}
+                  placeholder={"Receiver Name"}
+                  onChangeText={handleChange("receiver_name")}
+                  onBlur={handleBlur("receiver_name")}
+                  value={values.receiver_name}
+                />
+                <UploadButton type={"receiverImage"} title={"Receiver Image"} />
+                <UploadButton type={"receiverId"} title={"Receive ID Image"} />
+                <View style={{ paddingVertical: 10 }}>
+                  <CustomButton
+                    title={"create Receipt"}
+                    onPress={handleSubmit}
+                  />
+                </View>
               </View>
-            </View>
-          )}
-        </Formik>
-        <View>
+            )}
+          </Formik>
+        </View>
+        <View style={{marginTop:30}}>
           <TopContainer />
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 

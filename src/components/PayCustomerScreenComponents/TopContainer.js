@@ -22,7 +22,15 @@ const TopContainer = () => {
 
   return (
     <View style={styles.root}>
-      <View style={{ width: layout.widthp, paddingTop: 5, paddingLeft: 10 }}>
+      <View
+        style={{
+          width: layout.widthp,
+          paddingTop: 20,
+          paddingLeft: 10,
+          flex: 0.5,
+          // backgroundColor: "coral",
+        }}
+      >
         <Text style={{ fontFamily: "poppins-semibold", fontSize: 20 }}>
           Transaction Details
         </Text>
@@ -33,17 +41,24 @@ const TopContainer = () => {
           justifyContent: "space-between",
           width: layout.widthp,
           paddingHorizontal: 10,
-          flexDirection: "row",
-          flex: 2,
+          // flexDirection: "row",
+          flex: 4,
           // backgroundColor:'pink'
         }}
       >
+        <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
+          Receiver Image
+        </Text>
         <View
           style={{
             alignItems: "center",
             justifyContent: "center",
             // backgroundColor: "pink",
             height: "100%",
+            flex: 1,
+            marginBottom: 20,
+            minHeight: 120,
+            minWidth: 120,
           }}
         >
           <Image
@@ -52,17 +67,22 @@ const TopContainer = () => {
                 "http://codelumina.com/project/wallet_managment/public/" +
                 data.receiver_image,
             }}
-            style={{ height: 100, width: 100, borderRadius: 50 }}
+            style={{ height: 120, width: 120, borderRadius: 75 }}
           />
         </View>
+        <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
+          Receiver ID Image
+        </Text>
         <View
           style={{
             alignItems: "center",
             justifyContent: "center",
             // backgroundColor: "pink",
-            height: "100%",
+            // height: "100%",
             // paddingVertical: 10,
-            height: 120,
+            minHeight: 200,
+            flex: 1,
+            marginBottom: 20,
           }}
         >
           <Image
@@ -71,7 +91,12 @@ const TopContainer = () => {
                 "http://codelumina.com/project/wallet_managment/public/" +
                 data.receiver_id_card_image,
             }}
-            style={{ height: "100%", width: 200, borderRadius: 10 }}
+            style={{
+              height: "100%",
+              // height: 100,
+              width: layout.width * 0.7,
+              borderRadius: 10,
+            }}
           />
         </View>
       </View>
@@ -83,13 +108,13 @@ const TopContainer = () => {
           paddingBottom: 5,
         }}
       >
-        <Text style={{ fontFamily: "poppins-medium" }}>
+        <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
           Transaction ID - {data.transaction_id}
         </Text>
-        <Text style={{ fontFamily: "poppins-medium" }}>
+        <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
           Unique ID - {data.unique_id}
         </Text>
-        <Text style={{ fontFamily: "poppins-medium" }}>
+        <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
           Amount - {data.amount}
         </Text>
       </View>
@@ -103,12 +128,13 @@ const styles = StyleSheet.create({
   root: {
     alignItems: "center",
     justifyContent: "center",
-    height: 240,
+    height: 600,
     width: layout.widthp,
     elevation: 6,
     backgroundColor: "white",
     borderRadius: 10,
     // marginHorizontal:10
+    marginBottom: 20,
   },
   title: {
     fontFamily: "poppins-medium",
