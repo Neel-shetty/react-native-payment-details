@@ -104,16 +104,16 @@ const ImageBg = () => {
           bounces={false}
           pagingEnabled
           onScroll={(e) => {
-            const x = e.nativeEvent.contentOffset.x;
-            if (
-              Math.floor(Math.floor(x) / Math.floor(layout.widthp)) >
-                currentIndex ||
-              Math.floor(Math.floor(x) / Math.floor(layout.widthp)) === 0
-            ) {
-              setCurrentIndex(
-                Math.floor(Math.floor(x) / Math.floor(layout.widthp))
-              );
-            }
+            // const x = e.nativeEvent.contentOffset.x;
+            // if (
+            //   Math.floor(Math.floor(x) / Math.floor(layout.widthp)) >
+            //     currentIndex ||
+            //   Math.floor(Math.floor(x) / Math.floor(layout.widthp)) === 0
+            // ) {
+            //   setCurrentIndex(
+            //     Math.floor(Math.floor(x) / Math.floor(layout.widthp))
+            //   );
+            // }
             // setAutoScroll(false);
           }}
           windowSize={1}
@@ -123,32 +123,35 @@ const ImageBg = () => {
           viewabilityConfig={{ viewAreaCoveragePercentThreshold: 50 }}
         />
       </View>
-      {/* <View
+      <View
         style={{
           flexDirection: "row",
           width: layout.widthp,
           justifyContent: "center",
           alignItems: "center",
+          // backgroundColor: "turquoise",
+          height: 30,
         }}
       >
         {images.map((item, index) => {
           return (
-            <TouchableOpacity>
-              <View
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: 4,
-                  backgroundColor: currentIndex == index ? "violet" : "pink",
-                  marginLeft: 5,
-                }}
-              >
-                <Text></Text>
-              </View>
-            </TouchableOpacity>
+            <View
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: 4,
+                backgroundColor: currentIndex == index ? "#93e3fe" : "gray",
+                marginLeft: 5,
+                marginBottom: 15,
+                // position: "absolute",
+                alignItems: "center",
+                justifyContent: "center",
+                alignSelf: "center",
+              }}
+            ></View>
           );
         })}
-        <Button
+        {/* <Button
           title="prev"
           onPress={() => {
             setCurrentIndex(currentIndex - 1);
@@ -167,8 +170,8 @@ const ImageBg = () => {
               index: parseInt(currentIndex) + 1,
             });
           }}
-        />
-      </View> */}
+        /> */}
+      </View>
     </View>
   );
 };
