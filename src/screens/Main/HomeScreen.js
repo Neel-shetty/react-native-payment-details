@@ -15,6 +15,7 @@ import { StatusBar } from "expo-status-bar";
 import Storage from "../../utils/expireStorage";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../../store/slice/userSlice";
+import Inactivity from "../../components/Inactivity";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();

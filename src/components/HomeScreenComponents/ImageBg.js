@@ -29,12 +29,12 @@ const test = [
 const ImageBg = () => {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  console.log(
-    "🚀 ~ file: ImageBg.js:32 ~ ImageBg ~ currentIndex",
-    currentIndex
-  );
+  // console.log(
+  //   "🚀 ~ file: ImageBg.js:32 ~ ImageBg ~ currentIndex",
+  //   currentIndex
+  // );
   const [autoScroll, setAutoScroll] = useState(true);
-  console.log("🚀 ~ file: ImageBg.js:33 ~ ImageBg ~ autoScroll", autoScroll);
+  // console.log("🚀 ~ file: ImageBg.js:33 ~ ImageBg ~ autoScroll", autoScroll);
 
   const ref = useRef();
 
@@ -42,7 +42,7 @@ const ImageBg = () => {
     axios
       .post("http://codelumina.com/project/wallet_managment/api/banners")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setImages(res.data.data);
       })
       .catch((error) => console.log(error));

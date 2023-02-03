@@ -21,7 +21,7 @@ const Header = ({ back, loc }) => {
         userid: result,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setName(res.data.data.name);
       })
       .catch((error) => {

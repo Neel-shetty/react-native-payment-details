@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import { Alert, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import SignInScreen from "../screens/Login/SignInScreen";
@@ -32,11 +32,15 @@ import { AntDesign } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
+import UserInactivity from "react-native-user-inactivity";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Navigator = () => {
+  const [active, setActive] = useState(true);
+  console.log("🚀 ~ file: Navigator.js:42 ~ Navigator ~ active", active);
+  const [timer, setTimer] = useState(10000);
   const dispatch = useDispatch();
 
   // async function save(key, value) {
@@ -88,7 +92,11 @@ const Navigator = () => {
                 style={{ borderBottomWidth: 2, borderColor: "#edf0f3" }}
                 icon={({ color, size }) => {
                   return (
-                    <SimpleLineIcons name="logout" size={size} color={colors.red} />
+                    <SimpleLineIcons
+                      name="logout"
+                      size={size}
+                      color={colors.red}
+                    />
                   );
                 }}
               />
@@ -152,50 +160,69 @@ const Navigator = () => {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {!loggedIn ? (
-          <>
-            <Stack.Screen
-              name="OnboardingScreen"
-              component={OnboardingScreen}
-            />
-            <Stack.Screen name="SignInScreen" component={SignInScreen} />
-            <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-          </>
-        ) : (
-          <>
-            <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
-            <Stack.Screen
-              name="TransactionScreen"
-              component={TransactionScreen}
-            />
-            <Stack.Screen name="DetailScreen" component={DetailScreen} />
-            <Stack.Screen
-              name="TransactionInfoScreen"
-              component={TransactionInfoScreen}
-            />
-            <Stack.Screen
-              name="SearchTransactionScreen"
-              component={SearchTransactionScreen}
-            />
-            <Stack.Screen
-              name="SearchResultScreen"
-              component={SearchResultScreen}
-            />
-            <Stack.Screen name="ReceiptScreen" component={ReceiptScreen} />
-            <Stack.Screen
-              name="ReceiptInfoScreen"
-              component={ReceiptInfoScreen}
-            />
-            <Stack.Screen
-              name="EditDetailScreen"
-              component={EditDetailScreen}
-            />
-          </>
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UserInactivity
+      isActive={active}
+      timeForInactivity={60000} //60seconds
+      onAction={async (isActive) => {
+        if (isActive === false) {
+          if (loggedIn) {
+            Alert.alert("Session Timed out", "Login Again");
+            dispatch(setLoggedIn(false));
+            await Storage.setItem("isLoggedIn", "false");
+          }
+        }
+        setActive(isActive);
+      }}
+      // style={{ flex: 1, paddingTop: "10%" }}
+    >
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {!loggedIn ? (
+            <>
+              <Stack.Screen
+                name="OnboardingScreen"
+                component={OnboardingScreen}
+              />
+              <Stack.Screen name="SignInScreen" component={SignInScreen} />
+              <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+            </>
+          ) : (
+            <>
+              <Stack.Screen
+                name="DrawerNavigator"
+                component={DrawerNavigator}
+              />
+              <Stack.Screen
+                name="TransactionScreen"
+                component={TransactionScreen}
+              />
+              <Stack.Screen name="DetailScreen" component={DetailScreen} />
+              <Stack.Screen
+                name="TransactionInfoScreen"
+                component={TransactionInfoScreen}
+              />
+              <Stack.Screen
+                name="SearchTransactionScreen"
+                component={SearchTransactionScreen}
+              />
+              <Stack.Screen
+                name="SearchResultScreen"
+                component={SearchResultScreen}
+              />
+              <Stack.Screen name="ReceiptScreen" component={ReceiptScreen} />
+              <Stack.Screen
+                name="ReceiptInfoScreen"
+                component={ReceiptInfoScreen}
+              />
+              <Stack.Screen
+                name="EditDetailScreen"
+                component={EditDetailScreen}
+              />
+            </>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserInactivity>
   );
 };
 
