@@ -115,7 +115,7 @@ const CreateReceipt = () => {
         Alert.alert("Receipt Created", res.data.message, [
           {
             text: "OK",
-            onPress: () => navigation.navigate("SearchTransactionScreen"),
+            onPress: () => navigation.navigate("DrawerNavigator",{screen:'HomeScreen'}),
           },
         ]);
       })
