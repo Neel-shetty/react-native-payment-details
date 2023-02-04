@@ -135,7 +135,7 @@ const ImageBg = () => {
       >
         {images.map((item, index) => {
           return (
-            <View
+            <View key={item.image}
               style={{
                 width: 8,
                 height: 8,

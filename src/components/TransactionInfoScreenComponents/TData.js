@@ -1,9 +1,17 @@
-import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import DataItem from "./DataItem";
 import { ScrollView } from "react-native-gesture-handler";
 import { useRoute } from "@react-navigation/native";
 import axios from "axios";
+import { layout } from "../../constants/layout";
 
 const TData = () => {
   const [transactions, setTransactions] = useState(null);
@@ -103,6 +111,40 @@ const TData = () => {
         />
         <DataItem title={"Status"} data={transactions.status} />
         <DataItem title={"Date"} data={date.toLocaleDateString("en-GB")} />
+        <View style={{ width: layout.widthp, alignItems: "center" }}>
+          <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
+            Sender Image
+          </Text>
+          <Image
+            source={{ uri: transactions.sender_image }}
+            style={{ width: 120, height: 120, borderRadius: 10 }}
+          />
+          <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
+            Sender ID Card Image
+          </Text>
+          <Image
+            source={{ uri: transactions.sender_id_card_image }}
+            style={{ width: "100%", height: 250 }}
+            resizeMode="contain"
+          />
+        </View>
+        <View style={{ width: layout.widthp, alignItems: "center" }}>
+          <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
+            Receiver Image
+          </Text>
+          <Image
+            source={{ uri: transactions.receiver_image }}
+            style={{ width: 120, height: 120, borderRadius: 10 }}
+          />
+          <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
+            Receiver ID Card Image
+          </Text>
+          <Image
+            source={{ uri: transactions.receiver_id_card_image }}
+            style={{ width: "100%", height: 250 }}
+            resizeMode="contain"
+          />
+        </View>
       </ScrollView>
     </View>
   );

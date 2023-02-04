@@ -103,7 +103,7 @@ const TData = () => {
           </Text>
           <Image
             source={{ uri: transactions.reciver_image }}
-            style={{ width: 120, height: 120, borderRadius: 60 }}
+            style={{ width: 120, height: 120,borderRadius:10}}
           />
           <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
             Receiver ID Card Image

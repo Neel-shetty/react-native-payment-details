@@ -67,7 +67,7 @@ const TopContainer = () => {
                 "http://codelumina.com/project/wallet_managment/public/" +
                 data.receiver_image,
             }}
-            style={{ height: 120, width: 120, borderRadius: 75 }}
+            style={{ height: 120, width: 120, borderRadius: 10 }}
           />
         </View>
         <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
