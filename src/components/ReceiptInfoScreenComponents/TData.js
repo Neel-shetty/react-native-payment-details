@@ -97,20 +97,20 @@ const TData = () => {
         /> */}
         <DataItem title={"Receiver Name"} data={transactions.reciver_name} />
         <DataItem title={"Date"} data={date.toLocaleDateString("en-GB")} />
-        <View style={{width:layout.widthp,alignItems:'center',}}>
+        <View style={{ width: layout.widthp, alignItems: "center" }}>
           <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
             Receiver Image
           </Text>
           <Image
             source={{ uri: transactions.reciver_image }}
-            style={{ width: 120, height: 120,borderRadius:10}}
+            style={{ width: "100%", height: 250, borderRadius: 10 }}
           />
           <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
             Receiver ID Card Image
           </Text>
           <Image
             source={{ uri: transactions.reciver_id_image }}
-            style={{ width: '100%', height: 250 }}
+            style={{ width: "100%", height: 250, borderRadius: 10 }}
             resizeMode="contain"
           />
         </View>

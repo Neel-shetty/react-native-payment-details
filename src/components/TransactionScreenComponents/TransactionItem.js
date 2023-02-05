@@ -12,10 +12,9 @@ import {
 } from "react-native-popup-menu";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
-import Storage from '../../utils/expireStorage'
+import Storage from "../../utils/expireStorage";
 
-const TransactionItem = ({ id, date, amount, currency }) => {
-  console.log("🚀 ~ file: TransactionItem.js:8 ~ TransactionItem ~ id", id);
+const TransactionItem = ({ id, date, amount, currency, status }) => {
   const navigation = useNavigation();
   function transactionDetails() {
     navigation.navigate("TransactionInfoScreen", { transaction_id: id });
@@ -62,9 +61,11 @@ const TransactionItem = ({ id, date, amount, currency }) => {
   return (
     <TouchableOpacity onPress={transactionDetails}>
       <View style={styles.root}>
-        <View style={{ flex: 3 }}>
+        <View style={{ flex: 2 }}>
           <Text style={styles.title}>Transaction id - {id}</Text>
           <Text style={styles.date}>
+            Status - {status}
+            {"\n"}
             Date - {formattedDate.toLocaleDateString("en-GB")}
             {"\n"}
             Time - {date.slice(11, 19)}
@@ -76,11 +77,11 @@ const TransactionItem = ({ id, date, amount, currency }) => {
               flex: 1,
               // backgroundColor: "pink",
               alignItems: "center",
-              justifyContent: "flex-end",
+              justifyContent: "center",
             }}
           >
             <Text ellipsizeMode="tail" style={styles.amount}>
-              {currency?.slice(0,1)}
+              {currency?.slice(0, 1)}
               {amount}
             </Text>
           </View>
@@ -138,7 +139,7 @@ export default TransactionItem;
 
 const styles = StyleSheet.create({
   root: {
-    height: 100,
+    height: 120,
     width: layout.widthp,
     elevation: 6,
     backgroundColor: "white",
@@ -154,14 +155,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "poppins-medium",
-    fontSize: 16,
+    fontSize: 14,
   },
   date: {
     fontFamily: "poppins-regular",
   },
   amount: {
     fontFamily: "poppins-medium",
-    fontSize: 18,
+    fontSize: 17,
     textAlign: "right",
   },
 });

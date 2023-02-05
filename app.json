@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "payment-details",
-    "slug": "payment-details",
+    "name": "ALOSP",
+    "slug": "ALOSP",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,7 +23,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.neel.walletmanagement"
+      "package": "com.alosp.alosp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

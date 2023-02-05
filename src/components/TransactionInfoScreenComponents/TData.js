@@ -117,14 +117,14 @@ const TData = () => {
           </Text>
           <Image
             source={{ uri: transactions.sender_image }}
-            style={{ width: 120, height: 120, borderRadius: 10 }}
+            style={{ width: "100%", height: 250, borderRadius: 10 }}
           />
           <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
             Sender ID Card Image
           </Text>
           <Image
             source={{ uri: transactions.sender_id_card_image }}
-            style={{ width: "100%", height: 250 }}
+            style={{ width: "100%", height: 250, borderRadius: 10 }}
             resizeMode="contain"
           />
         </View>
@@ -134,14 +134,14 @@ const TData = () => {
           </Text>
           <Image
             source={{ uri: transactions.receiver_image }}
-            style={{ width: 120, height: 120, borderRadius: 10 }}
+            style={{ width: "100%", height: 250, borderRadius: 10 }}
           />
           <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
             Receiver ID Card Image
           </Text>
           <Image
             source={{ uri: transactions.receiver_id_card_image }}
-            style={{ width: "100%", height: 250 }}
+            style={{ width: "100%", height: 250, borderRadius: 10 }}
             resizeMode="contain"
           />
         </View>

@@ -268,6 +268,7 @@ const TransactionList = () => {
                 date={item.updated_at}
                 deleteTransaction={""}
                 currency={item.currency}
+                status={item.status}
               />
               // </View>
             );

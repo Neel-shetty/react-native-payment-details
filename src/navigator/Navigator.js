@@ -162,7 +162,7 @@ const Navigator = () => {
   return (
     <UserInactivity
       isActive={active}
-      timeForInactivity={60000} //60seconds
+      timeForInactivity={6000000} //60seconds
       onAction={async (isActive) => {
         if (isActive === false) {
           if (loggedIn) {

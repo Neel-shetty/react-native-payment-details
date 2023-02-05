@@ -42,7 +42,7 @@ const TopContainer = () => {
           width: layout.widthp,
           paddingHorizontal: 10,
           // flexDirection: "row",
-          flex: 4,
+          flex: 5,
           // backgroundColor:'pink'
         }}
       >
@@ -56,9 +56,9 @@ const TopContainer = () => {
             // backgroundColor: "pink",
             height: "100%",
             flex: 1,
-            marginBottom: 20,
-            minHeight: 120,
-            minWidth: 120,
+            // marginBottom: 20,
+            minHeight: 250,
+            // minWidth: 120,
           }}
         >
           <Image
@@ -67,7 +67,7 @@ const TopContainer = () => {
                 "http://codelumina.com/project/wallet_managment/public/" +
                 data.receiver_image,
             }}
-            style={{ height: 120, width: 120, borderRadius: 10 }}
+            style={{ height: 250, width: layout.width * 0.8, borderRadius: 10 }}
           />
         </View>
         <Text style={{ fontFamily: "poppins-medium", fontSize: 18 }}>
@@ -80,9 +80,9 @@ const TopContainer = () => {
             // backgroundColor: "pink",
             // height: "100%",
             // paddingVertical: 10,
-            minHeight: 200,
+            minHeight: 250,
             flex: 1,
-            marginBottom: 20,
+            // marginBottom: 20,
           }}
         >
           <Image
@@ -92,9 +92,9 @@ const TopContainer = () => {
                 data.receiver_id_card_image,
             }}
             style={{
-              height: "100%",
-              // height: 100,
-              width: layout.width * 0.7,
+              height: 250,
+              width: "100%",
+              width: layout.width * 0.8,
               borderRadius: 10,
             }}
           />
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   root: {
     alignItems: "center",
     justifyContent: "center",
-    height: 600,
+    height: 1000,
     width: layout.widthp,
     elevation: 6,
     backgroundColor: "white",

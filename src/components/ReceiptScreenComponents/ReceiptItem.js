@@ -14,7 +14,7 @@ const ReceiptItem = ({ id, date, amount, receiptId }) => {
   return (
     <TouchableOpacity onPress={transactionDetails}>
       <View style={styles.root}>
-        <View style={{ flex: 3 }}>
+        <View style={{ flex: 2 }}>
           <Text style={styles.title}>Transaction id - {id}</Text>
           <Text style={styles.date}>
             Date - {formattedDate.toLocaleDateString("en-GB")}
@@ -34,7 +34,7 @@ export default ReceiptItem;
 
 const styles = StyleSheet.create({
   root: {
-    height: 100,
+    height: 90,
     width: layout.widthp,
     elevation: 6,
     backgroundColor: "white",
@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "poppins-medium",
-    fontSize: 16,
+    fontSize: 14,
   },
   date: {
     fontFamily: "poppins-regular",
   },
   amount: {
     fontFamily: "poppins-medium",
-    fontSize: 20,
+    fontSize: 17,
     textAlign: "right",
   },
 });
