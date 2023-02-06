@@ -199,7 +199,9 @@ const TransactionList = () => {
           // paddingLeft: 10,
           // paddingRight: 10,
           alignItems: "center",
-          elevation: 6,
+          elevation:6,
+shadowRadius: 5,
+shadowOpacity: 0.25,
           paddingVertical: 10,
         }}
       >

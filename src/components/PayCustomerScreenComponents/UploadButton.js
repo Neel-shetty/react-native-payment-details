@@ -104,7 +104,9 @@ const styles = StyleSheet.create({
     width: layout.widthp,
     flexDirection: "row",
     paddingHorizontal: 10,
-    elevation: 6,
+    elevation:6,
+shadowRadius: 5,
+shadowOpacity: 0.25,
   },
   title: {
     fontFamily: "inter-semibold",

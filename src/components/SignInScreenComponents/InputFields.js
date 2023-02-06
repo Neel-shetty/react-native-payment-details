@@ -46,7 +46,7 @@ const InputFields = () => {
         dispatch(setLoggedIn(true));
         save("isLoggedIn", "true"); //no expire
         save("id", res.data.data.id);
-        navigation.navigate("HomeScreen");
+        // navigation.navigate("HomeScreen");
       })
       .catch((error) => {
         // console.log(e.toJSON());

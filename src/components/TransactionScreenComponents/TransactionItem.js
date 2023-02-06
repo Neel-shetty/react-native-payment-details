@@ -106,7 +106,9 @@ const TransactionItem = ({ id, date, amount, currency, status }) => {
                   optionsContainer: {
                     backgroundColor: "white",
                     borderRadius: 10,
-                    elevation: 6,
+                    elevation:6,
+shadowRadius: 5,
+shadowOpacity: 0.25,
                     padding: 5,
                     width: 100,
                   },
@@ -141,7 +143,9 @@ const styles = StyleSheet.create({
   root: {
     height: 120,
     width: layout.widthp,
-    elevation: 6,
+    elevation:6,
+shadowRadius: 5,
+shadowOpacity: 0.25,
     backgroundColor: "white",
     borderRadius: 10,
     alignItems: "center",
