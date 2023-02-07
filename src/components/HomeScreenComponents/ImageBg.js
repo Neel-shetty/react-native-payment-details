@@ -13,6 +13,7 @@ import { layout } from "../../constants/layout";
 import { colors } from "../../constants/colors";
 import axios from "axios";
 import { ImageSlider } from "react-native-image-slider-banner";
+import { BASEURL } from "../../constants/apiurl";
 // import Slideshow from "react-native-image-slider-show";
 
 const test = [
@@ -40,7 +41,7 @@ const ImageBg = () => {
 
   async function getImages() {
     axios
-      .post("http://codelumina.com/project/wallet_managment/api/banners")
+      .post(`${BASEURL}/banners`)
       .then((res) => {
         // console.log(res.data);
         setImages(res.data.data);
@@ -50,6 +51,7 @@ const ImageBg = () => {
   useEffect(() => {
     getImages();
   }, []);
+  console.log(BASEURL)
 
   useEffect(() => {
     let interval = null;

@@ -12,6 +12,7 @@ import axios from "axios";
 import { setLoggedIn } from "../../store/slice/userSlice";
 import * as SecureStore from "expo-secure-store";
 import Storage from "../../utils/expireStorage";
+import { BASEURL } from "../../constants/apiurl";
 
 const InputFields = () => {
   const [loading, setLoading] = useState(false);
@@ -36,7 +37,7 @@ const InputFields = () => {
   function Login(values) {
     setLoading(true);
     axios
-      .post("http://codelumina.com/project/wallet_managment/api/user/login", {
+      .post(`${BASEURL}/user/login`, {
         phone: values.phoneNumber,
         password: values.password,
       })

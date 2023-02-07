@@ -17,6 +17,7 @@ import DateTimePicker, {
   DateTimePickerAndroid,
 } from "@react-native-community/datetimepicker";
 import { colors } from "../../constants/colors";
+import { BASEURL } from "../../constants/apiurl";
 
 const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
@@ -101,7 +102,7 @@ const TransactionList = () => {
     // console.log(date1, date2);
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/transaction/filter",
+        `${BASEURL}/agent/transaction/filter`,
         {
           agent_id: result,
           start_date: `${startyear}-${startmonth}-${startdate}`,
@@ -140,7 +141,7 @@ const TransactionList = () => {
     let result = await Storage.getItem("id");
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/transactions",
+        `${BASEURL}/agent/transactions`,
         {
           agent_id: result,
         }

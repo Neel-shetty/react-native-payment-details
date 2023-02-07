@@ -4,6 +4,7 @@ import DataItem from "../TransactionInfoScreenComponents/DataItem";
 import { ScrollView } from "react-native-gesture-handler";
 import { useRoute } from "@react-navigation/native";
 import axios from "axios";
+import { BASEURL } from "../../constants/apiurl";
 
 const TData = () => {
   const [transactions, setTransactions] = useState(null);
@@ -14,12 +15,9 @@ const TData = () => {
 
   async function fetchInfo() {
     axios
-      .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/transaction/detail",
-        {
-          transaction_id: route?.params?.transaction_id,
-        }
-      )
+      .post(`${BASEURL}/agent/transaction/detail`, {
+        transaction_id: route?.params?.transaction_id,
+      })
       .then(async (res) => {
         setTransactions(res.data.data);
         setLoading(false);

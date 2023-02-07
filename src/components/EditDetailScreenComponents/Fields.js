@@ -23,7 +23,8 @@ import publicIP from "react-native-public-ip";
 import * as SecureStore from "expo-secure-store";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import * as yup from "yup";
-import Storage from '../../utils/expireStorage'
+import Storage from "../../utils/expireStorage";
+import { BASEURL } from "../../constants/apiurl";
 
 const Fields = () => {
   const [loading, setLoading] = useState();
@@ -71,7 +72,7 @@ const Fields = () => {
   async function fetchDropdownData(callback) {
     setLoading(true);
     axios
-      .post("http://codelumina.com/project/wallet_managment/api/locations")
+      .post(`${BASEURL}/locations`)
       .then((res) => {
         // console.log(res.data.data);
         setDropdownData(res.data.data);
@@ -103,7 +104,7 @@ const Fields = () => {
     setDataLoading(true);
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/transaction/detail",
+       `${BASEURL}/agent/transaction/detail`,
         {
           transaction_id: route?.params?.transaction_id,
         }
@@ -141,7 +142,7 @@ const Fields = () => {
   async function fetchCurrency(callback) {
     // setLoading(true);
     axios
-      .post("http://codelumina.com/project/wallet_managment/api/currency")
+      .post(`${BASEURL}/currency`)
       .then((res) => {
         console.log(res.data.data);
         setCurrencyData(res.data.data);
@@ -171,7 +172,7 @@ const Fields = () => {
 
   async function sendTransaction(values) {
     // let result = await SecureStore.getItemAsync("id");
-        let result = await Storage.getItem('id');
+    let result = await Storage.getItem("id");
 
     let formData = new FormData();
     if (ri) {
@@ -239,7 +240,7 @@ const Fields = () => {
 
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/transaction/update",
+        `${BASEURL}/agent/transaction/update`,
         formData,
         {
           headers: {

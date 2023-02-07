@@ -12,6 +12,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useRoute } from "@react-navigation/native";
 import axios from "axios";
 import { layout } from "../../constants/layout";
+import { BASEURL } from "../../constants/apiurl";
 
 const TData = () => {
   const [transactions, setTransactions] = useState(null);
@@ -23,7 +24,7 @@ const TData = () => {
   async function fetchInfo() {
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/receipt/detail",
+        `${BASEURL}/agent/receipt/detail`,
         {
           receipt_id: route?.params?.receipt_id,
         }

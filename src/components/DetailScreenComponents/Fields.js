@@ -23,7 +23,8 @@ import publicIP from "react-native-public-ip";
 import * as SecureStore from "expo-secure-store";
 import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
-import Storage from '../../utils/expireStorage'
+import Storage from "../../utils/expireStorage";
+import { BASEURL } from "../../constants/apiurl";
 
 const Fields = () => {
   const [loading, setLoading] = useState();
@@ -61,7 +62,7 @@ const Fields = () => {
   async function fetchDropdownData() {
     setLoading(true);
     axios
-      .post("http://codelumina.com/project/wallet_managment/api/locations")
+      .post(`${BASEURL}/locations`)
       .then((res) => {
         console.log(res.data.data);
         setDropdownData(res.data.data);
@@ -90,7 +91,7 @@ const Fields = () => {
   async function fetchCurrency() {
     setLoading(true);
     axios
-      .post("http://codelumina.com/project/wallet_managment/api/currency")
+      .post(`${BASEURL}/currency`)
       .then((res) => {
         console.log(res.data.data);
         setCurrencyData(res.data.data);
@@ -137,7 +138,7 @@ const Fields = () => {
     let type4 = match4 ? `image/${match4[1]}` : `image`;
 
     // let result = await SecureStore.getItemAsync("id");
-        let result = await Storage.getItem('id');
+    let result = await Storage.getItem("id");
 
     let formData = new FormData();
     formData.append("receiver_image", {
@@ -180,17 +181,13 @@ const Fields = () => {
     );
 
     axios
-      .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/transaction/create",
-        formData,
-        {
-          headers: {
-            // accept: "application/json",
-            accept: "application/json",
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .post(`${BASEURL}/agent/transaction/create`, formData, {
+        headers: {
+          // accept: "application/json",
+          accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then(async (res) => {
         console.log(res.data);
         setLoading(false);
@@ -211,7 +208,10 @@ const Fields = () => {
       .catch((error) => {
         if (error.response) {
           console.log("error response - ", error.response.data);
-          Alert.alert("Failed creating transaction", error.response.data.message);
+          Alert.alert(
+            "Failed creating transaction",
+            error.response.data.message
+          );
           setLoading(false);
         } else if (error.request) {
           console.log(error.request);

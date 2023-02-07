@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import Storage from "../../utils/expireStorage";
+import { BASEURL } from "../../constants/apiurl";
 
 const Header = ({ back, loc }) => {
   const [name, setName] = useState();
@@ -17,7 +18,7 @@ const Header = ({ back, loc }) => {
     // const result = await SecureStore.getItemAsync("id");
     let result = await Storage.getItem("id");
     axios
-      .post("http://codelumina.com/project/wallet_managment/api/user/profile", {
+      .post(`${BASEURL}/user/profile`, {
         userid: result,
       })
       .then((res) => {

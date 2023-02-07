@@ -6,6 +6,7 @@ import { Formik } from "formik";
 import Input from "../DetailScreenComponents/Input";
 import CustomButton from "../CustomButton";
 import Storage from '../../utils/expireStorage'
+import { BASEURL } from "../../constants/apiurl";
 
 const Fields = () => {
   const [loading, setLoading] = useState(false);
@@ -31,7 +32,7 @@ const Fields = () => {
 
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/profile/update",
+        `${BASEURL}/profile/update`,
         data
       )
       .then((res) => {

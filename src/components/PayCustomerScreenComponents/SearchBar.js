@@ -23,6 +23,7 @@ import Input from "./Input";
 import CustomButton from "../CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import Storage from "../../utils/expireStorage";
+import { BASEURL } from "../../constants/apiurl";
 
 const SearchBar = () => {
   const navigation = useNavigation();
@@ -35,7 +36,7 @@ const SearchBar = () => {
     let result = await Storage.getItem("id");
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/transaction/search",
+        `${BASEURL}/agent/transaction/search`,
         {
           transaction_id: values.transaction_id,
           unique_id: values.unique_id,

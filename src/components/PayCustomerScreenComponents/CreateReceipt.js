@@ -12,6 +12,7 @@ import * as SecureStore from "expo-secure-store";
 import TopContainer from "./TopContainer";
 import Dropdown from "../DetailScreenComponents/Dropdown";
 import Storage from "../../utils/expireStorage";
+import { BASEURL } from "../../constants/apiurl";
 
 const CreateReceipt = () => {
   const [loading, setLoading] = useState(false);
@@ -36,7 +37,7 @@ const CreateReceipt = () => {
   async function fetchCurrency() {
     setLoading(true);
     axios
-      .post("http://codelumina.com/project/wallet_managment/api/currency")
+      .post(`${BASEURL}/currency`)
       .then((res) => {
         console.log(res.data.data);
         setCurrencyData(res.data.data);
@@ -99,7 +100,7 @@ const CreateReceipt = () => {
 
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/receipt/insert",
+        `${BASEURL}/agent/receipt/insert`,
         formData,
         {
           headers: {

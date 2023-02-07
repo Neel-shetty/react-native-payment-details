@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import Storage from "../../utils/expireStorage";
+import { BASEURL } from "../../constants/apiurl";
 
 const TransactionItem = ({ id, date, amount, currency, status }) => {
   const navigation = useNavigation();
@@ -23,7 +24,7 @@ const TransactionItem = ({ id, date, amount, currency, status }) => {
     // const result = await SecureStore.getItemAsync("id");
     axios
       .post(
-        "http://codelumina.com/project/wallet_managment/api/agent/transaction/delete",
+        `${BASEURL}/agent/transaction/delete`,
         {
           transaction_id: id,
         }
