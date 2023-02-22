@@ -36,6 +36,7 @@ const InputFields = () => {
 
   function Login(values) {
     setLoading(true);
+    console.log('login running')
     axios
       .post(`${BASEURL}/user/login`, {
         phone: values.phoneNumber,

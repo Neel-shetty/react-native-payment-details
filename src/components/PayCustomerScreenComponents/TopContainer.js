@@ -18,7 +18,10 @@ const TopContainer = () => {
     route.params.transactionData
   );
   const data = route.params.transactionData;
-  console.log("🚀 ~ file: TopContainer.js:21 ~ TopContainer ~ data", data);
+  console.log(
+    "🚀 ~ file: TopContainer.js:21 ~ TopContainer ~ data",
+    data.receiver_image
+  );
 
   return (
     <View style={styles.root}>
@@ -63,9 +66,7 @@ const TopContainer = () => {
         >
           <Image
             source={{
-              uri:
-                "http://codelumina.com/project/wallet_managment/public/" +
-                data.receiver_image,
+              uri: data.receiver_image,
             }}
             style={{ height: 250, width: layout.width * 0.8, borderRadius: 10 }}
           />
@@ -87,9 +88,7 @@ const TopContainer = () => {
         >
           <Image
             source={{
-              uri:
-                "http://codelumina.com/project/wallet_managment/public/" +
-                data.receiver_id_card_image,
+              uri: data.receiver_id_card_image,
             }}
             style={{
               height: 250,
@@ -130,9 +129,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 1000,
     width: layout.widthp,
-    elevation:6,
-shadowRadius: 5,
-shadowOpacity: 0.25,
+    elevation: 6,
+    shadowRadius: 5,
+    shadowOpacity: 0.25,
     backgroundColor: "white",
     borderRadius: 10,
     // marginHorizontal:10
